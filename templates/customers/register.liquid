@@ -1,0 +1,15 @@
+<div style="max-width:420px;margin:64px auto;padding:0 24px;">
+  <h1 style="font-family:var(--serif);font-size:36px;text-align:center;margin-bottom:24px;">Create Account</h1>
+  {% form 'create_customer' %}
+    {{ form.errors | default_errors }}
+    <label style="display:block;margin-bottom:6px;font-size:14px;">First name</label>
+    <input type="text" name="customer[first_name]" required style="width:100%;padding:12px 16px;border:1px solid rgba(44,44,44,0.15);border-radius:8px;margin-bottom:12px;">
+    <label style="display:block;margin-bottom:6px;font-size:14px;">Last name</label>
+    <input type="text" name="customer[last_name]" required style="width:100%;padding:12px 16px;border:1px solid rgba(44,44,44,0.15);border-radius:8px;margin-bottom:12px;">
+    <label style="display:block;margin-bottom:6px;font-size:14px;">Email</label>
+    <input type="email" name="customer[email]" required style="width:100%;padding:12px 16px;border:1px solid rgba(44,44,44,0.15);border-radius:8px;margin-bottom:12px;">
+    <label style="display:block;margin-bottom:6px;font-size:14px;">Password</label>
+    <input type="password" name="customer[password]" required style="width:100%;padding:12px 16px;border:1px solid rgba(44,44,44,0.15);border-radius:8px;margin-bottom:16px;">
+    <button type="submit" style="width:100%;background:var(--charcoal);color:var(--cream);padding:14px;border:none;border-radius:999px;font-weight:500;cursor:pointer;">Create</button>
+  {% endform %}
+</div>

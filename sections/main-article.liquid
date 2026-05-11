@@ -1,0 +1,15 @@
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}
+
+<article style="max-width:760px;margin:48px auto;padding:0 24px;">
+  <h1 style="font-family:var(--serif);font-size:44px;margin:0 0 8px;">{{ article.title }}</h1>
+  <div style="color:rgba(44,44,44,0.55);font-size:13px;margin-bottom:32px;">{{ article.published_at | date: '%B %d, %Y' }} &middot; {{ article.author }}</div>
+  {% if article.image %}
+    <img src="{{ article.image | image_url: width: 1200 }}" style="border-radius:12px;width:100%;margin-bottom:24px;" alt="{{ article.title | escape }}">
+  {% endif %}
+  <div style="font-size:17px;line-height:1.75;">{{ article.content }}</div>
+</article>

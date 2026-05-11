@@ -1,0 +1,63 @@
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .cart-page { max-width: 960px; margin: 48px auto; padding: 0 24px; }
+  .cart-page__title { font-family: var(--serif); font-size: 40px; margin: 0 0 24px; }
+  .cart-page__empty { text-align: center; padding: 64px 16px; }
+  .cart-item { display: grid; grid-template-columns: 100px 1fr auto auto; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(44,44,44,0.08); }
+  .cart-item__img img { border-radius: 8px; }
+  .cart-item__title { font-family: var(--serif); font-size: 20px; }
+  .cart-item__variant { font-size: 13px; color: rgba(44,44,44,0.6); margin-top: 4px; }
+  .cart-item__qty input { width: 56px; padding: 8px; border: 1px solid rgba(44,44,44,0.15); border-radius: 999px; text-align: center; }
+  .cart-item__price { font-weight: 500; color: var(--terracotta); }
+  .cart-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; }
+  .cart-footer__total { font-family: var(--serif); font-size: 28px; }
+  .cart-footer__checkout { background: var(--charcoal); color: var(--cream); padding: 16px 32px; border: none; border-radius: 999px; font-size: 15px; font-weight: 500; cursor: pointer; }
+  .cart-footer__checkout:hover { background: var(--terracotta); }
+</style>
+
+<div class="cart-page">
+  <h1 class="cart-page__title">Your Cart</h1>
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post">
+      {% for item in cart.items %}
+        <div class="cart-item">
+          <div class="cart-item__img">
+            {% if item.image %}
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+            {% endif %}
+          </div>
+          <div>
+            <div class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title }}</a></div>
+            {% unless item.product.has_only_default_variant %}
+              <div class="cart-item__variant">{{ item.variant.title }}</div>
+            {% endunless %}
+          </div>
+          <div class="cart-item__qty">
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+          </div>
+          <div class="cart-item__price">{{ item.final_line_price | money }}</div>
+        </div>
+      {% endfor %}
+      <div class="cart-footer">
+        <div>
+          <button type="submit" name="update" style="background:none;border:none;color:var(--charcoal);text-decoration:underline;cursor:pointer;font-size:14px;">Update cart</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:24px;">
+          <div class="cart-footer__total">Subtotal: {{ cart.total_price | money }}</div>
+          <button type="submit" name="checkout" class="cart-footer__checkout">Checkout</button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="cart-page__empty">
+      <p style="font-size:18px;color:rgba(44,44,44,0.6);">Your cart is empty.</p>
+      <a href="/collections/all" style="display:inline-block;margin-top:16px;background:var(--terracotta);color:var(--cream);padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:500;">Continue shopping</a>
+    </div>
+  {% endif %}
+</div>

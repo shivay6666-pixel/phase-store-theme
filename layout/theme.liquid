@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F7F2EC">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    {{ content_for_header }}
+
+    <style>
+      :root {
+        --terracotta: #C97B5C;
+        --sage: #5C7A6A;
+        --cream: #F7F2EC;
+        --cream-alt: #EFE7DC;
+        --charcoal: #2C2C2C;
+        --gold: #D4A574;
+        --blush: #E8C5B8;
+        --serif: 'Cormorant Garamond', Georgia, serif;
+        --sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: var(--sans);
+        color: var(--charcoal);
+        background: var(--cream);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--terracotta); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      img { max-width: 100%; height: auto; display: block; }
+      h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; color: var(--charcoal); margin-top: 0; }
+
+      .phase-header {
+        background: var(--cream);
+        border-bottom: 1px solid rgba(44, 44, 44, 0.08);
+        padding: 18px 24px;
+        position: sticky; top: 0; z-index: 50;
+        backdrop-filter: blur(10px);
+        background: rgba(247, 242, 236, 0.92);
+      }
+      .phase-header__inner {
+        max-width: 1280px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      }
+      .phase-header__logo {
+        font-family: var(--serif); font-size: 28px; font-weight: 600;
+        color: var(--charcoal); letter-spacing: 0.02em;
+      }
+      .phase-header__nav { display: flex; gap: 28px; align-items: center; }
+      .phase-header__nav a {
+        color: var(--charcoal); font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+      }
+      .phase-header__nav a:hover { color: var(--terracotta); text-decoration: none; }
+      .phase-header__cart {
+        font-size: 14px; color: var(--charcoal); font-weight: 500;
+      }
+      @media (max-width: 768px) {
+        .phase-header__nav { display: none; }
+      }
+
+      .phase-footer {
+        background: var(--charcoal); color: var(--cream);
+        padding: 56px 24px 32px;
+      }
+      .phase-footer__inner {
+        max-width: 1280px; margin: 0 auto;
+        display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+      }
+      .phase-footer h4 {
+        font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+      }
+      .phase-footer ul { list-style: none; margin: 0; padding: 0; }
+      .phase-footer li { margin-bottom: 10px; }
+      .phase-footer a { color: rgba(247, 242, 236, 0.75); font-size: 14px; }
+      .phase-footer a:hover { color: var(--cream); text-decoration: none; }
+      .phase-footer__logo {
+        font-family: var(--serif); font-size: 28px; font-weight: 600; margin-bottom: 12px;
+      }
+      .phase-footer__tagline { color: rgba(247, 242, 236, 0.65); font-size: 14px; max-width: 320px; }
+      .phase-footer__legal {
+        max-width: 1280px; margin: 32px auto 0; padding-top: 24px;
+        border-top: 1px solid rgba(247, 242, 236, 0.1);
+        display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+        font-size: 13px; color: rgba(247, 242, 236, 0.55);
+      }
+      @media (max-width: 768px) {
+        .phase-footer__inner { grid-template-columns: 1fr 1fr; }
+      }
+    </style>
+  </head>
+
+  <body class="template-{{ template | replace: '.', '-' | handleize }}">
+    <a class="skip-to-content-link" href="#MainContent" style="position:absolute;left:-9999px;">Skip to content</a>
+
+    <header class="phase-header">
+      <div class="phase-header__inner">
+        <a href="/" class="phase-header__logo">{{ shop.name }}</a>
+        <nav class="phase-header__nav" aria-label="Main">
+          <a href="/collections/all">Shop All</a>
+          <a href="/collections/hot-flashes">Hot Flashes</a>
+          <a href="/collections/sleep">Sleep</a>
+          <a href="/collections/mood">Mood</a>
+          <a href="/pages/about">About</a>
+        </nav>
+        <a href="/cart" class="phase-header__cart">Cart ({{ cart.item_count }})</a>
+      </div>
+    </header>
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="phase-footer">
+      <div class="phase-footer__inner">
+        <div>
+          <div class="phase-footer__logo">{{ shop.name }}</div>
+          <p class="phase-footer__tagline">Doctor-formulated, hormone-free relief for the women who weren't warned.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/collections/all">All Products</a></li>
+            <li><a href="/collections/hot-flashes">Hot Flashes</a></li>
+            <li><a href="/collections/sleep">Sleep</a></li>
+            <li><a href="/collections/mood">Mood</a></li>
+            <li><a href="/collections/skin">Skin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/pages/about">About</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/blogs/news">Journal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Help</h4>
+          <ul>
+            <li><a href="/policies/shipping-policy">Shipping</a></li>
+            <li><a href="/policies/refund-policy">Returns</a></li>
+            <li><a href="/policies/privacy-policy">Privacy</a></li>
+            <li><a href="/policies/terms-of-service">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-footer__legal">
+        <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+        <span>Made with care for women in transition.</span>
+      </div>
+    </footer>
+  </body>
+</html>

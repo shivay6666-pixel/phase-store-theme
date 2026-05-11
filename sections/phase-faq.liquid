@@ -1,0 +1,64 @@
+{% comment %} Phase FAQ accordion section {% endcomment %}
+
+<style>
+  .phase-faq{padding:100px 0;background:#F7F2EC;}
+  .phase-faq .container{max-width:1280px;margin:0 auto;padding:0 24px;}
+  .phase-faq .head{text-align:center;max-width:700px;margin:0 auto 60px;}
+  .phase-faq .eyebrow{color:#C97B5C;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
+  .phase-faq h2{font-family:'DM Serif Display',serif;font-size:48px;color:#2C2C2C;line-height:1.15;}
+  .phase-faq-list{max-width:780px;margin:0 auto;}
+  .phase-faq-item{border-bottom:1px solid #E5DDD2;padding:24px 0;}
+  .phase-faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px;font-weight:600;font-family:'DM Sans',sans-serif;color:#2C2C2C;}
+  .phase-faq-q::after{content:"+";font-size:24px;color:#C97B5C;font-weight:300;}
+  .phase-faq-item.open .phase-faq-q::after{content:"−";}
+  .phase-faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;color:#6B6B6B;font-size:15px;}
+  .phase-faq-item.open .phase-faq-a{max-height:300px;padding-top:14px;}
+  @media(max-width:700px){.phase-faq h2{font-size:32px;}}
+</style>
+
+<section class="phase-faq">
+  <div class="container">
+    <div class="head">
+      <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="phase-faq-list">
+      {% for block in section.blocks %}
+        <div class="phase-faq-item{% if forloop.first %} open{% endif %}">
+          <div class="phase-faq-q">{{ block.settings.question }}</div>
+          <div class="phase-faq-a">{{ block.settings.answer }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.phase-faq-q').forEach(q=>{
+    q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Phase FAQ",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions, answered" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The things you'd ask a friend" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "When will I start to feel a difference?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Most customers report relief within 14–30 days." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Phase FAQ", "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }, { "type": "faq" }, { "type": "faq" }] }
+  ]
+}
+{% endschema %}

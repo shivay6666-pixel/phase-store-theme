@@ -1,0 +1,18 @@
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .page-rte { max-width: 760px; margin: 48px auto; padding: 0 24px; }
+  .page-rte h1 { font-family: var(--serif); font-size: 44px; margin: 0 0 24px; }
+  .page-rte img { border-radius: 10px; margin: 24px 0; }
+  .page-rte p { font-size: 17px; line-height: 1.75; color: var(--charcoal); }
+</style>
+
+<article class="page-rte">
+  <h1>{{ page.title }}</h1>
+  <div>{{ page.content }}</div>
+</article>

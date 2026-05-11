@@ -1,0 +1,13 @@
+<div style="max-width:720px;margin:48px auto;padding:0 24px;">
+  <h1 style="font-family:var(--serif);font-size:36px;">Your Addresses</h1>
+  {% paginate customer.addresses by 5 %}
+    {% for address in customer.addresses %}
+      <div style="border:1px solid rgba(44,44,44,0.1);border-radius:10px;padding:18px;margin-top:16px;">
+        {% if address == customer.default_address %}
+          <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Default</div>
+        {% endif %}
+        <div>{{ address | format_address }}</div>
+      </div>
+    {% endfor %}
+  {% endpaginate %}
+</div>

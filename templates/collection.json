@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "phase-catalog",
+      "settings": {
+        "eyebrow": "Shop",
+        "heading": "Browse the collection",
+        "subhead": "Filter by symptom, ritual, or routine.",
+        "product_limit": 24
+      }
+    }
+  },
+  "order": ["main"]
+}

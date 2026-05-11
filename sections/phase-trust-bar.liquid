@@ -1,0 +1,49 @@
+{% comment %} Phase Trust Bar - "As seen in" press logos {% endcomment %}
+
+<style>
+  .phase-trust{background:#EFE7DC;padding:40px 0;border-top:1px solid #E5DDD2;border-bottom:1px solid #E5DDD2;}
+  .phase-trust .container{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .phase-trust .label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#6B6B6B;}
+  .phase-trust .logos{display:flex;gap:48px;align-items:center;flex-wrap:wrap;font-family:'DM Serif Display',serif;font-size:22px;color:#6B6B6B;opacity:.7;}
+  .phase-trust .logos span{font-style:italic;}
+</style>
+
+<section class="phase-trust">
+  <div class="container">
+    <div class="label">{{ section.settings.label }}</div>
+    <div class="logos">
+      {% for block in section.blocks %}
+        <span>{{ block.settings.name }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phase Trust Bar",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "As seen in" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo (text)",
+      "settings": [{ "type": "text", "id": "name", "label": "Publication name", "default": "Vogue" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Phase Trust Bar",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Vogue" } },
+        { "type": "logo", "settings": { "name": "Goop" } },
+        { "type": "logo", "settings": { "name": "Well+Good" } },
+        { "type": "logo", "settings": { "name": "The Cut" } },
+        { "type": "logo", "settings": { "name": "mindbodygreen" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

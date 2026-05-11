@@ -1,0 +1,60 @@
+{% comment %} Phase Founder Story Section {% endcomment %}
+
+<style>
+  .phase-fnd{padding:100px 0;background:#F7F2EC;}
+  .phase-fnd .container{max-width:1280px;margin:0 auto;padding:0 24px;}
+  .phase-fnd-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;}
+  .phase-fnd-img img{width:100%;height:580px;object-fit:cover;border-radius:4px;}
+  .phase-fnd .eyebrow{color:#C97B5C;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
+  .phase-fnd h2{font-family:'DM Serif Display',serif;font-size:44px;color:#2C2C2C;margin-bottom:24px;line-height:1.15;}
+  .phase-fnd .quote{font-family:'DM Serif Display',serif;font-size:24px;font-style:italic;color:#5C7A6A;margin-bottom:24px;line-height:1.4;}
+  .phase-fnd p{color:#6B6B6B;font-size:16px;margin-bottom:18px;}
+  .phase-fnd-sig{margin-top:30px;font-family:'DM Serif Display',serif;font-size:22px;color:#2C2C2C;}
+  .phase-fnd-sig small{display:block;font-family:'DM Sans',sans-serif;font-size:13px;color:#6B6B6B;font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+  @media(max-width:900px){
+    .phase-fnd-grid{grid-template-columns:1fr;gap:40px;}
+    .phase-fnd-img img{height:420px;}
+    .phase-fnd h2{font-size:32px;}
+  }
+</style>
+
+<section class="phase-fnd">
+  <div class="container">
+    <div class="phase-fnd-grid">
+      <div class="phase-fnd-img">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" />
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=900&q=80&auto=format&fit=crop" alt="Founder" />
+        {% endif %}
+      </div>
+      <div>
+        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <p class="quote">"{{ section.settings.pull_quote }}"</p>
+        <p>{{ section.settings.body_1 }}</p>
+        <p>{{ section.settings.body_2 }}</p>
+        <div class="phase-fnd-sig">— {{ section.settings.signature }}
+          <small>{{ section.settings.role }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phase Founder Story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Founder image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Phase exists" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built by women who got tired of being told it's just a phase." },
+    { "type": "textarea", "id": "pull_quote", "label": "Pull quote", "default": "I was 47 when I had my first hot flash in a board meeting. My doctor handed me a brochure. That wasn't enough." },
+    { "type": "textarea", "id": "body_1", "label": "Body paragraph 1", "default": "Phase started as a frustrated text thread between three friends." },
+    { "type": "textarea", "id": "body_2", "label": "Body paragraph 2", "default": "Every product is formulated with women like us in mind." },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "The Phase Team" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Founders & formulators" }
+  ],
+  "presets": [{ "name": "Phase Founder Story" }]
+}
+{% endschema %}

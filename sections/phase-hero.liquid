@@ -1,0 +1,75 @@
+{% comment %}
+  Phase Hero Section — drop-in for OS 2.0 themes.
+  Configure headline, image, and CTAs from theme editor.
+{% endcomment %}
+
+<style>
+  .phase-hero{padding:60px 0 80px;background:linear-gradient(180deg,{{ section.settings.bg_top }} 0%,{{ section.settings.bg_bottom }} 100%);}
+  .phase-hero .container{max-width:1280px;margin:0 auto;padding:0 24px;}
+  .phase-hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
+  .phase-hero .eyebrow{color:{{ section.settings.accent }};font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+  .phase-hero h1{font-family:'DM Serif Display',serif;font-size:64px;line-height:1.1;letter-spacing:-1px;margin-bottom:24px;color:#2C2C2C;}
+  .phase-hero h1 em{font-style:italic;color:{{ section.settings.accent }};}
+  .phase-hero p{font-size:18px;color:#6B6B6B;margin-bottom:36px;max-width:520px;}
+  .phase-hero-cta{display:flex;gap:16px;flex-wrap:wrap;}
+  .phase-btn{display:inline-block;padding:16px 32px;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;border-radius:2px;transition:all .25s;text-decoration:none;}
+  .phase-btn-primary{background:{{ section.settings.accent }};color:#fff;}
+  .phase-btn-primary:hover{filter:brightness(.9);transform:translateY(-1px);}
+  .phase-btn-ghost{background:transparent;color:#2C2C2C;text-decoration:underline;text-underline-offset:6px;padding:16px 8px;}
+  .phase-hero-image{position:relative;}
+  .phase-hero-image img{border-radius:4px;width:100%;height:600px;object-fit:cover;box-shadow:0 30px 60px -20px rgba(60,40,30,.25);}
+  @media(max-width:900px){
+    .phase-hero h1{font-size:42px;}
+    .phase-hero-grid{grid-template-columns:1fr;gap:40px;}
+    .phase-hero-image img{height:420px;}
+  }
+</style>
+
+<section class="phase-hero">
+  <div class="container">
+    <div class="phase-hero-grid">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+        <h1>{{ section.settings.headline }}</h1>
+        <p>{{ section.settings.subhead }}</p>
+        <div class="phase-hero-cta">
+          {% if section.settings.cta_text != blank %}
+            <a href="{{ section.settings.cta_link }}" class="phase-btn phase-btn-primary">{{ section.settings.cta_text }} →</a>
+          {% endif %}
+          {% if section.settings.cta2_text != blank %}
+            <a href="{{ section.settings.cta2_link }}" class="phase-btn phase-btn-ghost">{{ section.settings.cta2_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="phase-hero-image">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager" />
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&auto=format&fit=crop" alt="Hero" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phase Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "For the women who weren't warned" },
+    { "type": "richtext", "id": "headline", "label": "Headline", "default": "<p>Symptoms have a season. <em>So does relief.</em></p>" },
+    { "type": "textarea", "id": "subhead", "label": "Subheadline", "default": "Doctor-formulated, plant-powered support for hot flashes, sleepless nights, and the moments you don't recognize yourself." },
+    { "type": "text", "id": "cta_text", "label": "Primary CTA text", "default": "Shop Relief" },
+    { "type": "url", "id": "cta_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_text", "label": "Secondary CTA text", "default": "Take the 60-second quiz" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary CTA link" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "color", "id": "bg_top", "label": "Background top", "default": "#F7F2EC" },
+    { "type": "color", "id": "bg_bottom", "label": "Background bottom", "default": "#EFE7DC" },
+    { "type": "color", "id": "accent", "label": "Accent color", "default": "#C97B5C" }
+  ],
+  "presets": [{ "name": "Phase Hero" }]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<div style="max-width:560px;margin:64px auto;padding:0 24px;text-align:center;">
+  <h1 style="font-family:var(--serif);font-size:40px;">Gift Card</h1>
+  <p style="color:rgba(44,44,44,0.7);">{{ gift_card.balance | money }}</p>
+  <div style="margin:24px 0;padding:24px;background:var(--cream-alt);border-radius:12px;font-family:monospace;font-size:18px;letter-spacing:0.1em;">
+    {{ gift_card.code | format_code }}
+  </div>
+  {% if gift_card.expired %}
+    <p style="color:#b00;">This gift card has expired.</p>
+  {% else %}
+    <p style="font-size:14px;color:rgba(44,44,44,0.6);">Use this code at checkout.</p>
+  {% endif %}
+</div>

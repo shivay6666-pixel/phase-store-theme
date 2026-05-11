@@ -1,0 +1,55 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Phase",
+    "theme_version": "1.0.0",
+    "theme_author": "Phase",
+    "theme_documentation_url": "https://help.shopify.com",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Will be scaled down to 32 x 32px"
+      },
+      {
+        "type": "header",
+        "content": "Brand colors"
+      },
+      {
+        "type": "color",
+        "id": "color_terracotta",
+        "label": "Terracotta (primary)",
+        "default": "#C97B5C"
+      },
+      {
+        "type": "color",
+        "id": "color_sage",
+        "label": "Sage (secondary)",
+        "default": "#5C7A6A"
+      },
+      {
+        "type": "color",
+        "id": "color_cream",
+        "label": "Cream (background)",
+        "default": "#F7F2EC"
+      },
+      {
+        "type": "color",
+        "id": "color_charcoal",
+        "label": "Charcoal (text)",
+        "default": "#2C2C2C"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Gold (accent)",
+        "default": "#D4A574"
+      }
+    ]
+  }
+]
