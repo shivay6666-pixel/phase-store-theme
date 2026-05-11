@@ -1,67 +1,96 @@
-{% comment %}
-  Phase Featured Products Section.
-  Pulls products from the collection you choose in the theme editor.
-  TIP for PagePilot users: Point this at the "Frontpage" or "All products" collection
-  so any newly imported product auto-appears on the home page.
-{% endcomment %}
-
 <style>
-  .phase-products{padding:100px 0;background:{{ section.settings.bg }};}
-  .phase-products .container{max-width:1280px;margin:0 auto;padding:0 24px;}
-  .phase-products .section-head{text-align:center;max-width:700px;margin:0 auto 60px;}
-  .phase-products .eyebrow{color:#C97B5C;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
-  .phase-products h2{font-family:'DM Serif Display',serif;font-size:48px;margin-bottom:18px;color:#2C2C2C;line-height:1.15;}
-  .phase-products .sub{color:#6B6B6B;font-size:17px;}
-  .phase-product-grid{display:grid;grid-template-columns:repeat({{ section.settings.cols }},1fr);gap:24px;}
-  .phase-product-card{background:#fff;border-radius:6px;overflow:hidden;transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:block;}
-  .phase-product-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -15px rgba(60,40,30,.18);}
-  .phase-product-card-img{position:relative;background:#F7F2EC;aspect-ratio:1/1;overflow:hidden;}
-  .phase-product-card-img img{width:100%;height:100%;object-fit:cover;}
-  .phase-product-tag{position:absolute;top:12px;left:12px;background:#C97B5C;color:#fff;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 10px;border-radius:2px;}
-  .phase-product-card-body{padding:20px;}
-  .phase-product-card h4{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;margin:0 0 6px;color:#2C2C2C;}
-  .phase-product-cat{font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
-  .phase-product-price{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:#2C2C2C;}
-  .phase-product-price .strike{color:#6B6B6B;text-decoration:line-through;font-weight:400;font-size:14px;}
-  .phase-products-cta{text-align:center;margin-top:50px;}
-  .phase-btn{display:inline-block;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;border-radius:2px;background:#C97B5C;color:#fff;text-decoration:none;}
-  @media(max-width:1000px){.phase-product-grid{grid-template-columns:repeat(3,1fr);}}
-  @media(max-width:760px){.phase-product-grid{grid-template-columns:repeat(2,1fr);} .phase-products h2{font-size:32px;}}
+  .phase-products-section {
+    padding: 100px 0;
+    background: var(--cream-dark);
+  }
+  .phase-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .phase-product-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all .3s;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+  .phase-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(60,40,30,.18);
+  }
+  .phase-product-card-img {
+    position: relative;
+    background: var(--cream);
+    aspect-ratio: 1/1;
+    overflow: hidden;
+  }
+  .phase-product-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .phase-product-card:hover .phase-product-card-img img { transform: scale(1.04); }
+  .phase-product-tag {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--terracotta); color: #fff;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 2px;
+  }
+  .phase-product-card-body { padding: 20px; }
+  .phase-product-card-body h4 {
+    font-size: 17px; font-family: 'DM Sans', sans-serif;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .phase-product-cat {
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
+  }
+  .phase-product-price {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 600;
+  }
+  .phase-product-price .strike {
+    color: var(--muted); text-decoration: line-through;
+    font-weight: 400; font-size: 14px;
+  }
+  .phase-product-stars { color: var(--gold); font-size: 13px; margin-top: 8px; }
+  .phase-product-stars span { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  .phase-center-cta { text-align: center; margin-top: 50px; }
+  @media (max-width: 1000px) { .phase-product-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) { .phase-product-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 
-<section class="phase-products">
+<section class="phase-products-section">
   <div class="container">
     <div class="section-head">
-      {% if section.settings.eyebrow != blank %}
-        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
-      {% endif %}
+      <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
       <h2>{{ section.settings.heading }}</h2>
-      {% if section.settings.subhead != blank %}
-        <p class="sub">{{ section.settings.subhead }}</p>
-      {% endif %}
+      <p>{{ section.settings.subhead }}</p>
     </div>
 
-    {% assign featured_collection = collections[section.settings.collection] %}
-    <div class="phase-product-grid">
-      {% if featured_collection.products.size > 0 %}
-        {% for product in featured_collection.products limit: section.settings.product_limit %}
+    {% assign feat_col = collections[section.settings.collection] %}
+    {% if feat_col != blank and feat_col.products_count > 0 %}
+      <div class="phase-product-grid">
+        {% for product in feat_col.products limit: section.settings.product_limit %}
           <a href="{{ product.url }}" class="phase-product-card">
             <div class="phase-product-card-img">
-              {% if product.tags contains 'bestseller' %}
-                <span class="phase-product-tag">Bestseller</span>
-              {% elsif product.tags contains 'new' %}
-                <span class="phase-product-tag" style="background:#5C7A6A;">New</span>
-              {% endif %}
-              {% if product.featured_image != blank %}
-                <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" loading="lazy" />
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 600 }}"
+                     alt="{{ product.featured_image.alt | escape }}" loading="lazy" />
               {% else %}
-                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=500&q=80&auto=format&fit=crop" alt="{{ product.title | escape }}" />
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
+                     alt="{{ product.title }}" loading="lazy" />
+              {% endif %}
+              {% if product.compare_at_price > product.price %}
+                <div class="phase-product-tag">Sale</div>
               {% endif %}
             </div>
             <div class="phase-product-card-body">
-              {% if product.type != blank %}
-                <div class="phase-product-cat">{{ product.type }}</div>
-              {% endif %}
+              <div class="phase-product-cat">{{ product.type }}</div>
               <h4>{{ product.title }}</h4>
               <div class="phase-product-price">
                 {{ product.price | money }}
@@ -69,29 +98,34 @@
                   <span class="strike">{{ product.compare_at_price | money }}</span>
                 {% endif %}
               </div>
+              <div class="phase-product-stars">★★★★★ <span>({{ product.metafields.reviews.rating_count | default: 0 }})</span></div>
             </div>
           </a>
         {% endfor %}
-      {% else %}
-        {% comment %} Placeholder products — replace by importing via PagePilot to the chosen collection {% endcomment %}
-        {% for i in (1..section.settings.product_limit) %}
-          <div class="phase-product-card">
-            <div class="phase-product-card-img">
-              <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=500&q=80&auto=format&fit=crop" alt="Sample" />
-            </div>
+      </div>
+    {% else %}
+      <div class="phase-product-grid">
+        {% for i in (1..4) %}
+          <div class="phase-product-card" style="pointer-events:none">
+            <div class="phase-product-card-img" style="background:var(--cream-dark)"></div>
             <div class="phase-product-card-body">
-              <div class="phase-product-cat">Sample category</div>
-              <h4>Import products from PagePilot to populate</h4>
-              <div class="phase-product-price">$0.00</div>
+              <div class="phase-product-cat" style="background:var(--line);height:12px;border-radius:2px;width:60%;margin-bottom:10px"></div>
+              <div style="background:var(--line);height:16px;border-radius:2px;margin-bottom:8px"></div>
+              <div style="background:var(--line);height:14px;border-radius:2px;width:40%"></div>
             </div>
           </div>
         {% endfor %}
-      {% endif %}
-    </div>
+      </div>
+      <p style="text-align:center;color:var(--muted);margin-top:24px;font-size:14px">
+        Import your products via <strong>Products → Import</strong> to populate this section.
+      </p>
+    {% endif %}
 
     {% if section.settings.show_cta %}
-      <div class="phase-products-cta">
-        <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="phase-btn">{{ section.settings.cta_text }} →</a>
+      <div class="phase-center-cta">
+        <a href="{{ section.settings.cta_link }}" class="btn btn-primary">
+          {{ section.settings.cta_text }} &rarr;
+        </a>
       </div>
     {% endif %}
   </div>
@@ -103,18 +137,12 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bestsellers" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by 12,000+ women in the phase" },
-    { "type": "text", "id": "subhead", "label": "Subhead", "default": "The essentials our customers reorder month after month." },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection (set to 'Frontpage' or 'All products' for PagePilot auto-fill)"
-    },
-    { "type": "range", "id": "product_limit", "label": "Number of products", "min": 4, "max": 16, "step": 4, "default": 8 },
-    { "type": "select", "id": "cols", "label": "Columns", "options": [{"value":"3","label":"3"},{"value":"4","label":"4"}], "default": "4" },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#EFE7DC" },
-    { "type": "checkbox", "id": "show_cta", "label": "Show 'View all' button", "default": true },
+    { "type": "textarea", "id": "subhead", "label": "Subheadline", "default": "The essentials our customers reorder month after month." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "Products to show", "min": 4, "max": 12, "step": 4, "default": 8 },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA button", "default": true },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "View All Products" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    { "type": "url", "id": "cta_link", "label": "CTA link", "default": "/collections/all" }
   ],
   "presets": [{ "name": "Phase Featured Products" }]
 }

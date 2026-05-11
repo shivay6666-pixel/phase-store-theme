@@ -1,20 +1,33 @@
-{% comment %} Phase Science Strip - stat counters {% endcomment %}
-
 <style>
-  .phase-sci{padding:80px 0;background:#2C2C2C;color:#fff;}
-  .phase-sci .container{max-width:1280px;margin:0 auto;padding:0 24px;}
-  .phase-sci-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;}
-  .phase-sci h3{font-family:'DM Serif Display',serif;font-size:48px;color:#D4A574;margin-bottom:12px;line-height:1;}
-  .phase-sci p{font-size:14px;opacity:.8;margin:0;}
-  @media(max-width:760px){.phase-sci-grid{grid-template-columns:repeat(2,1fr);gap:30px;}}
+  .phase-science {
+    padding: 80px 0;
+    background: var(--charcoal);
+    color: #fff;
+  }
+  .phase-science-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .phase-science-item h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .phase-science-item p { font-size: 14px; opacity: .8; color: #fff; }
+  @media (max-width: 760px) {
+    .phase-science-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+  }
 </style>
 
-<section class="phase-sci">
+<section class="phase-science">
   <div class="container">
-    <div class="phase-sci-grid">
+    <div class="phase-science-grid">
       {% for block in section.blocks %}
-        <div>
-          <h3>{{ block.settings.value }}</h3>
+        <div class="phase-science-item" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.stat }}</h3>
           <p>{{ block.settings.label }}</p>
         </div>
       {% endfor %}
@@ -25,27 +38,24 @@
 {% schema %}
 {
   "name": "Phase Science Strip",
-  "max_blocks": 6,
   "blocks": [
     {
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "value", "label": "Value", "default": "12k+" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Women supported across 23 countries" }
+        { "type": "text", "id": "stat", "label": "Stat", "default": "94%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Report symptom relief within 30 days" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Phase Science Strip",
-      "blocks": [
-        { "type": "stat", "settings": { "value": "12k+", "label": "Women supported across 23 countries" } },
-        { "type": "stat", "settings": { "value": "94%", "label": "Report symptom relief within 30 days" } },
-        { "type": "stat", "settings": { "value": "0", "label": "Parabens, sulfates, or hormone disruptors" } },
-        { "type": "stat", "settings": { "value": "60", "label": "Day money-back relief guarantee" } }
-      ]
-    }
-  ]
+  "presets": [{
+    "name": "Phase Science Strip",
+    "blocks": [
+      { "type": "stat", "settings": { "stat": "12k+", "label": "Women supported across 23 countries" } },
+      { "type": "stat", "settings": { "stat": "94%", "label": "Report symptom relief within 30 days" } },
+      { "type": "stat", "settings": { "stat": "0", "label": "Parabens, sulfates, or hormone disruptors" } },
+      { "type": "stat", "settings": { "stat": "60", "label": "Day money-back relief guarantee" } }
+    ]
+  }]
 }
 {% endschema %}

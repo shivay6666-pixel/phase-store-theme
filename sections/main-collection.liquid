@@ -1,52 +1,122 @@
+<style>
+  .phase-coll-page {
+    padding: 50px 0 100px;
+    background: var(--cream);
+  }
+  .phase-coll-head { text-align: center; margin-bottom: 50px; }
+  .phase-coll-head h1 { font-size: 48px; margin-bottom: 14px; }
+  .phase-coll-head p { color: var(--muted); }
+  .phase-coll-filters {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 40px; justify-content: center;
+  }
+  .phase-coll-filter {
+    padding: 10px 20px;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 30px; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none; color: var(--charcoal);
+    display: inline-block;
+  }
+  .phase-coll-filter:hover { border-color: var(--charcoal); }
+  .phase-coll-filter.active {
+    background: var(--terracotta); color: #fff; border-color: var(--terracotta);
+  }
+  .phase-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .phase-product-card {
+    background: #fff; border-radius: 6px;
+    overflow: hidden; transition: all .3s;
+    display: block; color: inherit; text-decoration: none;
+  }
+  .phase-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(60,40,30,.18);
+  }
+  .phase-product-card-img {
+    position: relative; background: var(--cream);
+    aspect-ratio: 1/1; overflow: hidden;
+  }
+  .phase-product-card-img img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform .4s;
+  }
+  .phase-product-card:hover .phase-product-card-img img { transform: scale(1.04); }
+  .phase-product-tag {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--terracotta); color: #fff;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 2px;
+  }
+  .phase-product-card-body { padding: 20px; }
+  .phase-product-card-body h4 {
+    font-size: 17px; font-family: 'DM Sans', sans-serif;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .phase-product-cat {
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
+  }
+  .phase-product-price { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; }
+  .phase-product-price .strike { color: var(--muted); text-decoration: line-through; font-weight: 400; font-size: 14px; }
+  .phase-product-stars { color: var(--gold); font-size: 13px; margin-top: 8px; }
+  @media (max-width: 1000px) { .phase-product-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) { .phase-product-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .phase-product-grid { grid-template-columns: 1fr; } }
+</style>
+
+<section class="phase-coll-page">
+  <div class="container">
+    <div class="phase-coll-head">
+      <h1>{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <p>{{ collection.description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="phase-product-grid">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="phase-product-card">
+          <div class="phase-product-card-img">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 600 }}"
+                   alt="{{ product.featured_image.alt | escape }}" loading="lazy" />
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
+                   alt="{{ product.title }}" loading="lazy" />
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <div class="phase-product-tag">Sale</div>
+            {% endif %}
+          </div>
+          <div class="phase-product-card-body">
+            <div class="phase-product-cat">{{ product.type }}</div>
+            <h4>{{ product.title }}</h4>
+            <div class="phase-product-price">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="strike">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+            <div class="phase-product-stars">★★★★★</div>
+          </div>
+        </a>
+      {% else %}
+        <p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0">
+          No products in this collection yet. Import your products to get started.
+        </p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
   "name": "Collection",
   "settings": []
 }
 {% endschema %}
-
-<style>
-  .coll-page { max-width: 1280px; margin: 48px auto; padding: 0 24px; }
-  .coll-page__head { text-align: center; margin-bottom: 40px; }
-  .coll-page__title { font-family: var(--serif); font-size: 44px; margin: 0 0 8px; }
-  .coll-page__desc { color: rgba(44,44,44,0.7); max-width: 560px; margin: 0 auto; }
-  .coll-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  @media (max-width: 1024px) { .coll-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 768px) { .coll-grid { grid-template-columns: repeat(2, 1fr); } }
-  .coll-card { background: #fff; border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
-  .coll-card:hover { transform: translateY(-3px); }
-  .coll-card a { color: inherit; text-decoration: none; }
-  .coll-card__img { aspect-ratio: 1; overflow: hidden; background: var(--cream-alt); }
-  .coll-card__img img { width: 100%; height: 100%; object-fit: cover; }
-  .coll-card__body { padding: 16px 18px 20px; }
-  .coll-card__title { font-family: var(--serif); font-size: 18px; margin: 0 0 6px; }
-  .coll-card__price { color: var(--terracotta); font-weight: 500; font-size: 15px; }
-</style>
-
-<div class="coll-page">
-  <div class="coll-page__head">
-    <h1 class="coll-page__title">{{ collection.title }}</h1>
-    {% if collection.description != blank %}
-      <div class="coll-page__desc">{{ collection.description }}</div>
-    {% endif %}
-  </div>
-  <div class="coll-grid">
-    {% paginate collection.products by 24 %}
-      {% for product in collection.products %}
-        <div class="coll-card">
-          <a href="{{ product.url }}">
-            <div class="coll-card__img">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
-              {% endif %}
-            </div>
-            <div class="coll-card__body">
-              <div class="coll-card__title">{{ product.title }}</div>
-              <div class="coll-card__price">{{ product.price | money }}</div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    {% endpaginate %}
-  </div>
-</div>

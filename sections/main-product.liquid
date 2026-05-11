@@ -1,59 +1,162 @@
+<style>
+  .phase-pdp { padding: 50px 0 100px; background: var(--cream); }
+  .phase-breadcrumb {
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  .phase-breadcrumb a:hover { color: var(--terracotta); }
+  .phase-pdp-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 60px; align-items: start;
+  }
+  .phase-pdp-gallery { position: sticky; top: 100px; }
+  .phase-pdp-main-img {
+    aspect-ratio: 1/1; background: #fff; border-radius: 6px;
+    overflow: hidden; margin-bottom: 14px; border: 1px solid var(--line);
+  }
+  .phase-pdp-main-img img { width: 100%; height: 100%; object-fit: cover; }
+  .phase-pdp-thumbs {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  }
+  .phase-pdp-thumb {
+    aspect-ratio: 1/1; background: #fff; border-radius: 4px;
+    overflow: hidden; border: 2px solid transparent; cursor: pointer;
+  }
+  .phase-pdp-thumb.active { border-color: var(--terracotta); }
+  .phase-pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .phase-pdp-info .phase-product-cat {
+    font-size: 12px; letter-spacing: 2px; color: var(--terracotta);
+    text-transform: uppercase; margin-bottom: 14px; font-weight: 600;
+  }
+  .phase-pdp-info h1 { font-size: 42px; margin-bottom: 14px; line-height: 1.1; }
+  .phase-pdp-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+  .phase-pdp-rating .stars { color: var(--gold); font-size: 16px; }
+  .phase-pdp-price {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 8px;
+  }
+  .phase-pdp-price .now { font-size: 32px; font-weight: 600; }
+  .phase-pdp-price .was { font-size: 18px; text-decoration: line-through; color: var(--muted); }
+  .phase-pdp-price .save {
+    background: var(--terracotta); color: #fff;
+    font-size: 11px; padding: 4px 10px; border-radius: 2px;
+    font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .phase-pdp-shipping {
+    font-size: 13px; color: var(--sage); margin-bottom: 30px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .phase-pdp-desc { color: var(--muted); font-size: 15px; margin-bottom: 28px; line-height: 1.7; }
+  .phase-pdp-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+  .phase-pdp-trust-row {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 24px 0; margin-bottom: 30px;
+  }
+  .phase-pdp-trust-item { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--muted); }
+  .phase-pdp-trust-item b { color: var(--charcoal); display: block; font-size: 13px; }
+  .phase-pdp-trust-ico {
+    width: 36px; height: 36px; background: var(--cream-dark);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  @media (max-width: 900px) {
+    .phase-pdp-grid { grid-template-columns: 1fr; gap: 30px; }
+    .phase-pdp-gallery { position: static; }
+    .phase-pdp-info h1 { font-size: 30px; }
+  }
+</style>
+
+<section class="phase-pdp">
+  <div class="container">
+    <div class="phase-breadcrumb">
+      <a href="/">Home</a> &middot;
+      <a href="/collections/all">Shop</a> &middot;
+      {{ product.title }}
+    </div>
+
+    <div class="phase-pdp-grid">
+      <div class="phase-pdp-gallery">
+        <div class="phase-pdp-main-img">
+          {% if product.featured_image %}
+            <img id="pdp-main-img"
+                 src="{{ product.featured_image | image_url: width: 900 }}"
+                 alt="{{ product.featured_image.alt | escape }}" />
+          {% else %}
+            <img id="pdp-main-img"
+                 src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80&auto=format&fit=crop"
+                 alt="{{ product.title }}" />
+          {% endif %}
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="phase-pdp-thumbs">
+            {% for img in product.images limit: 5 %}
+              <div class="phase-pdp-thumb {% if forloop.first %}active{% endif %}"
+                   data-src="{{ img | image_url: width: 900 }}"
+                   onclick="document.getElementById('pdp-main-img').src=this.dataset.src;document.querySelectorAll('.phase-pdp-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active')">
+                <img src="{{ img | image_url: width: 120 }}" alt="" loading="lazy" />
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="phase-pdp-info">
+        <div class="phase-product-cat">{{ product.type }}</div>
+        <h1>{{ product.title }}</h1>
+        <div class="phase-pdp-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:13px;color:var(--muted)">4.9 · 214 reviews</span>
+        </div>
+        <div class="phase-pdp-price">
+          <span class="now">{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="was">{{ product.compare_at_price | money }}</span>
+            <span class="save">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+          {% endif %}
+        </div>
+        <p class="phase-pdp-shipping">✓ Free shipping on orders over $50</p>
+        <div class="phase-pdp-desc">{{ product.description }}</div>
+
+        {% form 'product', product, id: 'pdp-form' %}
+          {% if product.variants.size > 1 %}
+            <select name="id" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:2px;margin-bottom:16px;outline:none">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} — {{ variant.price | money }}
+                </option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          {% endif %}
+          <div class="phase-pdp-actions">
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:18px 36px;font-size:15px">
+              Add to Bag &mdash; {{ product.price | money }}
+            </button>
+          </div>
+        {% endform %}
+
+        <div class="phase-pdp-trust-row">
+          <div class="phase-pdp-trust-item">
+            <div class="phase-pdp-trust-ico">🚚</div>
+            <div><b>Free Shipping</b>Orders over $50</div>
+          </div>
+          <div class="phase-pdp-trust-item">
+            <div class="phase-pdp-trust-ico">↩</div>
+            <div><b>60-Day Guarantee</b>Relief or refund</div>
+          </div>
+          <div class="phase-pdp-trust-item">
+            <div class="phase-pdp-trust-ico">🌿</div>
+            <div><b>Hormone-Free</b>No parabens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
   "name": "Product",
   "settings": []
 }
 {% endschema %}
-
-<style>
-  .product-page { max-width: 1200px; margin: 48px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-  .product-page__media img { border-radius: 12px; width: 100%; }
-  .product-page__title { font-family: var(--serif); font-size: 40px; line-height: 1.1; margin: 0 0 12px; }
-  .product-page__price { font-size: 22px; color: var(--terracotta); margin-bottom: 24px; }
-  .product-page__desc { font-size: 16px; line-height: 1.7; color: var(--charcoal); margin-bottom: 28px; }
-  .product-form__buttons { display: flex; gap: 12px; align-items: center; }
-  .product-form__cart { background: var(--charcoal); color: var(--cream); padding: 16px 28px; border: none; border-radius: 999px; font-size: 15px; font-weight: 500; cursor: pointer; letter-spacing: 0.02em; }
-  .product-form__cart:hover { background: var(--terracotta); }
-  .product-form__cart[disabled] { opacity: 0.5; cursor: not-allowed; }
-  .product-form__qty { width: 64px; padding: 14px 12px; border: 1px solid rgba(44,44,44,0.15); border-radius: 999px; text-align: center; }
-  .product-form__variants { margin-bottom: 20px; }
-  .product-form__variants select { padding: 12px 16px; border: 1px solid rgba(44,44,44,0.15); border-radius: 8px; font-size: 14px; min-width: 200px; }
-  @media (max-width: 768px) { .product-page { grid-template-columns: 1fr; gap: 24px; } }
-</style>
-
-<div class="product-page">
-  <div class="product-page__media">
-    {% if product.featured_image %}
-      <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy">
-    {% endif %}
-  </div>
-  <div class="product-page__info">
-    <h1 class="product-page__title">{{ product.title }}</h1>
-    <div class="product-page__price">{{ product.selected_or_first_available_variant.price | money }}</div>
-    <div class="product-page__desc">{{ product.description }}</div>
-
-    {% form 'product', product %}
-      {% if product.has_only_default_variant == false %}
-        <div class="product-form__variants">
-          <label for="variant-select">Option:</label>
-          <select id="variant-select" name="id">
-            {% for variant in product.variants %}
-              <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
-                {{ variant.title }} - {{ variant.price | money }}{% unless variant.available %} (Sold out){% endunless %}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-      {% else %}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      {% endif %}
-
-      <div class="product-form__buttons">
-        <input type="number" name="quantity" value="1" min="1" class="product-form__qty">
-        <button type="submit" name="add" class="product-form__cart" {% unless product.available %}disabled{% endunless %}>
-          {% if product.available %}Add to cart{% else %}Sold out{% endif %}
-        </button>
-      </div>
-    {% endform %}
-  </div>
-</div>
