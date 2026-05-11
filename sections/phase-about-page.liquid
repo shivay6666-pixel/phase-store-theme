@@ -1,0 +1,334 @@
+<style>
+  .phase-about { background: var(--cream); }
+
+  /* Hero */
+  .phase-about-hero {
+    padding: 100px 0 80px;
+    background: linear-gradient(160deg, var(--cream) 0%, var(--cream-dark) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .phase-about-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .phase-about-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 20px;
+  }
+  .phase-about-hero h1 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.1; margin-bottom: 24px;
+  }
+  .phase-about-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .phase-about-hero-lead {
+    font-size: 18px; color: var(--muted);
+    line-height: 1.7; margin-bottom: 36px;
+  }
+  .phase-about-hero-stats {
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .phase-about-stat strong {
+    display: block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: var(--terracotta);
+    line-height: 1;
+  }
+  .phase-about-stat span {
+    font-size: 13px; color: var(--muted);
+    margin-top: 6px; display: block;
+  }
+  .phase-about-hero-img img {
+    width: 100%; border-radius: 4px;
+    box-shadow: 0 40px 80px -20px rgba(60,40,30,.2);
+    aspect-ratio: 4/5; object-fit: cover;
+  }
+  @media (max-width: 900px) {
+    .phase-about-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .phase-about-hero-img { order: -1; }
+    .phase-about-hero-img img { aspect-ratio: 16/9; }
+  }
+
+  /* Mission */
+  .phase-mission {
+    padding: 100px 0;
+    background: var(--charcoal);
+    color: #fff;
+  }
+  .phase-mission-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .phase-mission-inner .phase-about-eyebrow { color: var(--gold); }
+  .phase-mission-inner h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    color: #fff; margin-bottom: 28px;
+    line-height: 1.2;
+  }
+  .phase-mission-inner h2 em { font-style: italic; color: var(--blush); }
+  .phase-mission-inner p {
+    font-size: 18px; opacity: .8;
+    line-height: 1.75; margin-bottom: 20px;
+  }
+
+  /* Founders */
+  .phase-founders { padding: 100px 0; background: var(--cream-dark); }
+  .phase-founders-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+  .phase-founder-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .phase-founder-photo {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover; display: block;
+    background: var(--cream);
+  }
+  .phase-founder-card-body { padding: 28px; }
+  .phase-founder-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; margin-bottom: 4px;
+  }
+  .phase-founder-role {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 16px;
+  }
+  .phase-founder-bio { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  @media (max-width: 900px) {
+    .phase-founders-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .phase-founders-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Standards */
+  .phase-standards { padding: 100px 0; background: var(--cream); }
+  .phase-standards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 60px;
+  }
+  .phase-standard {
+    padding: 36px 28px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+  .phase-standard-icon { font-size: 36px; margin-bottom: 16px; }
+  .phase-standard h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; margin-bottom: 10px;
+  }
+  .phase-standard p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  @media (max-width: 900px) {
+    .phase-standards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .phase-standards-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Story */
+  .phase-story { padding: 100px 0; background: var(--cream-dark); }
+  .phase-story-inner { max-width: 720px; margin: 0 auto; }
+  .phase-story-inner h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    margin-bottom: 36px; line-height: 1.2;
+  }
+  .phase-story-inner p {
+    font-size: 17px; color: var(--muted);
+    line-height: 1.8; margin-bottom: 24px;
+  }
+  .phase-story-pull {
+    border-left: 3px solid var(--terracotta);
+    padding: 16px 0 16px 32px;
+    margin: 40px 0;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 2.8vw, 28px);
+    color: var(--charcoal);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .phase-about-cta {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--terracotta) 0%, #B5684C 100%);
+    text-align: center;
+    color: #fff;
+  }
+  .phase-about-cta h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    color: #fff; margin-bottom: 16px;
+  }
+  .phase-about-cta p {
+    font-size: 18px; opacity: .88;
+    margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .phase-about-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .phase-about-cta-btns .btn-white {
+    padding: 16px 36px; background: #fff; color: var(--terracotta);
+    border-radius: 3px; font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    text-decoration: none; transition: all .25s; display: inline-block;
+  }
+  .phase-about-cta-btns .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.15); }
+  .phase-about-cta-btns .btn-outline-white {
+    padding: 16px 36px; background: transparent; color: #fff;
+    border: 1.5px solid rgba(255,255,255,.7); border-radius: 3px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none;
+    transition: all .25s; display: inline-block;
+  }
+  .phase-about-cta-btns .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+</style>
+
+<div class="phase-about">
+
+  <!-- HERO -->
+  <section class="phase-about-hero">
+    <div class="container">
+      <div class="phase-about-hero-inner">
+        <div>
+          <div class="phase-about-eyebrow">Our Story</div>
+          <h1>We built what we <em>couldn't find.</em></h1>
+          <p class="phase-about-hero-lead">Phase started because three women — a clinical nutritionist, a women's health pharmacist, and a sleep researcher — all hit menopause and came up empty. No honest information. No products that worked. No one who talked to them like adults.</p>
+          <div class="phase-about-hero-stats">
+            <div class="phase-about-stat"><strong>12k+</strong><span>Women supported</span></div>
+            <div class="phase-about-stat"><strong>23</strong><span>Countries reached</span></div>
+            <div class="phase-about-stat"><strong>94%</strong><span>Report relief in 30 days</span></div>
+          </div>
+        </div>
+        <div class="phase-about-hero-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=85&auto=format&fit=crop" alt="Margaret Chen, Phase founder" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="phase-mission">
+    <div class="container">
+      <div class="phase-mission-inner">
+        <div class="phase-about-eyebrow">What We Believe</div>
+        <h2>Menopause isn't a <em>disorder.</em><br>It's a phase. Treat it like one.</h2>
+        <p>The average woman spends 7 years in perimenopause or menopause before getting meaningful support. Most are told to "try lifestyle changes" or handed an HRT prescription with no context.</p>
+        <p>We believe women deserve honest information, clinically tested solutions, and a brand that doesn't treat their biology as a problem to be solved in a pamphlet. Phase curates the most rigorously tested menopause wellness products — from Bonafide, Kindra, Hilma, and others — so you don't have to spend 200 hours on PubMed to figure out what actually works.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS -->
+  <section class="phase-founders">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">The Team</div>
+        <h2>Built by women who lived it.</h2>
+        <p>Three clinicians. Three menopause journeys. One company.</p>
+      </div>
+      <div class="phase-founders-grid">
+        <div class="phase-founder-card">
+          <img class="phase-founder-photo" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&auto=format&fit=crop&crop=faces" alt="Margaret Chen" loading="lazy" />
+          <div class="phase-founder-card-body">
+            <div class="phase-founder-name">Margaret Chen</div>
+            <div class="phase-founder-role">Co-Founder &amp; CEO · CN, Clinical Nutritionist</div>
+            <p class="phase-founder-bio">22 years in clinical nutrition. Hit menopause at 51 and spent two years figuring out what was happening without adequate support. Built Phase so no woman has to do that alone.</p>
+          </div>
+        </div>
+        <div class="phase-founder-card">
+          <img class="phase-founder-photo" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80&auto=format&fit=crop&crop=faces" alt="Dr. Sandra Park" loading="lazy" />
+          <div class="phase-founder-card-body">
+            <div class="phase-founder-name">Dr. Sandra Park</div>
+            <div class="phase-founder-role">Co-Founder · PharmD, Women's Health Pharmacist</div>
+            <p class="phase-founder-bio">Board-certified women's health pharmacist with 18 years of clinical practice. Vets every product in the Phase catalog for ingredient quality, bioavailability, and drug interactions.</p>
+          </div>
+        </div>
+        <div class="phase-founder-card">
+          <img class="phase-founder-photo" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&auto=format&fit=crop&crop=faces" alt="Dr. Keiko Yamamoto" loading="lazy" />
+          <div class="phase-founder-card-body">
+            <div class="phase-founder-name">Dr. Keiko Yamamoto</div>
+            <div class="phase-founder-role">Co-Founder · PhD, Sleep Medicine Researcher</div>
+            <p class="phase-founder-bio">Sleep researcher at a major academic medical center for 15 years. Her own insomnia during perimenopause sparked the sleep category. Everything in the Sleep collection is something she'd prescribe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDARDS -->
+  <section class="phase-standards">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">The Phase Standard</div>
+        <h2>How we choose what's in the catalog.</h2>
+        <p>We only carry products we'd take ourselves, or recommend to our patients.</p>
+      </div>
+      <div class="phase-standards-grid">
+        <div class="phase-standard">
+          <div class="phase-standard-icon">🔬</div>
+          <h4>Clinically Studied</h4>
+          <p>Every product must have peer-reviewed clinical data supporting its primary claim — not just "studies show ingredients may help."</p>
+        </div>
+        <div class="phase-standard">
+          <div class="phase-standard-icon">🌿</div>
+          <h4>Hormone-Free</h4>
+          <p>All Phase products are hormone-free and safe for women who can't or don't want to use HRT — including those with hormone-sensitive conditions.</p>
+        </div>
+        <div class="phase-standard">
+          <div class="phase-standard-icon">✅</div>
+          <h4>Third-Party Tested</h4>
+          <p>Independent lab verification for purity, potency, and contaminants. We check the certificates of analysis — not just the label.</p>
+        </div>
+        <div class="phase-standard">
+          <div class="phase-standard-icon">💬</div>
+          <h4>Real-World Tested</h4>
+          <p>Before a product enters the catalog, at least one Phase founder or advisor has used it. Preferably for 90 days. No exceptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="phase-story">
+    <div class="container">
+      <div class="phase-story-inner">
+        <div class="phase-about-eyebrow">The Full Story</div>
+        <h2>How Phase became what it is.</h2>
+        <p>In 2021, Margaret Chen walked into her gynecologist's office convinced she was having a cardiac event. Racing heart. Drenching sweats at 2am. A fog so thick she'd forgotten her own phone number in a client meeting. She was 51.</p>
+        <p>Her doctor said: "This is menopause. You can try HRT or lifestyle changes." No nuance. No explanation of what was actually happening to her hormones. No guidance on what "lifestyle changes" actually meant beyond "exercise more and stress less."</p>
+        <blockquote class="phase-story-pull">"I was a clinical nutritionist. I knew how to read research. And I still spent two years figuring this out on my own. That should not happen to anyone."</blockquote>
+        <p>She called Sandra Park, a pharmacist friend who'd recently had the same experience. And then Keiko Yamamoto, a sleep researcher colleague who'd been studying hormonal insomnia for years but had never connected it to her own midnight wake-ups.</p>
+        <p>Together, they spent six months reviewing clinical literature, testing products on themselves, and building the framework for what Phase would become: not a supplement company, but a curated catalog of the most rigorously tested menopause wellness products available — with honest, no-fluff explanations of what each one actually does and why.</p>
+        <p>Today, Phase supports over 12,000 women across 23 countries. Every product in the catalog is something at least one founder takes, has taken, or would recommend to a patient. That's the only standard that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="phase-about-cta">
+    <div class="container">
+      <h2>Ready to find your protocol?</h2>
+      <p>Take the 60-second quiz and we'll match you with the products most likely to help your specific symptoms.</p>
+      <div class="phase-about-cta-btns">
+        <a href="/pages/quiz" class="btn-white">Take the 60-second quiz →</a>
+        <a href="/collections/all" class="btn-outline-white">Browse all products</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Phase About Page",
+  "settings": [],
+  "presets": [{ "name": "Phase About Page" }]
+}
+{% endschema %}
