@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -20,14 +29,76 @@
     "symptoms": {
       "type": "phase-symptoms-grid",
       "blocks": {
-        "s1": { "type": "symptom", "settings": { "title": "Hot Flashes", "description": "Cooling sprays, neck fans, and night-sweat-busting essentials.", "cta": "Shop cooling", "fallback_url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop", "link": "/collections/hot-flashes" } },
-        "s2": { "type": "symptom", "settings": { "title": "Sleepless Nights", "description": "Magnesium blends, weighted eye masks, and cooling pillowcases.", "cta": "Shop sleep", "fallback_url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&q=80&auto=format&fit=crop", "link": "/collections/sleep" } },
-        "s3": { "type": "symptom", "settings": { "title": "Mood & Anxiety", "description": "Adaptogens, breathwork tools, and calm-in-a-bottle essentials.", "cta": "Shop mood", "fallback_url": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&q=80&auto=format&fit=crop", "link": "/collections/mood" } },
-        "s4": { "type": "symptom", "settings": { "title": "Brain Fog", "description": "Nootropic blends and focus support designed for hormonal shifts.", "cta": "Shop focus", "fallback_url": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600&q=80&auto=format&fit=crop", "link": "/collections/focus" } },
-        "s5": { "type": "symptom", "settings": { "title": "Joint & Body", "description": "Topical CBD, magnesium creams, and morning-mobility rituals.", "cta": "Shop body", "fallback_url": "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop", "link": "/collections/body" } },
-        "s6": { "type": "symptom", "settings": { "title": "Intimate Wellness", "description": "pH-balanced moisturizers and comfort essentials, no shame attached.", "cta": "Shop intimate", "fallback_url": "https://images.unsplash.com/photo-1583912267550-d44c9c98e9aa?w=600&q=80&auto=format&fit=crop", "link": "/collections/intimate" } }
+        "s1": {
+          "type": "symptom",
+          "settings": {
+            "title": "Hot Flashes",
+            "description": "Cooling sprays, neck fans, and night-sweat-busting essentials.",
+            "cta": "Shop cooling",
+            "link": "/collections/hot-flashes",
+            "fallback_url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
+          }
+        },
+        "s2": {
+          "type": "symptom",
+          "settings": {
+            "title": "Sleepless Nights",
+            "description": "Magnesium blends, weighted eye masks, and cooling pillowcases.",
+            "cta": "Shop sleep",
+            "link": "/collections/sleep",
+            "fallback_url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&q=80&auto=format&fit=crop"
+          }
+        },
+        "s3": {
+          "type": "symptom",
+          "settings": {
+            "title": "Mood & Anxiety",
+            "description": "Adaptogens, breathwork tools, and calm-in-a-bottle essentials.",
+            "cta": "Shop mood",
+            "link": "/collections/mood",
+            "fallback_url": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&q=80&auto=format&fit=crop"
+          }
+        },
+        "s4": {
+          "type": "symptom",
+          "settings": {
+            "title": "Brain Fog",
+            "description": "Nootropic blends and focus support designed for hormonal shifts.",
+            "cta": "Shop focus",
+            "link": "/collections/focus",
+            "fallback_url": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600&q=80&auto=format&fit=crop"
+          }
+        },
+        "s5": {
+          "type": "symptom",
+          "settings": {
+            "title": "Joint & Body",
+            "description": "Topical CBD, magnesium creams, and morning-mobility rituals.",
+            "cta": "Shop body",
+            "link": "/collections/body",
+            "fallback_url": "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop"
+          }
+        },
+        "s6": {
+          "type": "symptom",
+          "settings": {
+            "title": "Intimate Wellness",
+            "description": "pH-balanced moisturizers and comfort essentials, no shame attached.",
+            "cta": "Shop intimate",
+            "link": "/collections/intimate",
+            "fallback_url": "https://images.unsplash.com/photo-1583912267550-d44c9c98e9aa?w=600&q=80&auto=format&fit=crop"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6"]
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6"
+      ],
+      "settings": {}
     },
     "featured": {
       "type": "phase-featured-products",
@@ -56,44 +127,128 @@
     "science": {
       "type": "phase-science-strip",
       "blocks": {
-        "st1": { "type": "stat", "settings": { "stat": "12k+", "label": "Women supported across 23 countries" } },
-        "st2": { "type": "stat", "settings": { "stat": "94%", "label": "Report symptom relief within 30 days" } },
-        "st3": { "type": "stat", "settings": { "stat": "0", "label": "Parabens, sulfates, or hormone disruptors" } },
-        "st4": { "type": "stat", "settings": { "stat": "60", "label": "Day money-back relief guarantee" } }
+        "st1": {
+          "type": "stat",
+          "settings": {
+            "stat": "12k+",
+            "label": "Women supported across 23 countries"
+          }
+        },
+        "st2": {
+          "type": "stat",
+          "settings": {
+            "stat": "94%",
+            "label": "Report symptom relief within 30 days"
+          }
+        },
+        "st3": {
+          "type": "stat",
+          "settings": {
+            "stat": "0",
+            "label": "Parabens, sulfates, or hormone disruptors"
+          }
+        },
+        "st4": {
+          "type": "stat",
+          "settings": {
+            "stat": "60",
+            "label": "Day money-back relief guarantee"
+          }
+        }
       },
-      "block_order": ["st1", "st2", "st3", "st4"]
+      "block_order": [
+        "st1",
+        "st2",
+        "st3",
+        "st4"
+      ],
+      "settings": {}
     },
     "testimonials": {
       "type": "phase-testimonials",
       "blocks": {
-        "t1": { "type": "testimonial", "settings": {
-          "quote": "I'd accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years.",
-          "name": "Sarah K.", "meta": "51 · Subscriber 8 months",
-          "avatar_url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=100&q=80&auto=format&fit=crop"
-        }},
-        "t2": { "type": "testimonial", "settings": {
-          "quote": "The cooling neck wrap is in my bag at all times. I had a hot flash mid-presentation last week and my colleague didn't even notice. Game changer.",
-          "name": "Michelle R.", "meta": "48 · Subscriber 4 months",
-          "avatar_url": "https://images.unsplash.com/photo-1573164574396-ce99a23a0d7b?w=100&q=80&auto=format&fit=crop"
-        }},
-        "t3": { "type": "testimonial", "settings": {
-          "quote": "Finally a brand that talks to me like an adult. The Daily Balance capsules are part of my morning ritual now and I can feel the difference on the days I forget.",
-          "name": "Jennifer L.", "meta": "55 · Subscriber 1 year",
-          "avatar_url": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&auto=format&fit=crop"
-        }}
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'd accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years.",
+            "name": "Sarah K.",
+            "meta": "51 · Subscriber 8 months",
+            "avatar_url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=100&q=80&auto=format&fit=crop"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The cooling neck wrap is in my bag at all times. I had a hot flash mid-presentation last week and my colleague didn't even notice. Game changer.",
+            "name": "Michelle R.",
+            "meta": "48 · Subscriber 4 months",
+            "avatar_url": "https://images.unsplash.com/photo-1573164574396-ce99a23a0d7b?w=100&q=80&auto=format&fit=crop"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally a brand that talks to me like an adult. The Daily Balance capsules are part of my morning ritual now and I can feel the difference on the days I forget.",
+            "name": "Jennifer L.",
+            "meta": "55 · Subscriber 1 year",
+            "avatar_url": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&auto=format&fit=crop"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {}
     },
     "faq": {
       "type": "phase-faq",
       "blocks": {
-        "f1": { "type": "faq", "settings": { "question": "When will I start to feel a difference?", "answer": "Most customers report noticeable relief within 14–30 days of consistent use. Our 60-day guarantee gives you plenty of time." } },
-        "f2": { "type": "faq", "settings": { "question": "Are these products safe with HRT?", "answer": "Most are designed to complement hormone therapy — but always check with your provider." } },
-        "f3": { "type": "faq", "settings": { "question": "Can I use Phase if I'm in perimenopause?", "answer": "Absolutely. Many of our customers find Phase most useful during perimenopause, before menopause is officially diagnosed." } },
-        "f4": { "type": "faq", "settings": { "question": "How does the subscription work?", "answer": "Subscribe and save 15% on every order. Skip, swap, or cancel anytime from your account dashboard." } },
-        "f5": { "type": "faq", "settings": { "question": "What if a product doesn't work for me?", "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you — no returns required, no fine print." } }
+        "f1": {
+          "type": "faq",
+          "settings": {
+            "question": "When will I start to feel a difference?",
+            "answer": "Most customers report noticeable relief within 14–30 days of consistent use. Our 60-day guarantee gives you plenty of time."
+          }
+        },
+        "f2": {
+          "type": "faq",
+          "settings": {
+            "question": "Are these products safe with HRT?",
+            "answer": "Most are designed to complement hormone therapy — but always check with your provider."
+          }
+        },
+        "f3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Phase if I'm in perimenopause?",
+            "answer": "Absolutely. Many of our customers find Phase most useful during perimenopause, before menopause is officially diagnosed."
+          }
+        },
+        "f4": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the subscription work?",
+            "answer": "Subscribe and save 15% on every order. Skip, swap, or cancel anytime from your account dashboard."
+          }
+        },
+        "f5": {
+          "type": "faq",
+          "settings": {
+            "question": "What if a product doesn't work for me?",
+            "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you — no returns required, no fine print."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4", "f5"]
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "settings": {}
     },
     "newsletter": {
       "type": "phase-newsletter",
