@@ -1,162 +1,995 @@
 <style>
-  .phase-pdp { padding: 50px 0 100px; background: var(--cream); }
+/* ===================================================
+   PHASE PRODUCT PAGE — full PDP
+   =================================================== */
+
+  .phase-product-page { background: var(--cream); }
+
+  /* Breadcrumb */
   .phase-breadcrumb {
+    padding: 14px 0;
     font-size: 12px; color: var(--muted);
-    margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1.5px;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: .3px;
   }
+  .phase-breadcrumb a { color: var(--muted); transition: color .2s; }
   .phase-breadcrumb a:hover { color: var(--terracotta); }
-  .phase-pdp-grid {
-    display: grid; grid-template-columns: 1.2fr 1fr;
-    gap: 60px; align-items: start;
-  }
-  .phase-pdp-gallery { position: sticky; top: 100px; }
-  .phase-pdp-main-img {
-    aspect-ratio: 1/1; background: #fff; border-radius: 6px;
-    overflow: hidden; margin-bottom: 14px; border: 1px solid var(--line);
-  }
-  .phase-pdp-main-img img { width: 100%; height: 100%; object-fit: cover; }
-  .phase-pdp-thumbs {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
-  }
-  .phase-pdp-thumb {
-    aspect-ratio: 1/1; background: #fff; border-radius: 4px;
-    overflow: hidden; border: 2px solid transparent; cursor: pointer;
-  }
-  .phase-pdp-thumb.active { border-color: var(--terracotta); }
-  .phase-pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .phase-pdp-info .phase-product-cat {
-    font-size: 12px; letter-spacing: 2px; color: var(--terracotta);
-    text-transform: uppercase; margin-bottom: 14px; font-weight: 600;
-  }
-  .phase-pdp-info h1 { font-size: 42px; margin-bottom: 14px; line-height: 1.1; }
-  .phase-pdp-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-  .phase-pdp-rating .stars { color: var(--gold); font-size: 16px; }
-  .phase-pdp-price {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 8px;
-  }
-  .phase-pdp-price .now { font-size: 32px; font-weight: 600; }
-  .phase-pdp-price .was { font-size: 18px; text-decoration: line-through; color: var(--muted); }
-  .phase-pdp-price .save {
-    background: var(--terracotta); color: #fff;
-    font-size: 11px; padding: 4px 10px; border-radius: 2px;
-    font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-  }
-  .phase-pdp-shipping {
-    font-size: 13px; color: var(--sage); margin-bottom: 30px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .phase-pdp-desc { color: var(--muted); font-size: 15px; margin-bottom: 28px; line-height: 1.7; }
-  .phase-pdp-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-  .phase-pdp-trust-row {
-    display: flex; gap: 24px; flex-wrap: wrap;
-    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    padding: 24px 0; margin-bottom: 30px;
-  }
-  .phase-pdp-trust-item { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--muted); }
-  .phase-pdp-trust-item b { color: var(--charcoal); display: block; font-size: 13px; }
-  .phase-pdp-trust-ico {
-    width: 36px; height: 36px; background: var(--cream-dark);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;
+  .phase-breadcrumb .sep { margin: 0 8px; opacity: .4; }
+
+  /* ── Product main layout ─────────────────────────── */
+  .phase-product-main { padding: 48px 0 80px; }
+  .phase-product-layout {
+    display: grid;
+    grid-template-columns: 52% 1fr;
+    gap: 64px;
+    align-items: start;
   }
   @media (max-width: 900px) {
-    .phase-pdp-grid { grid-template-columns: 1fr; gap: 30px; }
-    .phase-pdp-gallery { position: static; }
-    .phase-pdp-info h1 { font-size: 30px; }
+    .phase-product-layout { grid-template-columns: 1fr; gap: 36px; }
   }
+
+  /* ── Gallery ─────────────────────────────────────── */
+  .phase-gallery { position: sticky; top: 88px; }
+
+  .phase-gallery-main {
+    position: relative;
+    border-radius: 6px; overflow: hidden;
+    background: var(--cream-dark);
+    aspect-ratio: 1 / 1;
+    margin-bottom: 10px;
+    cursor: zoom-in;
+  }
+  .phase-gallery-main img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease, opacity .25s;
+    display: block;
+  }
+  .phase-gallery-main:hover img { transform: scale(1.04); }
+
+  .phase-gallery-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--terracotta); color: #fff;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 2px;
+    pointer-events: none;
+  }
+  .phase-gallery-badge-green {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--sage); color: #fff;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .phase-gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .phase-thumb {
+    aspect-ratio: 1/1; border-radius: 4px;
+    overflow: hidden; cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color .2s, opacity .2s;
+    background: var(--cream-dark);
+  }
+  .phase-thumb.active  { border-color: var(--terracotta); }
+  .phase-thumb:hover   { opacity: .85; }
+  .phase-thumb img     { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ── Product info column ─────────────────────────── */
+  .phase-product-vendor {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 10px;
+  }
+  .phase-product-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.15; margin-bottom: 14px;
+    color: var(--charcoal);
+  }
+
+  /* Star rating row */
+  .phase-rating-row {
+    display: flex; align-items: center;
+    gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .phase-stars-gold { color: #E8A838; font-size: 15px; letter-spacing: 1px; }
+  .phase-rating-score { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .phase-rating-link {
+    font-size: 13px; color: var(--muted);
+    text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer; background: none; border: none;
+    font-family: inherit; padding: 0;
+  }
+  .phase-verified-pill {
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+    color: var(--sage); background: rgba(92,122,106,.1);
+    padding: 4px 10px; border-radius: 20px;
+  }
+
+  /* Price */
+  .phase-price-row {
+    display: flex; align-items: baseline;
+    gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .phase-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px; color: var(--charcoal);
+    line-height: 1;
+  }
+  .phase-compare { font-size: 18px; color: var(--muted); text-decoration: line-through; }
+  .phase-save-pill {
+    font-size: 12px; font-weight: 700;
+    color: #fff; background: var(--sage);
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* Subscribe toggle */
+  .phase-sub-toggle {
+    display: flex;
+    border: 1.5px solid var(--line);
+    border-radius: 6px; overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .phase-sub-btn {
+    flex: 1; padding: 13px 14px;
+    background: #fff; border: none;
+    text-align: left; cursor: pointer;
+    font-family: inherit; transition: background .2s;
+  }
+  .phase-sub-btn.active { background: var(--cream-dark); }
+  .phase-sub-btn-label {
+    display: block; font-size: 13px;
+    font-weight: 600; color: var(--charcoal); margin-bottom: 2px;
+  }
+  .phase-sub-btn-note { display: block; font-size: 11px; color: var(--muted); }
+  .phase-sub-divider { width: 1.5px; background: var(--line); flex-shrink: 0; }
+
+  /* Variants */
+  .phase-option-label {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--charcoal); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .phase-option-selected {
+    font-weight: 400; text-transform: none;
+    letter-spacing: 0; color: var(--muted);
+  }
+  .phase-variant-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .phase-variant-btn {
+    padding: 9px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 4px; background: #fff;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .2s;
+    font-family: inherit; color: var(--charcoal);
+  }
+  .phase-variant-btn:hover { border-color: var(--terracotta); }
+  .phase-variant-btn.active {
+    border-color: var(--terracotta);
+    background: var(--terracotta); color: #fff;
+  }
+
+  /* Add to cart row */
+  .phase-atc-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: stretch; }
+  .phase-qty {
+    display: flex; align-items: center;
+    border: 1.5px solid var(--line); border-radius: 4px;
+    overflow: hidden; background: #fff; flex-shrink: 0;
+  }
+  .phase-qty-btn {
+    width: 38px; height: 100%;
+    font-size: 20px; background: none; border: none;
+    color: var(--charcoal); cursor: pointer;
+    font-family: inherit; transition: background .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phase-qty-btn:hover { background: var(--cream-dark); }
+  .phase-qty-num {
+    width: 40px; text-align: center;
+    font-size: 15px; font-weight: 600; color: var(--charcoal);
+  }
+  .phase-btn-atc {
+    flex: 1; padding: 15px 20px;
+    background: var(--terracotta); color: #fff;
+    border: none; border-radius: 4px;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all .25s;
+    font-family: inherit;
+  }
+  .phase-btn-atc:hover { background: var(--terracotta-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,123,92,.3); }
+
+  /* Micro-trust pills */
+  .phase-micro-trust {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding: 14px 0; border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 24px;
+  }
+  .phase-micro-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted); font-weight: 500;
+  }
+  .phase-micro-item .mi-icon { font-size: 15px; }
+
+  /* Why it works */
+  .phase-why-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--charcoal); margin-bottom: 12px;
+  }
+  .phase-why-list { list-style: none; margin-bottom: 28px; }
+  .phase-why-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; line-height: 1.6; color: var(--charcoal);
+    padding: 8px 0; border-bottom: 1px solid var(--line);
+  }
+  .phase-why-list li:last-child { border-bottom: none; }
+  .phase-why-icon { color: var(--terracotta); flex-shrink: 0; margin-top: 2px; font-size: 14px; }
+
+  /* Accordion */
+  .phase-accordion { border-top: 1px solid var(--line); margin-top: 8px; }
+  .phase-acc-item  { border-bottom: 1px solid var(--line); }
+  .phase-acc-head  {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 17px 0;
+    cursor: pointer; background: none;
+    border: none; width: 100%; text-align: left;
+    font-family: inherit; gap: 12px;
+  }
+  .phase-acc-label { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+  .phase-acc-icon  {
+    font-size: 22px; color: var(--terracotta);
+    transition: transform .28s; flex-shrink: 0; line-height: 1;
+  }
+  .phase-acc-item.open .phase-acc-icon { transform: rotate(45deg); }
+  .phase-acc-body  {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease;
+  }
+  .phase-acc-item.open .phase-acc-body { max-height: 900px; }
+  .phase-acc-inner {
+    padding-bottom: 20px;
+    font-size: 14px; color: var(--muted); line-height: 1.8;
+  }
+  .phase-acc-inner p   { margin-bottom: 10px; }
+  .phase-acc-inner ul  { list-style: none; margin-top: 8px; }
+  .phase-acc-inner li  {
+    padding: 5px 0 5px 18px; position: relative;
+    line-height: 1.6;
+  }
+  .phase-acc-inner li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--terracotta); font-size: 11px; top: 7px;
+  }
+
+  /* Ingredient grid inside accordion */
+  .phase-ing-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-top: 12px;
+  }
+  @media (max-width: 500px) { .phase-ing-grid { grid-template-columns: 1fr; } }
+  .phase-ing-card {
+    background: var(--cream); border: 1px solid var(--line);
+    border-radius: 6px; padding: 12px 14px;
+  }
+  .phase-ing-name { font-size: 13px; font-weight: 700; color: var(--charcoal); margin-bottom: 3px; }
+  .phase-ing-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Pullquote strip ─────────────────────────────── */
+  .phase-pullquote {
+    padding: 64px 0;
+    background: var(--charcoal); color: #fff;
+    text-align: center;
+  }
+  .phase-pq-stars { color: #E8A838; font-size: 20px; letter-spacing: 3px; margin-bottom: 14px; }
+  .phase-pq-text  {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 2.8vw, 30px);
+    font-style: italic; line-height: 1.45;
+    color: #fff; max-width: 740px;
+    margin: 0 auto 18px;
+  }
+  .phase-pq-attr { font-size: 13px; color: rgba(255,255,255,.55); }
+
+  /* ── Reviews section ─────────────────────────────── */
+  .phase-reviews-section {
+    padding: 80px 0;
+    background: var(--cream-dark);
+  }
+  .phase-rev-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 800px) { .phase-rev-layout { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Summary panel */
+  .phase-rev-score-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 84px; line-height: 1;
+    color: var(--charcoal); margin-bottom: 6px;
+  }
+  .phase-rev-stars-big { color: #E8A838; font-size: 20px; letter-spacing: 2px; margin-bottom: 8px; }
+  .phase-rev-total { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .phase-bar-row  {
+    display: flex; align-items: center;
+    gap: 9px; margin-bottom: 6px; font-size: 12px; color: var(--muted);
+  }
+  .phase-bar-lbl  { width: 28px; text-align: right; flex-shrink: 0; }
+  .phase-bar-track {
+    flex: 1; height: 6px; background: var(--line);
+    border-radius: 3px; overflow: hidden;
+  }
+  .phase-bar-fill {
+    height: 100%; background: #E8A838;
+    border-radius: 3px; transition: width .6s ease;
+  }
+  .phase-bar-pct  { width: 28px; flex-shrink: 0; }
+
+  /* Review list header */
+  .phase-rev-header {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .phase-rev-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: var(--charcoal);
+  }
+  .phase-rev-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .phase-rev-filter {
+    padding: 7px 14px; border-radius: 20px; font-size: 12px;
+    font-weight: 600; border: 1.5px solid var(--line);
+    background: #fff; color: var(--muted);
+    cursor: pointer; transition: all .2s; font-family: inherit;
+  }
+  .phase-rev-filter.active {
+    border-color: var(--terracotta);
+    color: var(--terracotta); background: rgba(201,123,92,.07);
+  }
+
+  /* Review cards */
+  .phase-rev-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 960px) { .phase-rev-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px)  { .phase-rev-grid { grid-template-columns: 1fr; } }
+
+  .phase-rev-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 8px; padding: 22px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .phase-rev-card.rev-highlight {
+    background: var(--charcoal); border-color: var(--charcoal);
+  }
+  .phase-rev-top   { display: flex; justify-content: space-between; align-items: flex-start; }
+  .phase-rev-s     { color: #E8A838; font-size: 12px; letter-spacing: 1px; }
+  .phase-rev-card.rev-highlight .phase-rev-s { color: var(--gold); }
+  .phase-rev-date  { font-size: 11px; color: var(--muted); }
+  .phase-rev-card.rev-highlight .phase-rev-date { color: rgba(255,255,255,.4); }
+  .phase-rev-title { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .phase-rev-card.rev-highlight .phase-rev-title { color: #fff; }
+  .phase-rev-body  { font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1; }
+  .phase-rev-card.rev-highlight .phase-rev-body { color: rgba(255,255,255,.8); }
+  .phase-rev-foot  {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 12px; border-top: 1px solid var(--line);
+  }
+  .phase-rev-card.rev-highlight .phase-rev-foot { border-color: rgba(255,255,255,.12); }
+  .phase-rev-ava   {
+    width: 34px; height: 34px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    background: var(--cream-dark); color: var(--terracotta);
+    overflow: hidden;
+  }
+  .phase-rev-name  { font-size: 13px; font-weight: 700; color: var(--charcoal); }
+  .phase-rev-card.rev-highlight .phase-rev-name { color: #fff; }
+  .phase-rev-meta  { font-size: 11px; color: var(--muted); }
+  .phase-rev-card.rev-highlight .phase-rev-meta { color: rgba(255,255,255,.45); }
+  .phase-rev-vbadge {
+    margin-left: auto; font-size: 11px;
+    color: var(--sage); font-weight: 700;
+    white-space: nowrap;
+  }
+  .phase-rev-card.rev-highlight .phase-rev-vbadge { color: #7BBFA0; }
+
+  /* ── Cross-sell ──────────────────────────────────── */
+  .phase-cross-sell { padding: 80px 0; background: var(--cream); }
+  .phase-cs-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px; margin-top: 40px;
+  }
+  @media (max-width: 900px) { .phase-cs-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px)  { .phase-cs-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }
+
+  .phase-cs-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 8px; overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .phase-cs-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(60,40,30,.1);
+  }
+  .phase-cs-img  {
+    width: 100%; aspect-ratio: 1/1;
+    object-fit: cover; display: block;
+    background: var(--cream-dark);
+  }
+  .phase-cs-body { padding: 14px 16px; }
+  .phase-cs-name { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; line-height: 1.4; }
+  .phase-cs-price { font-size: 14px; font-weight: 700; color: var(--terracotta); }
 </style>
 
-<section class="phase-pdp">
-  <div class="container">
-    <div class="phase-breadcrumb">
-      <a href="/">Home</a> &middot;
-      <a href="/collections/all">Shop</a> &middot;
+{%- assign cv = product.selected_or_first_available_variant -%}
+
+<div class="phase-product-page">
+
+  <!-- BREADCRUMB -->
+  <div class="phase-breadcrumb">
+    <div class="container">
+      <a href="/">Home</a>
+      <span class="sep">›</span>
+      <a href="/collections/all">Shop All</a>
+      <span class="sep">›</span>
       {{ product.title }}
     </div>
+  </div>
 
-    <div class="phase-pdp-grid">
-      <div class="phase-pdp-gallery">
-        <div class="phase-pdp-main-img">
-          {% if product.featured_image %}
-            <img id="pdp-main-img"
-                 src="{{ product.featured_image | image_url: width: 900 }}"
-                 alt="{{ product.featured_image.alt | escape }}" />
-          {% else %}
-            <img id="pdp-main-img"
-                 src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80&auto=format&fit=crop"
-                 alt="{{ product.title }}" />
-          {% endif %}
-        </div>
-        {% if product.images.size > 1 %}
-          <div class="phase-pdp-thumbs">
-            {% for img in product.images limit: 5 %}
-              <div class="phase-pdp-thumb {% if forloop.first %}active{% endif %}"
-                   data-src="{{ img | image_url: width: 900 }}"
-                   onclick="document.getElementById('pdp-main-img').src=this.dataset.src;document.querySelectorAll('.phase-pdp-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active')">
-                <img src="{{ img | image_url: width: 120 }}" alt="" loading="lazy" />
-              </div>
-            {% endfor %}
+  <!-- MAIN -->
+  <section class="phase-product-main">
+    <div class="container">
+      <div class="phase-product-layout">
+
+        <!-- ══ GALLERY ══ -->
+        <div class="phase-gallery">
+          <div class="phase-gallery-main" id="phase-gallery-main">
+            {%- if product.images.size > 0 -%}
+              <img id="phase-hero-img"
+                src="{{ product.images[0] | image_url: width: 1000 }}"
+                alt="{{ product.images[0].alt | default: product.title }}"
+                loading="eager" />
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&q=80" alt="{{ product.title }}" />
+            {%- endif -%}
+            {%- if product.compare_at_price > product.price -%}
+              {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              <div class="phase-gallery-badge">Save {{ pct }}%</div>
+            {%- endif -%}
+            <div class="phase-gallery-badge-green">✓ Clinician Vetted</div>
           </div>
-        {% endif %}
-      </div>
 
-      <div class="phase-pdp-info">
-        <div class="phase-product-cat">{{ product.type }}</div>
-        <h1>{{ product.title }}</h1>
-        <div class="phase-pdp-rating">
-          <span class="stars">★★★★★</span>
-          <span style="font-size:13px;color:var(--muted)">4.9 · 214 reviews</span>
+          {%- if product.images.size > 1 -%}
+          <div class="phase-gallery-thumbs">
+            {%- for img in product.images limit: 8 -%}
+              <div class="phase-thumb {% if forloop.first %}active{% endif %}"
+                   onclick="phaseSetImg(this,'{{ img | image_url: width: 1000 }}','{{ img.alt | default: product.title | escape }}')">
+                <img src="{{ img | image_url: width: 180 }}"
+                     alt="{{ img.alt | default: product.title }}" loading="lazy" />
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
         </div>
-        <div class="phase-pdp-price">
-          <span class="now">{{ product.price | money }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="was">{{ product.compare_at_price | money }}</span>
-            <span class="save">Save {{ product.compare_at_price | minus: product.price | money }}</span>
-          {% endif %}
-        </div>
-        <p class="phase-pdp-shipping">✓ Free shipping on orders over $50</p>
-        <div class="phase-pdp-desc">{{ product.description }}</div>
 
-        {% form 'product', product, id: 'pdp-form' %}
-          {% if product.variants.size > 1 %}
-            <select name="id" style="width:100%;padding:14px 16px;border:1.5px solid var(--line);background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:2px;margin-bottom:16px;outline:none">
-              {% for variant in product.variants %}
-                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
-                  {{ variant.title }} — {{ variant.price | money }}
-                </option>
-              {% endfor %}
-            </select>
-          {% else %}
-            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-          {% endif %}
-          <div class="phase-pdp-actions">
-            <button type="submit" class="btn btn-primary" style="width:100%;padding:18px 36px;font-size:15px">
-              Add to Bag &mdash; {{ product.price | money }}
+        <!-- ══ INFO ══ -->
+        <div class="phase-product-info">
+
+          <div class="phase-product-vendor">Phase® — Clinician Curated</div>
+          <h1 class="phase-product-title">{{ product.title }}</h1>
+
+          <!-- Rating row -->
+          <div class="phase-rating-row">
+            <span class="phase-stars-gold">★★★★★</span>
+            <span class="phase-rating-score">{{ section.settings.avg_rating | default: 4.8 }}</span>
+            <button class="phase-rating-link" onclick="document.getElementById('phase-reviews').scrollIntoView({behavior:'smooth'})">
+              {{ section.settings.review_count | default: 127 }} verified reviews
+            </button>
+            <span class="phase-verified-pill">✓ Verified Buyers</span>
+          </div>
+
+          <!-- Price -->
+          <div class="phase-price-row">
+            <span class="phase-price" id="phase-price">{{ cv.price | money }}</span>
+            {%- if cv.compare_at_price > cv.price -%}
+              <span class="phase-compare">{{ cv.compare_at_price | money }}</span>
+              <span class="phase-save-pill">Save {{ cv.compare_at_price | minus: cv.price | money }}</span>
+            {%- endif -%}
+          </div>
+
+          <!-- Subscribe / one-time toggle -->
+          <div class="phase-sub-toggle">
+            <button class="phase-sub-btn" id="phase-sub-once" onclick="phaseSubMode('once')">
+              <span class="phase-sub-btn-label">One-time purchase</span>
+              <span class="phase-sub-btn-note">{{ cv.price | money }}</span>
+            </button>
+            <div class="phase-sub-divider"></div>
+            <button class="phase-sub-btn active" id="phase-sub-sub" onclick="phaseSubMode('sub')">
+              <span class="phase-sub-btn-label">Subscribe &amp; save 15%</span>
+              <span class="phase-sub-btn-note" style="color:var(--terracotta);font-weight:600">
+                {{ cv.price | times: 0.85 | money }} / month · Cancel anytime
+              </span>
             </button>
           </div>
-        {% endform %}
 
-        <div class="phase-pdp-trust-row">
-          <div class="phase-pdp-trust-item">
-            <div class="phase-pdp-trust-ico">🚚</div>
-            <div><b>Free Shipping</b>Orders over $50</div>
+          <!-- Variant options -->
+          {%- if product.variants.size > 1 -%}
+            {%- for option in product.options_with_values -%}
+              <div class="phase-option-label">
+                {{ option.name }}
+                <span class="phase-option-selected" id="sel-{{ option.position }}">— {{ option.values.first }}</span>
+              </div>
+              <div class="phase-variant-row">
+                {%- for v in option.values -%}
+                  <button class="phase-variant-btn {% if forloop.first %}active{% endif %}"
+                          onclick="phasePickVariant(this, '{{ v | escape }}', {{ option.position }})">
+                    {{ v }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+
+          <!-- Add to cart -->
+          <form action="/cart/add" method="post" id="phase-atc-form">
+            <input type="hidden" name="id"       value="{{ cv.id }}" id="phase-vid">
+            <input type="hidden" name="quantity"  value="1" id="phase-qty-input">
+            <div class="phase-atc-row">
+              <div class="phase-qty">
+                <button type="button" class="phase-qty-btn" onclick="phaseQty(-1)">−</button>
+                <span class="phase-qty-num" id="phase-qty-num">1</span>
+                <button type="button" class="phase-qty-btn" onclick="phaseQty(1)">+</button>
+              </div>
+              <button type="submit" class="phase-btn-atc">Add to Cart →</button>
+            </div>
+          </form>
+
+          <!-- Micro-trust -->
+          <div class="phase-micro-trust">
+            <div class="phase-micro-item"><span class="mi-icon">🚚</span> Free shipping $50+</div>
+            <div class="phase-micro-item"><span class="mi-icon">↩</span> 60-day money-back</div>
+            <div class="phase-micro-item"><span class="mi-icon">🔬</span> Clinically studied</div>
+            <div class="phase-micro-item"><span class="mi-icon">🌿</span> Hormone-free</div>
           </div>
-          <div class="phase-pdp-trust-item">
-            <div class="phase-pdp-trust-ico">↩</div>
-            <div><b>60-Day Guarantee</b>Relief or refund</div>
-          </div>
-          <div class="phase-pdp-trust-item">
-            <div class="phase-pdp-trust-ico">🌿</div>
-            <div><b>Hormone-Free</b>No parabens</div>
-          </div>
+
+          <!-- Why it works -->
+          <div class="phase-why-title">Why it works</div>
+          <ul class="phase-why-list">
+            {%- assign hl_blocks = section.blocks | where: 'type', 'highlight' -%}
+            {%- if hl_blocks.size > 0 -%}
+              {%- for b in hl_blocks -%}
+                <li>
+                  <span class="phase-why-icon">{{ b.settings.icon | default: '✓' }}</span>
+                  <span>{{ b.settings.text }}</span>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><span class="phase-why-icon">✓</span> <span>{{ product.description | strip_html | truncate: 130 }}</span></li>
+              <li><span class="phase-why-icon">🔬</span> <span>Backed by peer-reviewed clinical trials — not just "may support" label copy</span></li>
+              <li><span class="phase-why-icon">✅</span> <span>Third-party tested for purity, potency, and absence of heavy metals</span></li>
+              <li><span class="phase-why-icon">🌿</span> <span>Hormone-free and safe alongside HRT, SSRIs, or on its own</span></li>
+              <li><span class="phase-why-icon">📦</span> <span>Ships from US-based fulfillment within 24–48 hours of your order</span></li>
+            {%- endif -%}
+          </ul>
+
+          <!-- Accordion -->
+          <div class="phase-accordion">
+
+            <div class="phase-acc-item open">
+              <button class="phase-acc-head" onclick="phaseAcc(this)">
+                <span class="phase-acc-label">Product Details</span>
+                <span class="phase-acc-icon">+</span>
+              </button>
+              <div class="phase-acc-body">
+                <div class="phase-acc-inner">{{ product.description }}</div>
+              </div>
+            </div>
+
+            <div class="phase-acc-item">
+              <button class="phase-acc-head" onclick="phaseAcc(this)">
+                <span class="phase-acc-label">Ingredients &amp; Materials</span>
+                <span class="phase-acc-icon">+</span>
+              </button>
+              <div class="phase-acc-body">
+                <div class="phase-acc-inner">
+                  {%- assign ing_blocks = section.blocks | where: 'type', 'ingredient' -%}
+                  {%- if ing_blocks.size > 0 -%}
+                  <div class="phase-ing-grid">
+                    {%- for b in ing_blocks -%}
+                    <div class="phase-ing-card">
+                      <div class="phase-ing-name">{{ b.settings.name }}</div>
+                      <div class="phase-ing-desc">{{ b.settings.description }}</div>
+                    </div>
+                    {%- endfor -%}
+                  </div>
+                  {%- else -%}
+                  <p>All Phase products are independently lab-tested before they reach you. We check certificates of analysis — not just trust the label.</p>
+                  <ul>
+                    <li>No parabens, sulfates, or hormone disruptors</li>
+                    <li>Free from artificial colors and synthetic fragrances</li>
+                    <li>Manufactured in FDA-registered, cGMP-certified facilities</li>
+                    <li>Full COA available on request at hello@phasewellness.com</li>
+                  </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-acc-item">
+              <button class="phase-acc-head" onclick="phaseAcc(this)">
+                <span class="phase-acc-label">How to Use</span>
+                <span class="phase-acc-icon">+</span>
+              </button>
+              <div class="phase-acc-body">
+                <div class="phase-acc-inner">
+                  {%- if section.settings.how_to_use != blank -%}
+                    <p>{{ section.settings.how_to_use }}</p>
+                  {%- else -%}
+                    <p><strong>Best results come from consistency.</strong> Most customers notice a meaningful difference within 14–21 days of regular use. Give it at least 30 days before making a judgment.</p>
+                    <ul>
+                      <li>Use at the same time each day to build a reliable habit</li>
+                      <li>Pair with consistent sleep and adequate hydration</li>
+                      <li>If you take prescription medications, check with your provider before adding any supplement</li>
+                      <li>Our 60-day guarantee exists precisely because some bodies take longer to respond — don't quit at week two</li>
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-acc-item">
+              <button class="phase-acc-head" onclick="phaseAcc(this)">
+                <span class="phase-acc-label">Clinical Evidence</span>
+                <span class="phase-acc-icon">+</span>
+              </button>
+              <div class="phase-acc-body">
+                <div class="phase-acc-inner">
+                  {%- if section.settings.clinical_evidence != blank -%}
+                    <p>{{ section.settings.clinical_evidence }}</p>
+                  {%- else -%}
+                    <p>Every product in the Phase catalog is reviewed by our Clinical Advisory Board — led by Dr. Sandra Park, PharmD — against primary peer-reviewed literature. Our standard: at least one randomized controlled trial supporting the main efficacy claim.</p>
+                    <ul>
+                      <li>RCT-level evidence required — not just mechanistic data</li>
+                      <li>Products are reassessed annually; removed if evidence weakens</li>
+                      <li>No MLM brands, no influencer-launched wellness lines</li>
+                      <li>Safety profile reviewed for hormone-sensitive conditions before catalog entry</li>
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-acc-item">
+              <button class="phase-acc-head" onclick="phaseAcc(this)">
+                <span class="phase-acc-label">Shipping &amp; 60-Day Guarantee</span>
+                <span class="phase-acc-icon">+</span>
+              </button>
+              <div class="phase-acc-body">
+                <div class="phase-acc-inner">
+                  <ul>
+                    <li>Free standard shipping on orders over $50 (US domestic)</li>
+                    <li>Orders placed before 2pm ET ship same business day</li>
+                    <li>Standard delivery: 3–5 business days · Express 2-day available at checkout</li>
+                    <li><strong>60-Day Relief Guarantee:</strong> If you don't experience meaningful improvement in your target symptom within 60 days, we'll refund you in full. No return required. No questions. No fine print.</li>
+                    <li>Email hello@phasewellness.com within 60 days of delivery to request a refund</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /accordion -->
+
+        </div><!-- /info -->
+      </div><!-- /layout -->
+    </div>
+  </section>
+
+  <!-- ══ PULLQUOTE ══ -->
+  {%- assign pq = section.blocks | where: 'type', 'review_highlight' | first -%}
+  <div class="phase-pullquote">
+    <div class="container">
+      <div style="max-width:720px;margin:0 auto;text-align:center">
+        <div class="phase-pq-stars">★★★★★</div>
+        <blockquote class="phase-pq-text">
+          &ldquo;{{ pq.settings.quote | default: "I had accepted I'd never sleep properly again. Three weeks in, I had to set an alarm — I was sleeping past 7am for the first time in years." }}&rdquo;
+        </blockquote>
+        <div class="phase-pq-attr">
+          {{ pq.settings.name | default: 'Sarah K.' }}
+          &mdash; {{ pq.settings.meta | default: '51 · Subscriber 8 months' }}
         </div>
       </div>
     </div>
   </div>
-</section>
+
+  <!-- ══ REVIEWS ══ -->
+  <section class="phase-reviews-section" id="phase-reviews">
+    <div class="container">
+      <div class="phase-rev-layout">
+
+        <!-- Summary -->
+        <div>
+          <div class="phase-rev-score-big">{{ section.settings.avg_rating | default: 4.8 }}</div>
+          <div class="phase-rev-stars-big">★★★★★</div>
+          <div class="phase-rev-total">{{ section.settings.review_count | default: 127 }} verified reviews</div>
+          <div class="phase-bar-row"><span class="phase-bar-lbl">5★</span><div class="phase-bar-track"><div class="phase-bar-fill" style="width:{{ section.settings.pct_5 | default: 78 }}%"></div></div><span class="phase-bar-pct">{{ section.settings.pct_5 | default: 78 }}%</span></div>
+          <div class="phase-bar-row"><span class="phase-bar-lbl">4★</span><div class="phase-bar-track"><div class="phase-bar-fill" style="width:{{ section.settings.pct_4 | default: 14 }}%"></div></div><span class="phase-bar-pct">{{ section.settings.pct_4 | default: 14 }}%</span></div>
+          <div class="phase-bar-row"><span class="phase-bar-lbl">3★</span><div class="phase-bar-track"><div class="phase-bar-fill" style="width:{{ section.settings.pct_3 | default: 5 }}%"></div></div><span class="phase-bar-pct">{{ section.settings.pct_3 | default: 5 }}%</span></div>
+          <div class="phase-bar-row"><span class="phase-bar-lbl">2★</span><div class="phase-bar-track"><div class="phase-bar-fill" style="width:{{ section.settings.pct_2 | default: 2 }}%"></div></div><span class="phase-bar-pct">{{ section.settings.pct_2 | default: 2 }}%</span></div>
+          <div class="phase-bar-row"><span class="phase-bar-lbl">1★</span><div class="phase-bar-track"><div class="phase-bar-fill" style="width:{{ section.settings.pct_1 | default: 1 }}%"></div></div><span class="phase-bar-pct">{{ section.settings.pct_1 | default: 1 }}%</span></div>
+        </div>
+
+        <!-- Reviews list -->
+        <div>
+          <div class="phase-rev-header">
+            <div class="phase-rev-header-title">What customers say</div>
+            <div class="phase-rev-filters">
+              <button class="phase-rev-filter active" onclick="phaseRevFilter('all',this)">All</button>
+              <button class="phase-rev-filter" onclick="phaseRevFilter('5',this)">5 Stars</button>
+              <button class="phase-rev-filter" onclick="phaseRevFilter('verified',this)">Verified</button>
+            </div>
+          </div>
+
+          <div class="phase-rev-grid">
+            {%- assign rev_blocks = section.blocks | where: 'type', 'review' -%}
+            {%- if rev_blocks.size > 0 -%}
+              {%- for b in rev_blocks -%}
+                {%- assign stars = b.settings.stars | default: 5 -%}
+                <div class="phase-rev-card {% if forloop.first %}rev-highlight{% endif %}"
+                     data-stars="{{ stars }}"
+                     data-verified="{{ b.settings.verified | default: true }}">
+                  <div class="phase-rev-top">
+                    <span class="phase-rev-s">
+                      {%- for i in (1..stars) -%}★{%- endfor -%}
+                    </span>
+                    <span class="phase-rev-date">{{ b.settings.date | default: '' }}</span>
+                  </div>
+                  {%- if b.settings.title != blank -%}
+                  <div class="phase-rev-title">{{ b.settings.title }}</div>
+                  {%- endif -%}
+                  <div class="phase-rev-body">&ldquo;{{ b.settings.text }}&rdquo;</div>
+                  <div class="phase-rev-foot">
+                    {%- if b.settings.avatar != blank -%}
+                      <img class="phase-rev-ava" src="{{ b.settings.avatar }}" alt="{{ b.settings.name }}" loading="lazy" />
+                    {%- else -%}
+                      <div class="phase-rev-ava">{{ b.settings.name | slice: 0 }}</div>
+                    {%- endif -%}
+                    <div>
+                      <div class="phase-rev-name">{{ b.settings.name }}</div>
+                      <div class="phase-rev-meta">{{ b.settings.meta }}</div>
+                    </div>
+                    {%- if b.settings.verified != false -%}
+                      <span class="phase-rev-vbadge">✓ Verified</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <!-- Default reviews shown when no blocks are configured -->
+              {%- assign default_reviews = "Sarah K.|51 · Subscriber 8 months|March 2025|5|Finally sleeping through the night|I had accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years. My husband noticed the difference before I did.|||Michelle R.|48 · Subscriber 4 months|February 2025|5|Invisible relief in meetings|Had a hot flash mid-presentation last week and my colleague didn't even notice. That alone is worth every penny. I keep it in my bag at all times now.|||Jennifer L.|55 · Subscriber 1 year|January 2025|5|Part of my morning ritual|Part of my daily routine now and I can feel the difference on days I forget. A brand that talks to me like an adult, not a patient to be managed.|||Diane W.|59 · Subscriber 3 months|April 2025|4|Noticeably better, give it time|Joint pain in the morning is so much more manageable in month two. Took about 3 weeks to kick in — stick with it. It's worth the patience.|||Renee T.|53 · Single purchase|March 2025|5|Recommended to my whole book club|Five of us are now using Phase products. The mood support has been a revelation — I feel like myself again for the first time in two years.|||Patricia H.|57 · Subscriber 6 months|February 2025|5|My sleep doctor approved it|My sleep doctor actually knew the clinical data behind this. The fact it's peer-reviewed and not just wellness marketing means everything to me." | split: "|||" -%}
+              {%- for rev in default_reviews -%}
+                {%- assign parts = rev | split: "|" -%}
+                {%- assign rev_stars = parts[3] | plus: 0 -%}
+                <div class="phase-rev-card {% if forloop.first %}rev-highlight{% endif %}"
+                     data-stars="{{ rev_stars }}" data-verified="true">
+                  <div class="phase-rev-top">
+                    <span class="phase-rev-s">{%- for i in (1..rev_stars) -%}★{%- endfor -%}</span>
+                    <span class="phase-rev-date">{{ parts[2] }}</span>
+                  </div>
+                  <div class="phase-rev-title">{{ parts[4] }}</div>
+                  <div class="phase-rev-body">&ldquo;{{ parts[5] }}&rdquo;</div>
+                  <div class="phase-rev-foot">
+                    <div class="phase-rev-ava">{{ parts[0] | slice: 0 }}</div>
+                    <div>
+                      <div class="phase-rev-name">{{ parts[0] }}</div>
+                      <div class="phase-rev-meta">{{ parts[1] }}</div>
+                    </div>
+                    <span class="phase-rev-vbadge">✓ Verified</span>
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          </div><!-- /grid -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COMPLETE YOUR PROTOCOL ══ -->
+  <section class="phase-cross-sell">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">Complete Your Protocol</div>
+        <h2>Women who buy this also love</h2>
+        <p>These products pair naturally with {{ product.title | split: ' — ' | first }} to cover more of your symptoms.</p>
+      </div>
+      <div class="phase-cs-grid">
+        {%- assign shown = 0 -%}
+        {%- for rp in collections.all.products -%}
+          {%- if rp.id != product.id and shown < 4 -%}
+            <a href="{{ rp.url }}" class="phase-cs-card">
+              {%- if rp.featured_image -%}
+                <img class="phase-cs-img"
+                     src="{{ rp.featured_image | image_url: width: 500 }}"
+                     alt="{{ rp.title }}" loading="lazy" />
+              {%- else -%}
+                <div class="phase-cs-img"></div>
+              {%- endif -%}
+              <div class="phase-cs-body">
+                <div class="phase-cs-name">{{ rp.title | split: ' — ' | first }}</div>
+                <div class="phase-cs-price">
+                  {{ rp.price | money }}
+                  {%- if rp.compare_at_price > rp.price -%}
+                    <span style="font-size:12px;color:var(--muted);font-weight:400;text-decoration:line-through;margin-left:5px">{{ rp.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </a>
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ── Gallery ─────────────────────────── */
+function phaseSetImg(thumb, src, alt) {
+  var hero = document.getElementById('phase-hero-img');
+  hero.style.opacity = '0.6';
+  setTimeout(function() {
+    hero.src = src;
+    hero.alt = alt;
+    hero.style.opacity = '1';
+  }, 100);
+  document.querySelectorAll('.phase-thumb').forEach(function(t){ t.classList.remove('active'); });
+  thumb.classList.add('active');
+}
+
+/* ── Accordion ───────────────────────── */
+function phaseAcc(btn) {
+  var item = btn.closest('.phase-acc-item');
+  item.classList.toggle('open');
+}
+
+/* ── Subscribe toggle ────────────────── */
+function phaseSubMode(mode) {
+  var once = document.getElementById('phase-sub-once');
+  var sub  = document.getElementById('phase-sub-sub');
+  once.classList.toggle('active', mode === 'once');
+  sub.classList.toggle('active',  mode === 'sub');
+}
+
+/* ── Qty ─────────────────────────────── */
+function phaseQty(delta) {
+  var el = document.getElementById('phase-qty-num');
+  var n  = Math.max(1, Math.min(10, parseInt(el.textContent) + delta));
+  el.textContent = n;
+  document.getElementById('phase-qty-input').value = n;
+}
+
+/* ── Variant selector ────────────────── */
+function phasePickVariant(btn, val, pos) {
+  var row = btn.closest('.phase-variant-row');
+  row.querySelectorAll('.phase-variant-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var selEl = document.getElementById('sel-' + pos);
+  if (selEl) selEl.textContent = '— ' + val;
+  /* Match variant id */
+  var variants = {{ product.variants | json }};
+  var selectedOptions = [];
+  document.querySelectorAll('.phase-variant-row').forEach(function(r, i) {
+    var a = r.querySelector('.phase-variant-btn.active');
+    selectedOptions[i] = a ? a.textContent.trim() : '';
+  });
+  variants.forEach(function(v) {
+    var match = v.options.every(function(o, i) { return selectedOptions[i] === o; });
+    if (match) {
+      document.getElementById('phase-vid').value = v.id;
+      if (v.price) {
+        var p = document.getElementById('phase-price');
+        if (p) p.textContent = formatMoney(v.price);
+      }
+    }
+  });
+}
+
+function formatMoney(cents) {
+  return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+}
+
+/* ── Review filter ───────────────────── */
+function phaseRevFilter(f, btn) {
+  document.querySelectorAll('.phase-rev-filter').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.phase-rev-card').forEach(function(c) {
+    var show = true;
+    if (f === '5')        show = c.dataset.stars === '5';
+    if (f === 'verified') show = c.dataset.verified !== 'false';
+    c.style.display = show ? '' : 'none';
+  });
+}
+</script>
 
 {% schema %}
 {
   "name": "Product",
-  "settings": []
+  "tag": "section",
+  "settings": [
+    { "type": "range",   "id": "avg_rating",     "label": "Average rating",  "min": 1.0, "max": 5.0, "step": 0.1, "default": 4.8 },
+    { "type": "number",  "id": "review_count",   "label": "Total reviews",    "default": 127 },
+    { "type": "range",   "id": "pct_5",          "label": "5-star %",         "min": 0, "max": 100, "step": 1, "default": 78 },
+    { "type": "range",   "id": "pct_4",          "label": "4-star %",         "min": 0, "max": 100, "step": 1, "default": 14 },
+    { "type": "range",   "id": "pct_3",          "label": "3-star %",         "min": 0, "max": 100, "step": 1, "default": 5 },
+    { "type": "range",   "id": "pct_2",          "label": "2-star %",         "min": 0, "max": 100, "step": 1, "default": 2 },
+    { "type": "range",   "id": "pct_1",          "label": "1-star %",         "min": 0, "max": 100, "step": 1, "default": 1 },
+    { "type": "textarea","id": "how_to_use",     "label": "How-to-use copy (optional override)" },
+    { "type": "textarea","id": "clinical_evidence","label": "Clinical evidence copy (optional override)" }
+  ],
+  "blocks": [
+    {
+      "type": "highlight", "name": "Product Highlight",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "✓" },
+        { "type": "text", "id": "text", "label": "Highlight text" }
+      ]
+    },
+    {
+      "type": "ingredient", "name": "Ingredient / Material",
+      "settings": [
+        { "type": "text", "id": "name",        "label": "Name" },
+        { "type": "text", "id": "description", "label": "What it does (1 sentence)" }
+      ]
+    },
+    {
+      "type": "review", "name": "Customer Review",
+      "settings": [
+        { "type": "range",    "id": "stars",    "label": "Stars",        "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text",     "id": "title",    "label": "Headline" },
+        { "type": "textarea", "id": "text",     "label": "Review body" },
+        { "type": "text",     "id": "name",     "label": "Reviewer name" },
+        { "type": "text",     "id": "meta",     "label": "Reviewer meta (e.g. 51 · 8 months)" },
+        { "type": "text",     "id": "date",     "label": "Date (e.g. March 2025)" },
+        { "type": "url",      "id": "avatar",   "label": "Avatar URL (optional)" },
+        { "type": "checkbox", "id": "verified", "label": "Verified purchase", "default": true }
+      ]
+    },
+    {
+      "type": "review_highlight", "name": "Hero Pullquote", "limit": 1,
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote (no quotation marks)" },
+        { "type": "text",     "id": "name",  "label": "Name" },
+        { "type": "text",     "id": "meta",  "label": "Meta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Product",
+    "blocks": [
+      { "type": "review", "settings": { "stars": 5, "title": "Finally sleeping through the night", "text": "I had accepted I'd never sleep properly again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years.", "name": "Sarah K.", "meta": "51 · Subscriber 8 months", "date": "March 2025", "verified": true }},
+      { "type": "review", "settings": { "stars": 5, "title": "Invisible relief in meetings", "text": "Had a hot flash mid-presentation and my colleague didn't even notice. Worth every penny. I keep it in my bag at all times.", "name": "Michelle R.", "meta": "48 · Subscriber 4 months", "date": "February 2025", "verified": true }},
+      { "type": "review", "settings": { "stars": 5, "title": "Part of my morning ritual", "text": "I can feel the difference on days I forget it. Finally a brand that talks to me like an adult, not a patient to be managed.", "name": "Jennifer L.", "meta": "55 · Subscriber 1 year", "date": "January 2025", "verified": true }},
+      { "type": "review", "settings": { "stars": 4, "title": "Noticeably better — give it time", "text": "Joint pain in the morning is so much more manageable in month two. Took 3 weeks to kick in. Stick with it.", "name": "Diane W.", "meta": "59 · Subscriber 3 months", "date": "April 2025", "verified": true }},
+      { "type": "review", "settings": { "stars": 5, "title": "Recommended to my whole book club", "text": "Five of us are using Phase now. The mood support has been a revelation — I feel like myself again for the first time in two years.", "name": "Renee T.", "meta": "53 · Single purchase", "date": "March 2025", "verified": true }},
+      { "type": "review", "settings": { "stars": 5, "title": "My sleep doctor approved it", "text": "My sleep doctor knew the clinical data behind this product. The fact it's peer-reviewed and not just wellness marketing means everything to me.", "name": "Patricia H.", "meta": "57 · Subscriber 6 months", "date": "February 2025", "verified": true }}
+    ]
+  }]
 }
 {% endschema %}
