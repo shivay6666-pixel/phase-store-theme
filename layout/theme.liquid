@@ -190,15 +190,17 @@
         <a href="/" class="phase-logo">{{ shop.name }}<span>.</span></a>
         <nav class="phase-nav-links" aria-label="Main navigation">
           <a href="/collections/all">Shop All</a>
-          <a href="/collections/hot-flashes">Hot Flashes</a>
-          <a href="/collections/sleep">Sleep</a>
-          <a href="/collections/mood">Mood</a>
-          <a href="/pages/about">About</a>
+          <a href="/collections/all">By Symptom</a>
+          <a href="/pages/about">Our Story</a>
+          <a href="/pages/quiz">Take the Quiz</a>
         </nav>
         <div class="phase-nav-actions">
+          <a href="/search" class="phase-icon-btn" title="Search">⌕</a>
           <a href="/cart" class="phase-icon-btn" title="Cart">
             🛒
-            <span class="phase-cart-count" data-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+            {%- if cart.item_count > 0 -%}
+            <span class="phase-cart-count">{{ cart.item_count }}</span>
+            {%- endif -%}
           </a>
         </div>
       </div>

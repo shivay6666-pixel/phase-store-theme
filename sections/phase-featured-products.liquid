@@ -72,54 +72,46 @@
       <p>{{ section.settings.subhead }}</p>
     </div>
 
-    {% assign feat_col = collections[section.settings.collection] %}
-    {% if feat_col != blank and feat_col.products_count > 0 %}
-      <div class="phase-product-grid">
-        {% for product in feat_col.products limit: section.settings.product_limit %}
-          <a href="{{ product.url }}" class="phase-product-card">
-            <div class="phase-product-card-img">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 600 }}"
-                     alt="{{ product.featured_image.alt | escape }}" loading="lazy" />
-              {% else %}
-                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
-                     alt="{{ product.title }}" loading="lazy" />
-              {% endif %}
-              {% if product.compare_at_price > product.price %}
-                <div class="phase-product-tag">Sale</div>
-              {% endif %}
-            </div>
-            <div class="phase-product-card-body">
-              <div class="phase-product-cat">{{ product.type }}</div>
-              <h4>{{ product.title }}</h4>
-              <div class="phase-product-price">
-                {{ product.price | money }}
-                {% if product.compare_at_price > product.price %}
-                  <span class="strike">{{ product.compare_at_price | money }}</span>
-                {% endif %}
-              </div>
-              <div class="phase-product-stars">★★★★★ <span>({{ product.metafields.reviews.rating_count | default: 0 }})</span></div>
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="phase-product-grid">
-        {% for i in (1..4) %}
-          <div class="phase-product-card" style="pointer-events:none">
-            <div class="phase-product-card-img" style="background:var(--cream-dark)"></div>
-            <div class="phase-product-card-body">
-              <div class="phase-product-cat" style="background:var(--line);height:12px;border-radius:2px;width:60%;margin-bottom:10px"></div>
-              <div style="background:var(--line);height:16px;border-radius:2px;margin-bottom:8px"></div>
-              <div style="background:var(--line);height:14px;border-radius:2px;width:40%"></div>
-            </div>
+    {%- assign feat_col = collections[section.settings.collection] -%}
+    {%- if feat_col == blank or feat_col.products_count == 0 -%}
+      {%- assign feat_col = collections.all -%}
+    {%- endif -%}
+    <div class="phase-product-grid">
+      {%- for product in feat_col.products limit: section.settings.product_limit -%}
+        <a href="{{ product.url }}" class="phase-product-card">
+          <div class="phase-product-card-img">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}"
+                   alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy" />
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
+                   alt="{{ product.title | escape }}" loading="lazy" />
+            {%- endif -%}
+            {%- assign tag_text = '' -%}
+            {%- for tag in product.tags -%}
+              {%- if tag == 'Bestseller' or tag == 'bestseller' -%}{%- assign tag_text = 'Bestseller' -%}{%- endif -%}
+              {%- if tag == 'New' or tag == 'new' -%}{%- assign tag_text = 'New' -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if tag_text != '' -%}
+              <div class="phase-product-tag">{{ tag_text }}</div>
+            {%- elsif product.compare_at_price > product.price -%}
+              <div class="phase-product-tag">Sale</div>
+            {%- endif -%}
           </div>
-        {% endfor %}
-      </div>
-      <p style="text-align:center;color:var(--muted);margin-top:24px;font-size:14px">
-        Import your products via <strong>Products → Import</strong> to populate this section.
-      </p>
-    {% endif %}
+          <div class="phase-product-card-body">
+            <div class="phase-product-cat">{{ product.type }}</div>
+            <h4>{{ product.title }}</h4>
+            <div class="phase-product-price">
+              {{ product.price | money }}
+              {%- if product.compare_at_price > product.price -%}
+                <span class="strike">{{ product.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+            <div class="phase-product-stars">★★★★★</div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
 
     {% if section.settings.show_cta %}
       <div class="phase-center-cta">
