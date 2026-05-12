@@ -1,74 +1,409 @@
 <style>
   .phase-testimonials {
     padding: 100px 0;
-    background: var(--sage);
-    color: #fff;
+    background: var(--cream-dark);
   }
-  .phase-testimonials .section-head h2,
-  .phase-testimonials .section-head p { color: #fff; }
-  .phase-testimonials .section-eyebrow { color: var(--blush); }
-  .phase-testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+  .phase-testimonials .section-head { margin-bottom: 56px; }
+  .phase-testimonials .section-head h2 { color: var(--charcoal); }
+
+  /* Rating summary */
+  .phase-ratings-summary {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
   }
-  .phase-testimonial-card {
-    background: rgba(255,255,255,.08);
-    backdrop-filter: blur(10px);
-    padding: 36px 30px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,.12);
+  .phase-rating-big {
+    text-align: center;
   }
-  .phase-testimonial-stars { color: var(--gold); font-size: 16px; margin-bottom: 18px; }
-  .phase-testimonial-quote {
+  .phase-rating-big .num {
     font-family: 'DM Serif Display', serif;
-    font-size: 18px; line-height: 1.5;
-    margin-bottom: 24px; font-style: italic;
+    font-size: 64px; line-height: 1; color: var(--terracotta);
+  }
+  .phase-rating-big .stars { color: var(--gold); font-size: 20px; letter-spacing: 2px; }
+  .phase-rating-big .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .phase-rating-divider { width: 1px; height: 70px; background: var(--line); }
+  .phase-rating-bars { min-width: 200px; }
+  .phase-rating-bar-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px; font-size: 13px; color: var(--muted);
+  }
+  .phase-rating-bar-row .bar-label { width: 32px; text-align: right; }
+  .phase-rating-bar-track {
+    flex: 1; height: 6px; background: var(--line);
+    border-radius: 3px; overflow: hidden;
+  }
+  .phase-rating-bar-fill {
+    height: 100%; background: var(--gold); border-radius: 3px;
+  }
+  .phase-rating-bar-row .bar-count { width: 24px; }
+  @media (max-width: 560px) {
+    .phase-rating-divider { display: none; }
+    .phase-rating-bars { width: 100%; }
+  }
+
+  /* Filter tabs */
+  .phase-review-filters {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 44px;
+  }
+  .phase-review-filter {
+    padding: 9px 20px; border-radius: 100px;
+    border: 1.5px solid var(--line); background: #fff;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all .2s; font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+  }
+  .phase-review-filter:hover { border-color: var(--terracotta); color: var(--terracotta); }
+  .phase-review-filter.active {
+    background: var(--terracotta); border-color: var(--terracotta);
     color: #fff;
   }
-  .phase-testimonial-author { display: flex; align-items: center; gap: 14px; }
-  .phase-testimonial-author img {
-    width: 48px; height: 48px;
-    border-radius: 50%; object-fit: cover;
+
+  /* Review grid */
+  .phase-review-grid {
+    columns: 3; column-gap: 24px;
   }
-  .phase-testimonial-name { font-weight: 600; font-size: 15px; color: #fff; }
-  .phase-testimonial-meta { font-size: 12px; opacity: .75; color: #fff; }
-  @media (max-width: 900px) { .phase-testimonial-grid { grid-template-columns: 1fr; } }
+  .phase-review-card {
+    break-inside: avoid; background: #fff;
+    border-radius: 10px; padding: 28px;
+    margin-bottom: 24px; border: 1px solid var(--line);
+    transition: all .25s;
+  }
+  .phase-review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px -12px rgba(60,40,30,.12);
+  }
+  .phase-review-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 16px;
+  }
+  .phase-review-stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; }
+  .phase-review-verified {
+    font-size: 10px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--sage);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .phase-review-text {
+    font-size: 15px; color: var(--charcoal); line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .phase-review-product {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .phase-review-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .phase-review-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    object-fit: cover; background: var(--cream);
+    flex-shrink: 0;
+  }
+  .phase-review-name { font-weight: 600; font-size: 14px; color: var(--charcoal); }
+  .phase-review-meta { font-size: 12px; color: var(--muted); }
+
+  /* Highlight card */
+  .phase-review-card.highlight {
+    background: var(--charcoal); border-color: var(--charcoal);
+  }
+  .phase-review-card.highlight .phase-review-text { color: #fff; }
+  .phase-review-card.highlight .phase-review-name { color: #fff; }
+  .phase-review-card.highlight .phase-review-meta { color: rgba(255,255,255,.5); }
+  .phase-review-card.highlight .phase-review-product { color: var(--gold); }
+  .phase-review-card.highlight .phase-review-verified { color: var(--blush); }
+
+  /* Load more */
+  .phase-reviews-more {
+    text-align: center; margin-top: 50px;
+  }
+  .phase-reviews-count {
+    font-size: 14px; color: var(--muted); margin-bottom: 20px;
+  }
+
+  @media (max-width: 1000px) { .phase-review-grid { columns: 2; } }
+  @media (max-width: 600px) { .phase-review-grid { columns: 1; } }
 </style>
 
 <section class="phase-testimonials">
   <div class="container">
+
     <div class="section-head">
-      <div class="section-eyebrow">Real stories</div>
-      <h2>From women in every phase</h2>
+      <div class="section-eyebrow">Real Women. Real Results.</div>
+      <h2>12,000+ women found their protocol.</h2>
+      <p>Every review is from a verified Phase customer. No incentivized reviews. No cherry-picking.</p>
     </div>
-    <div class="phase-testimonial-grid">
-      {% for block in section.blocks %}
-        <div class="phase-testimonial-card" {{ block.shopify_attributes }}>
-          <div class="phase-testimonial-stars">★★★★★</div>
-          <p class="phase-testimonial-quote">"{{ block.settings.quote }}"</p>
-          <div class="phase-testimonial-author">
-            {% if block.settings.avatar != blank %}
-              <img src="{{ block.settings.avatar | image_url: width: 100 }}"
-                   alt="{{ block.settings.name }}" loading="lazy" />
-            {% else %}
-              <img src="{{ block.settings.avatar_url }}"
-                   alt="{{ block.settings.name }}" loading="lazy" />
-            {% endif %}
-            <div>
-              <div class="phase-testimonial-name">{{ block.settings.name }}</div>
-              <div class="phase-testimonial-meta">{{ block.settings.meta }}</div>
-            </div>
+
+    <!-- Rating Summary -->
+    <div class="phase-ratings-summary">
+      <div class="phase-rating-big">
+        <div class="num">4.8</div>
+        <div class="stars">★★★★★</div>
+        <div class="label">Based on 1,247 reviews</div>
+      </div>
+      <div class="phase-rating-divider"></div>
+      <div class="phase-rating-bars">
+        <div class="phase-rating-bar-row">
+          <span class="bar-label">5★</span>
+          <div class="phase-rating-bar-track"><div class="phase-rating-bar-fill" style="width:82%"></div></div>
+          <span class="bar-count">82%</span>
+        </div>
+        <div class="phase-rating-bar-row">
+          <span class="bar-label">4★</span>
+          <div class="phase-rating-bar-track"><div class="phase-rating-bar-fill" style="width:12%"></div></div>
+          <span class="bar-count">12%</span>
+        </div>
+        <div class="phase-rating-bar-row">
+          <span class="bar-label">3★</span>
+          <div class="phase-rating-bar-track"><div class="phase-rating-bar-fill" style="width:4%"></div></div>
+          <span class="bar-count">4%</span>
+        </div>
+        <div class="phase-rating-bar-row">
+          <span class="bar-label">2★</span>
+          <div class="phase-rating-bar-track"><div class="phase-rating-bar-fill" style="width:1%"></div></div>
+          <span class="bar-count">1%</span>
+        </div>
+        <div class="phase-rating-bar-row">
+          <span class="bar-label">1★</span>
+          <div class="phase-rating-bar-track"><div class="phase-rating-bar-fill" style="width:1%"></div></div>
+          <span class="bar-count">1%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="phase-review-filters">
+      <button class="phase-review-filter active" onclick="filterReviews('all', this)">All Reviews</button>
+      <button class="phase-review-filter" onclick="filterReviews('sleep', this)">Sleep</button>
+      <button class="phase-review-filter" onclick="filterReviews('flash', this)">Hot Flashes</button>
+      <button class="phase-review-filter" onclick="filterReviews('mood', this)">Mood</button>
+      <button class="phase-review-filter" onclick="filterReviews('focus', this)">Brain Fog</button>
+      <button class="phase-review-filter" onclick="filterReviews('body', this)">Joint & Body</button>
+    </div>
+
+    <!-- Reviews -->
+    <div class="phase-review-grid" id="reviewGrid">
+
+      <div class="phase-review-card highlight" data-cat="sleep">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"I'd accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years. I actually cried when I realized what had happened."</p>
+        <div class="phase-review-product">Magnesium Glycinate 400 + Sleep Serum</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Sarah K." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Sarah K.</div>
+            <div class="phase-review-meta">51 · Subscriber 8 months</div>
           </div>
         </div>
-      {% endfor %}
+      </div>
+
+      <div class="phase-review-card" data-cat="flash">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The cooling neck wrap is in my bag at all times. I had a hot flash mid-presentation last week and my colleague didn't even notice. Before Phase, I would have had to excuse myself."</p>
+        <div class="phase-review-product">Arctic Wrap™ Cooling Neck Collar</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1573164574396-ce99a23a0d7b?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Michelle R." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Michelle R.</div>
+            <div class="phase-review-meta">48 · Subscriber 4 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="mood">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"Finally a brand that talks to me like an adult. The Daily Balance capsules are part of my morning ritual now — I can feel the difference on the days I forget to take them."</p>
+        <div class="phase-review-product">Phase Daily Balance™ Multivitamin</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Jennifer L." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Jennifer L.</div>
+            <div class="phase-review-meta">55 · Subscriber 1 year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="sleep">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The Lavender Sleep Serum smells incredible and actually works. I was skeptical of a topical but the science makes sense. I'm staying asleep for the first time in two years."</p>
+        <div class="phase-review-product">Lavender Sleep Serum — CBN + Magnesium</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Donna M." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Donna M.</div>
+            <div class="phase-review-meta">53 · Subscriber 6 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="flash mood">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The Black Cohosh made a 70% difference in my hot flash frequency within 6 weeks. I've tried every supplement on the market and this is the only one I've felt a clear difference from."</p>
+        <div class="phase-review-product">Black Cohosh 40mg Relief Capsules</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Carol T." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Carol T.</div>
+            <div class="phase-review-meta">57 · Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="flash">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The Cooling Mist is magic. I keep one at my desk, one in my car, and one on my nightstand. My husband started calling it my 'flash grenade' because I grab it so fast."</p>
+        <div class="phase-review-product">Cooling Mist Spray — Instant Flash Relief</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Patricia W." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Patricia W.</div>
+            <div class="phase-review-meta">50 · Subscriber 5 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="focus">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The brain fog was the worst part for me. Forgetting mid-sentence what I was saying. The Lion's Mane capsules took about 5 weeks to kick in but the difference is remarkable. I feel like myself again."</p>
+        <div class="phase-review-product">Lion's Mane Focus Capsules</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Linda H." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Linda H.</div>
+            <div class="phase-review-meta">52 · Subscriber 7 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="body">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"My knees and hips were so stiff every morning I'd limp to the bathroom. The Magnesium Lotion takes about 20 minutes to work but the difference is significant. My rheumatologist asked what I changed."</p>
+        <div class="phase-review-product">Topical Magnesium Lotion — Joint Relief</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1548142813-c348350df52b?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Barbara G." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Barbara G.</div>
+            <div class="phase-review-meta">61 · Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card highlight" data-cat="mood sleep">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"I ordered the Hormone Harmony Kit mostly as a last resort after years of trying everything. By week 4 I was sleeping 6+ hours straight. By week 8 my anxiety had dropped so much my therapist asked what I'd changed. I told her about Phase. She's now recommending it to her other clients."</p>
+        <div class="phase-review-product">Phase Hormone Harmony Kit</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Anne B." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Anne B.</div>
+            <div class="phase-review-meta">54 · Subscriber 10 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="sleep">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The Cooling Pillowcases are worth every penny. I was changing my pillowcase every night from the soaking. Now I don't think about it. The material is incredibly soft too — not like those crinkly bamboo ones."</p>
+        <div class="phase-review-product">Cooling Pillowcase Set — Phase-Chill® Fiber</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1514626585111-9aa86183ac98?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Karen S." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Karen S.</div>
+            <div class="phase-review-meta">49 · Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="mood">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"The Ashwagandha KSM-66 is the real deal. I've taken cheap ashwagandha before and felt nothing. After 6 weeks on Phase's version I have noticeably less cortisol response to stress. My heart rate doesn't spike when things go sideways at work."</p>
+        <div class="phase-review-product">Ashwagandha KSM-66® Capsules</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1491349174775-aaaefdd81942?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Susan M." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Susan M.</div>
+            <div class="phase-review-meta">47 · Subscriber 4 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-review-card" data-cat="flash sleep body">
+        <div class="phase-review-top">
+          <div class="phase-review-stars">★★★★★</div>
+          <div class="phase-review-verified">✓ Verified</div>
+        </div>
+        <p class="phase-review-text">"I started Phase on recommendation from my gynecologist (yes, really). Six months later I'm sleeping better, my hot flashes are down by about 80%, and I've stopped dreading getting on my yoga mat because my joints don't hurt anymore. Three products. Life-changing."</p>
+        <div class="phase-review-product">Sleep Rescue Bundle</div>
+        <div class="phase-review-author">
+          <img class="phase-review-avatar" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Dr. Rachel V." loading="lazy" />
+          <div>
+            <div class="phase-review-name">Dr. Rachel V.</div>
+            <div class="phase-review-meta">56 · Subscriber 6 months</div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <div class="phase-reviews-more">
+      <p class="phase-reviews-count">Showing 12 of 1,247 reviews</p>
+      <a href="/collections/all" class="btn btn-outline">Shop Products →</a>
+    </div>
+
   </div>
 </section>
+
+<script>
+function filterReviews(cat, btn) {
+  document.querySelectorAll('.phase-review-filter').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.phase-review-card').forEach(function(card) {
+    if (cat === 'all') {
+      card.style.display = '';
+    } else {
+      var cats = (card.getAttribute('data-cat') || '').split(' ');
+      card.style.display = cats.indexOf(cat) > -1 ? '' : 'none';
+    }
+  });
+}
+</script>
 
 {% schema %}
 {
   "name": "Phase Testimonials",
+  "settings": [],
   "blocks": [
     {
       "type": "testimonial",
@@ -76,31 +411,11 @@
       "settings": [
         { "type": "textarea", "id": "quote", "label": "Quote" },
         { "type": "text", "id": "name", "label": "Name" },
-        { "type": "text", "id": "meta", "label": "Meta (age, subscriber info)" },
-        { "type": "image_picker", "id": "avatar", "label": "Avatar photo" },
-        { "type": "text", "id": "avatar_url", "label": "Avatar fallback URL" }
+        { "type": "text", "id": "meta", "label": "Meta (age, subscriber status)" },
+        { "type": "url", "id": "avatar_url", "label": "Avatar URL" }
       ]
     }
   ],
-  "presets": [{
-    "name": "Phase Testimonials",
-    "blocks": [
-      { "type": "testimonial", "settings": {
-        "quote": "I'd accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years.",
-        "name": "Sarah K.", "meta": "51 · Subscriber 8 months",
-        "avatar_url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=100&q=80&auto=format&fit=crop"
-      }},
-      { "type": "testimonial", "settings": {
-        "quote": "The cooling neck wrap is in my bag at all times. I had a hot flash mid-presentation last week and my colleague didn't even notice. Game changer.",
-        "name": "Michelle R.", "meta": "48 · Subscriber 4 months",
-        "avatar_url": "https://images.unsplash.com/photo-1573164574396-ce99a23a0d7b?w=100&q=80&auto=format&fit=crop"
-      }},
-      { "type": "testimonial", "settings": {
-        "quote": "Finally a brand that talks to me like an adult. The Daily Balance capsules are part of my morning ritual now and I can feel the difference on the days I forget.",
-        "name": "Jennifer L.", "meta": "55 · Subscriber 1 year",
-        "avatar_url": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&auto=format&fit=crop"
-      }}
-    ]
-  }]
+  "presets": [{ "name": "Phase Testimonials" }]
 }
 {% endschema %}

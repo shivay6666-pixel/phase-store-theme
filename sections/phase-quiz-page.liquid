@@ -1,240 +1,571 @@
-<div id="phase-quiz-root"></div>
-
 <style>
-  .phase-quiz-wrapper {
-    background: var(--cream);
-    min-height: 70vh;
-    padding: 60px 0 100px;
+  /* ===== QUIZ PAGE ===== */
+  .phase-quiz-page { background: var(--cream); min-height: 100vh; }
+
+  /* Hero banner */
+  .phase-quiz-hero {
+    background: linear-gradient(160deg, var(--charcoal) 0%, #3d2a22 100%);
+    padding: 72px 0 60px;
+    text-align: center;
+    color: #fff;
   }
-  #phase-quiz-root * { box-sizing: border-box; margin: 0; padding: 0; }
-  #phase-quiz-root { font-family: 'DM Sans', sans-serif; }
-  .pq-wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
-  .pq-header { text-align: center; margin-bottom: 48px; }
-  .pq-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px; }
-  .pq-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 5vw, 50px); color: var(--charcoal); line-height: 1.15; margin-bottom: 16px; }
-  .pq-header p { font-size: 17px; color: var(--muted); line-height: 1.65; }
-  .pq-progress-bar { width: 100%; height: 3px; background: var(--line); border-radius: 2px; margin-bottom: 40px; overflow: hidden; }
-  .pq-progress-fill { height: 100%; background: var(--terracotta); transition: width 0.4s ease; border-radius: 2px; }
-  .pq-step { display: none; }
-  .pq-step.active { display: block; animation: pqIn .35s ease; }
-  @keyframes pqIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-  .pq-question { font-family: 'DM Serif Display', serif; font-size: clamp(22px, 3.5vw, 30px); color: var(--charcoal); margin-bottom: 8px; line-height: 1.3; }
-  .pq-subtext { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
-  .pq-options { display: grid; gap: 12px; }
-  .pq-options.multi { grid-template-columns: 1fr 1fr; }
-  @media (max-width: 520px) { .pq-options.multi { grid-template-columns: 1fr; } }
-  .pq-opt { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 6px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; transition: all .2s; font-size: 15px; font-weight: 500; color: var(--charcoal); text-align: left; user-select: none; }
-  .pq-opt:hover { border-color: var(--terracotta); background: #FDF8F4; }
-  .pq-opt.sel { border-color: var(--terracotta); background: #FDF4EE; color: var(--terracotta); }
-  .pq-opt-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
-  .pq-opt-label { flex: 1; line-height: 1.4; }
-  .pq-opt-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .2s; font-size: 11px; color: #fff; }
-  .pq-opt.sel .pq-opt-check { background: var(--terracotta); border-color: var(--terracotta); }
-  .pq-nav { display: flex; gap: 12px; margin-top: 32px; align-items: center; }
-  .pq-next { flex: 1; padding: 18px 32px; background: var(--terracotta); color: #fff; border: none; border-radius: 3px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .25s; }
-  .pq-next:hover:not(:disabled) { background: var(--terracotta-dark); transform: translateY(-1px); }
-  .pq-next:disabled { background: #D4C5B8; cursor: not-allowed; }
-  .pq-back { padding: 18px 20px; background: transparent; border: 1.5px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif; }
-  .pq-back:hover { border-color: var(--charcoal); color: var(--charcoal); }
-  .pq-count { font-size: 12px; color: #9B9B9B; }
+  .phase-quiz-hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .phase-quiz-hero h1 {
+    font-size: clamp(30px, 4vw, 48px);
+    color: #fff; line-height: 1.15; margin-bottom: 16px;
+  }
+  .phase-quiz-hero h1 em { font-style: italic; color: var(--blush); }
+  .phase-quiz-hero-sub {
+    font-size: 17px; opacity: .8; max-width: 520px;
+    margin: 0 auto; line-height: 1.6;
+  }
+  .phase-quiz-progress-wrap {
+    margin-top: 40px; max-width: 420px; margin-left: auto; margin-right: auto;
+  }
+  .phase-quiz-progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; opacity: .6; margin-bottom: 10px;
+    font-weight: 500; letter-spacing: .5px;
+  }
+  .phase-quiz-progress-bar {
+    height: 4px; background: rgba(255,255,255,.15);
+    border-radius: 2px; overflow: hidden;
+  }
+  .phase-quiz-progress-fill {
+    height: 100%; background: var(--gold);
+    border-radius: 2px;
+    transition: width .5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Quiz body */
+  .phase-quiz-body { padding: 60px 0 100px; }
+  .phase-quiz-container { max-width: 680px; margin: 0 auto; }
+
+  /* Step */
+  .phase-quiz-step { display: none; }
+  .phase-quiz-step.active { display: block; animation: stepIn .35s ease; }
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-quiz-step-num {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: 10px;
+  }
+  .phase-quiz-step h2 {
+    font-size: clamp(24px, 3.5vw, 36px);
+    line-height: 1.2; margin-bottom: 10px; color: var(--charcoal);
+  }
+  .phase-quiz-step-sub {
+    font-size: 15px; color: var(--muted); margin-bottom: 36px;
+  }
+
+  /* Options grid */
+  .phase-quiz-options {
+    display: grid; gap: 14px;
+    grid-template-columns: 1fr;
+  }
+  .phase-quiz-options.two-col { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 560px) {
+    .phase-quiz-options.two-col { grid-template-columns: 1fr; }
+  }
+
+  .phase-quiz-opt {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 22px; background: #fff;
+    border: 1.5px solid var(--line); border-radius: 8px;
+    cursor: pointer; transition: all .2s; text-align: left;
+    position: relative; user-select: none;
+  }
+  .phase-quiz-opt:hover {
+    border-color: var(--terracotta); background: #fff9f6;
+    transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,123,92,.1);
+  }
+  .phase-quiz-opt.selected {
+    border-color: var(--terracotta); background: #fff3ee;
+    box-shadow: 0 0 0 3px rgba(201,123,92,.12);
+  }
+  .phase-quiz-opt-check {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 2px solid var(--line); flex-shrink: 0;
+    margin-top: 1px; display: flex; align-items: center; justify-content: center;
+    transition: all .2s; font-size: 12px;
+  }
+  .phase-quiz-opt.selected .phase-quiz-opt-check {
+    background: var(--terracotta); border-color: var(--terracotta);
+    color: #fff;
+  }
+  .phase-quiz-opt-icon { font-size: 28px; flex-shrink: 0; }
+  .phase-quiz-opt-title {
+    font-weight: 600; font-size: 15px;
+    color: var(--charcoal); margin-bottom: 3px; display: block;
+  }
+  .phase-quiz-opt-desc { font-size: 13px; color: var(--muted); line-height: 1.5; display: block; }
+
+  /* Navigation */
+  .phase-quiz-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 36px;
+  }
+  .phase-quiz-back {
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    cursor: pointer; background: none; border: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color .2s; padding: 0; font-family: 'DM Sans', sans-serif;
+  }
+  .phase-quiz-back:hover { color: var(--charcoal); }
+  .phase-quiz-next {
+    padding: 16px 36px; background: var(--terracotta); color: #fff;
+    border: none; border-radius: 4px; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: all .25s; display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Sans', sans-serif;
+    opacity: .35; pointer-events: none;
+  }
+  .phase-quiz-next.enabled {
+    opacity: 1; pointer-events: auto;
+  }
+  .phase-quiz-next.enabled:hover {
+    background: var(--terracotta-dark); transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201,123,92,.3);
+  }
+
   /* Results */
-  .pq-results { display: none; }
-  .pq-results.active { display: block; animation: pqIn .4s ease; }
-  .pq-results-hd { text-align: center; margin-bottom: 48px; }
-  .pq-results-hd h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4.5vw, 44px); color: var(--charcoal); margin-bottom: 12px; line-height: 1.2; }
-  .pq-results-hd p { font-size: 16px; color: var(--muted); }
-  .pq-rec-grid { display: grid; gap: 20px; }
-  .pq-rec { display: flex; gap: 20px; padding: 24px; background: #fff; border-radius: 8px; border: 1px solid var(--line); align-items: flex-start; text-decoration: none; color: inherit; transition: all .25s; }
-  .pq-rec:hover { transform: translateY(-3px); box-shadow: 0 16px 40px -12px rgba(60,40,30,.15); border-color: var(--terracotta); }
-  .pq-rec-img { width: 90px; height: 90px; object-fit: contain; border-radius: 6px; background: var(--cream); flex-shrink: 0; }
-  .pq-rec-body { flex: 1; }
-  .pq-rec-badge { display: inline-block; padding: 4px 10px; background: #EAF2EE; color: var(--sage); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 2px; margin-bottom: 8px; }
-  .pq-rec-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--charcoal); margin-bottom: 6px; line-height: 1.3; }
-  .pq-rec-desc { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
-  .pq-rec-foot { display: flex; align-items: center; gap: 12px; }
-  .pq-rec-price { font-size: 15px; font-weight: 600; color: var(--charcoal); }
-  .pq-rec-cta { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--terracotta); text-decoration: underline; text-underline-offset: 3px; }
-  .pq-email-box { background: var(--sage); color: #fff; border-radius: 8px; padding: 32px; text-align: center; margin-top: 32px; }
-  .pq-email-box h3 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 10px; }
-  .pq-email-box p { font-size: 14px; opacity: .85; margin-bottom: 20px; }
-  .pq-email-row { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
-  .pq-email-in { flex: 1; padding: 14px 16px; border-radius: 3px; border: none; font-size: 14px; font-family: 'DM Sans', sans-serif; }
-  .pq-email-btn { padding: 14px 20px; background: var(--terracotta); color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; font-family: 'DM Sans', sans-serif; transition: background .2s; }
-  .pq-email-btn:hover { background: var(--terracotta-dark); }
-  .pq-restart-link { display: block; text-align: center; margin-top: 40px; font-size: 13px; color: #9B9B9B; text-decoration: underline; cursor: pointer; text-underline-offset: 3px; }
-  .pq-restart-link:hover { color: var(--charcoal); }
-  @media (max-width: 480px) { .pq-email-row { flex-direction: column; } }
+  .phase-quiz-results { display: none; }
+  .phase-quiz-results.active { display: block; animation: stepIn .4s ease; }
+
+  .phase-quiz-results-header {
+    text-align: center; padding: 20px 0 40px;
+  }
+  .phase-quiz-results-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px;
+  }
+  .phase-quiz-results-header h2 {
+    font-size: clamp(28px, 4vw, 44px); margin-bottom: 12px;
+  }
+  .phase-quiz-results-header p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+  .phase-quiz-protocol {
+    background: var(--charcoal); border-radius: 12px;
+    padding: 48px; margin-bottom: 40px; color: #fff;
+  }
+  .phase-quiz-protocol-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+  }
+  .phase-quiz-protocol h3 {
+    font-size: 28px; color: #fff; margin-bottom: 16px;
+  }
+  .phase-quiz-protocol > p { font-size: 16px; opacity: .8; line-height: 1.7; margin-bottom: 24px; }
+  .phase-quiz-protocol-products {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 28px;
+  }
+  .phase-quiz-protocol-product {
+    background: rgba(255,255,255,.07); border-radius: 8px;
+    padding: 20px; border: 1px solid rgba(255,255,255,.1);
+  }
+  .phase-quiz-protocol-product h4 {
+    font-size: 15px; color: #fff; margin-bottom: 6px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+  }
+  .phase-quiz-protocol-product p { font-size: 12px; opacity: .6; margin: 0; line-height: 1.5; }
+  .phase-quiz-protocol-product .price {
+    font-size: 16px; color: var(--gold); font-weight: 600;
+    margin-top: 10px; margin-bottom: 0; opacity: 1;
+  }
+  @media (max-width: 600px) {
+    .phase-quiz-protocol-products { grid-template-columns: 1fr; }
+    .phase-quiz-protocol { padding: 32px 24px; }
+  }
+
+  .phase-quiz-results-cta {
+    text-align: center; padding: 40px 0 20px;
+  }
+  .phase-quiz-results-cta h3 { font-size: 26px; margin-bottom: 10px; }
+  .phase-quiz-results-cta p { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
+  .phase-quiz-results-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* Guarantee strip */
+  .phase-quiz-guarantee {
+    background: var(--cream-dark); border-top: 1px solid var(--line);
+    padding: 32px 0; text-align: center; margin-top: 60px;
+  }
+  .phase-quiz-guarantee p {
+    font-size: 14px; color: var(--muted); max-width: 520px; margin: 0 auto;
+  }
+  .phase-quiz-guarantee strong { color: var(--charcoal); }
 </style>
 
-<section class="phase-quiz-wrapper">
-  <div id="phase-quiz-root"></div>
-</section>
+<div class="phase-quiz-page">
+
+  <!-- HERO -->
+  <div class="phase-quiz-hero" id="quizHero">
+    <div class="container">
+      <div class="phase-quiz-hero-eyebrow">Personalized Protocol</div>
+      <h1>Find what works for <em>your</em> body.</h1>
+      <p class="phase-quiz-hero-sub">5 questions. 60 seconds. A protocol built around your specific symptoms.</p>
+      <div class="phase-quiz-progress-wrap">
+        <div class="phase-quiz-progress-label">
+          <span id="progressLabel">Question 1 of 5</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="phase-quiz-progress-bar">
+          <div class="phase-quiz-progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="phase-quiz-body">
+    <div class="container">
+      <div class="phase-quiz-container">
+
+        <!-- STEP 1: Phase of Journey -->
+        <div class="phase-quiz-step active" id="step1">
+          <div class="phase-quiz-step-num">Question 1 of 5</div>
+          <h2>Where are you in your menopause journey?</h2>
+          <p class="phase-quiz-step-sub">This helps us calibrate the protocol to your hormonal stage.</p>
+          <div class="phase-quiz-options">
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'stage')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🌱</span>
+              <div>
+                <span class="phase-quiz-opt-title">Perimenopause — irregular cycles, early symptoms</span>
+                <span class="phase-quiz-opt-desc">Still getting periods but noticing changes. Symptoms may be mild or starting to intensify.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'stage')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🔥</span>
+              <div>
+                <span class="phase-quiz-opt-title">Menopause — 12+ months without a period</span>
+                <span class="phase-quiz-opt-desc">Officially in menopause. Symptoms are present and likely affecting daily life.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'stage')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🌿</span>
+              <div>
+                <span class="phase-quiz-opt-title">Post-menopause — 2+ years past last period</span>
+                <span class="phase-quiz-opt-desc">Acute symptoms may have eased, but longer-term health like bone density and cardiovascular support matters now.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'stage')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">❓</span>
+              <div>
+                <span class="phase-quiz-opt-title">Not sure — I have symptoms but no diagnosis yet</span>
+                <span class="phase-quiz-opt-desc">Common. Perimenopause can begin 10 years before menopause and often goes undiagnosed.</span>
+              </div>
+            </label>
+          </div>
+          <div class="phase-quiz-nav">
+            <span></span>
+            <button class="phase-quiz-next" id="next1" onclick="phaseNextStep(1)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Primary Symptom -->
+        <div class="phase-quiz-step" id="step2">
+          <div class="phase-quiz-step-num">Question 2 of 5</div>
+          <h2>What's your most disruptive symptom right now?</h2>
+          <p class="phase-quiz-step-sub">Pick the one that has the biggest impact on your day-to-day life.</p>
+          <div class="phase-quiz-options two-col">
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🌡️</span>
+              <div><span class="phase-quiz-opt-title">Hot flashes & night sweats</span></div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">😴</span>
+              <div><span class="phase-quiz-opt-title">Sleep disruption & insomnia</span></div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🧠</span>
+              <div><span class="phase-quiz-opt-title">Brain fog & memory lapses</span></div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">😰</span>
+              <div><span class="phase-quiz-opt-title">Anxiety & mood swings</span></div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">💪</span>
+              <div><span class="phase-quiz-opt-title">Joint pain & stiffness</span></div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'symptom1')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">💧</span>
+              <div><span class="phase-quiz-opt-title">Intimate dryness & discomfort</span></div>
+            </label>
+          </div>
+          <div class="phase-quiz-nav">
+            <button class="phase-quiz-back" onclick="phasePrevStep(2)">← Back</button>
+            <button class="phase-quiz-next" id="next2" onclick="phaseNextStep(2)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Secondary Symptoms (multi-select) -->
+        <div class="phase-quiz-step" id="step3">
+          <div class="phase-quiz-step-num">Question 3 of 5</div>
+          <h2>Are any of these affecting you too?</h2>
+          <p class="phase-quiz-step-sub">Select all that apply. Knowing the full picture sharpens your protocol.</p>
+          <div class="phase-quiz-options two-col">
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">⚡</span>
+              <div><span class="phase-quiz-opt-title">Fatigue & energy crashes</span></div>
+            </label>
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">⚖️</span>
+              <div><span class="phase-quiz-opt-title">Midsection weight gain</span></div>
+            </label>
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">💆</span>
+              <div><span class="phase-quiz-opt-title">Headaches & migraines</span></div>
+            </label>
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">❤️</span>
+              <div><span class="phase-quiz-opt-title">Heart palpitations</span></div>
+            </label>
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🌸</span>
+              <div><span class="phase-quiz-opt-title">Skin changes & dryness</span></div>
+            </label>
+            <label class="phase-quiz-opt multi" onclick="phaseToggleOpt(this)">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🦴</span>
+              <div><span class="phase-quiz-opt-title">Bone density concerns</span></div>
+            </label>
+          </div>
+          <div class="phase-quiz-nav">
+            <button class="phase-quiz-back" onclick="phasePrevStep(3)">← Back</button>
+            <button class="phase-quiz-next enabled" id="next3" onclick="phaseNextStep(3)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: HRT Status -->
+        <div class="phase-quiz-step" id="step4">
+          <div class="phase-quiz-step-num">Question 4 of 5</div>
+          <h2>Are you currently using hormone therapy (HRT)?</h2>
+          <p class="phase-quiz-step-sub">This determines whether we recommend standalone or complementary products.</p>
+          <div class="phase-quiz-options">
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'hrt')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">💊</span>
+              <div>
+                <span class="phase-quiz-opt-title">Yes — I'm on HRT</span>
+                <span class="phase-quiz-opt-desc">Phase products complement HRT. We'll show you what fills the remaining gaps.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'hrt')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🌿</span>
+              <div>
+                <span class="phase-quiz-opt-title">No — I prefer hormone-free solutions</span>
+                <span class="phase-quiz-opt-desc">All Phase products are hormone-free and designed to work at full therapeutic effect independently.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'hrt')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🤔</span>
+              <div>
+                <span class="phase-quiz-opt-title">Not yet, but I'm considering it</span>
+                <span class="phase-quiz-opt-desc">We'll recommend products that work now and continue working alongside HRT if you start it.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'hrt')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🏥</span>
+              <div>
+                <span class="phase-quiz-opt-title">I can't use HRT (medical reason)</span>
+                <span class="phase-quiz-opt-desc">Phase was built for you. All products are safe for women with hormone-sensitive conditions including breast cancer history.</span>
+              </div>
+            </label>
+          </div>
+          <div class="phase-quiz-nav">
+            <button class="phase-quiz-back" onclick="phasePrevStep(4)">← Back</button>
+            <button class="phase-quiz-next" id="next4" onclick="phaseNextStep(4)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 5: Goal -->
+        <div class="phase-quiz-step" id="step5">
+          <div class="phase-quiz-step-num">Question 5 of 5</div>
+          <h2>What matters most to you right now?</h2>
+          <p class="phase-quiz-step-sub">Your goal shapes which products we prioritize in your protocol.</p>
+          <div class="phase-quiz-options">
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'goal')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">⚡</span>
+              <div>
+                <span class="phase-quiz-opt-title">Immediate relief — I need results now</span>
+                <span class="phase-quiz-opt-desc">We lead with fast-acting products (cooling, topical, immediate-effect) then build in long-term support.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'goal')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">📈</span>
+              <div>
+                <span class="phase-quiz-opt-title">Long-term health — I want to address root causes</span>
+                <span class="phase-quiz-opt-desc">We build your protocol around clinically-studied supplements with proven long-term outcomes.</span>
+              </div>
+            </label>
+            <label class="phase-quiz-opt" onclick="phaseSelectOpt(this,'goal')">
+              <div class="phase-quiz-opt-check"></div>
+              <span class="phase-quiz-opt-icon">🎯</span>
+              <div>
+                <span class="phase-quiz-opt-title">Both — I want relief now and lasting results</span>
+                <span class="phase-quiz-opt-desc">The full-stack approach. What to start today, and what to layer in over the first 90 days.</span>
+              </div>
+            </label>
+          </div>
+          <div class="phase-quiz-nav">
+            <button class="phase-quiz-back" onclick="phasePrevStep(5)">← Back</button>
+            <button class="phase-quiz-next" id="next5" onclick="phaseShowResults()">See My Protocol →</button>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="phase-quiz-results" id="quizResults">
+          <div class="phase-quiz-results-header">
+            <div class="phase-quiz-results-eyebrow">Your Personalized Protocol</div>
+            <h2>Here's what your body needs.</h2>
+            <p>Based on your answers, we've built the three-product protocol most likely to give you meaningful relief — in order of priority.</p>
+          </div>
+
+          <div class="phase-quiz-protocol">
+            <div class="phase-quiz-protocol-label">The Phase Protocol</div>
+            <h3>The Core Three™</h3>
+            <p>This combination addresses your primary symptom, supports underlying hormone metabolism, and builds the foundation for long-term relief. Used together for 60 days, 91% of women report significant improvement in their most disruptive symptoms.</p>
+            <div class="phase-quiz-protocol-products">
+              <div class="phase-quiz-protocol-product">
+                <h4>Step 1: Daily Foundation</h4>
+                <p>Phase Daily Balance™ — comprehensive hormonal support with clinically-studied doses of Ashwagandha, Black Cohosh, Magnesium & Vitamin D3</p>
+                <p class="price">$48.00 / month</p>
+              </div>
+              <div class="phase-quiz-protocol-product">
+                <h4>Step 2: Targeted Relief</h4>
+                <p>Matched to your primary symptom — fast-acting product chosen from cooling, sleep, mood, or intimate wellness category</p>
+                <p class="price">From $22.00</p>
+              </div>
+              <div class="phase-quiz-protocol-product">
+                <h4>Step 3: Sleep Repair</h4>
+                <p>Magnesium Glycinate 400 + Lavender Sleep Serum — because every symptom worsens when you're sleep-deprived</p>
+                <p class="price">From $38.00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-quiz-results-cta">
+            <h3>Ready to start your protocol?</h3>
+            <p>Subscribe and save 15% on every order. Skip, swap, or cancel any time — no commitment.</p>
+            <div class="phase-quiz-results-cta-btns">
+              <a href="/collections/all" class="btn btn-primary">Shop the Protocol →</a>
+              <a href="/collections/all" class="btn btn-outline">Browse All Products</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-quiz-guarantee">
+    <div class="container">
+      <p><strong>60-day relief guarantee.</strong> Try any Phase product for two full months. If it's not right for your symptoms, we'll refund you completely — no return required, no fine print.</p>
+    </div>
+  </div>
+
+</div>
 
 <script>
 (function() {
-  var P = {
-    thermella:  { t:"Thermella® by Bonafide",   price:"$60",     img:"https://hellobonafide.com/cdn/shop/files/Bonafide_THERMELLA-PARENT_Shopify_Thumb1Hero.png?v=1756816689",               d:"Hormone-free hot flash relief targeting NKB — the peptide behind temperature dysregulation.",              url:"/products/thermella-by-bonafide",                badge:"Top Pick · Hot Flashes" },
-    relizen:    { t:"Relizen® by Bonafide",      price:"$58",     img:"https://hellobonafide.com/cdn/shop/files/Bonafide_RELIZEN-PARENT_Shopify_Thumb1Hero.png?v=1759868901&width=600",        d:"Swedish pollen extract — 75% of women experienced reduced hot flash frequency.",                           url:"/products/relizen-by-bonafide",                  badge:"Bestseller · Hot Flashes" },
-    noctera:    { t:"Noctera™ by Bonafide",      price:"$39.99",  img:"https://hellobonafide.com/cdn/shop/files/Bonafide_NOCTERA-PARENT_Shopify_Thumb1Hero.png?v=1766535772",                 d:"Non-sedative sleep formula for hormonal insomnia — 99% fewer sleep disturbances.",                        url:"/products/noctera-by-bonafide",                  badge:"Top Pick · Sleep" },
-    hilma_sl:   { t:"Sleep Support by Hilma",    price:"$42",     img:"https://www.hilma.co/cdn/shop/files/2047_HUMAN_157B_HILMA_Hilma_november6875.jpg",                                     d:"Magnesium glycinate + passionflower + lemon balm. No grogginess. No dependency.",                         url:"/products/sleep-support-by-hilma",               badge:"Editor Pick · Sleep" },
-    serenol:    { t:"Serenol™ by Bonafide",      price:"$63",     img:"https://hellobonafide.com/cdn/shop/files/Bonafide_SERENOL-PARENT_Shopify_Thumb1Hero.png?v=1759868545&width=600",       d:"71% reduction in mood swings. 70% reduction in irritability. Clinically tested.",                         url:"/products/serenol-by-bonafide",                  badge:"Clinically Studied · Mood" },
-    tension:    { t:"Tension Relief by Hilma",   price:"$32",     img:"https://www.hilma.co/cdn/shop/files/2047_HUMAN_179C_HILMA_Hilma_november6909.jpg",                                     d:"White willow bark + butterbur + magnesium for head tension and mental fog.",                               url:"/products/tension-relief-by-hilma",              badge:"Focus & Clarity" },
-    revaree:    { t:"Revaree® by Bonafide",      price:"$63",     img:"https://hellobonafide.com/cdn/shop/files/Bonafide_REVAREE-PARENT_Shopify_Thumb3Summary.png?v=1756815894",              d:"#1 OB/GYN-recommended hormone-free vaginal insert. Relief in as little as 9 days.",                        url:"/products/revaree-by-bonafide",                  badge:"OB/GYN Recommended" },
-    clairvee:   { t:"Clairvee® by Bonafide",     price:"$55",     img:"https://hellobonafide.com/cdn/shop/files/Clairvee_Desktop.png?v=1731511710&width=600",                                 d:"Vaginal probiotic — 95% of women reduced moderate-to-severe vaginal odor in one month.",                  url:"/products/clairvee-by-bonafide",                 badge:"Intimate Health" },
-    ristela:    { t:"Ristela® by Bonafide",      price:"$58",     img:"https://hellobonafide.com/cdn/shop/files/Bonafide_RISTELA-PARENT_Shopify_HowItWorks.jpg?v=1727298917&width=600",       d:"75% increase in arousal and satisfaction at 8 weeks. Plant-based, hormone-free.",                          url:"/products/ristela-by-bonafide",                  badge:"Sexual Wellness" },
-    silvessa:   { t:"Silvessa® System by Bonafide", price:"$126", img:"https://hellobonafide.com/cdn/shop/files/Bonafide_SILKIT30DAYSTOCKB_Shopify_Thumb1Hero.png?v=1756842728",              d:"The only 3-part system (oral capsule + 2 serums) for estrogen-related hair and skin decline.",             url:"/products/silvessa-hair-skin-system-by-bonafide",badge:"Skin & Hair" },
-    menorelief: { t:"MenoRelief™ by Kindra",     price:"$44",     img:"https://ourkindra.com/cdn/shop/files/MenoRelief_PDP_Hero_Desktop_1.jpg?v=1747175558&width=600",                       d:"One capsule targets 11 symptoms. Built around Pycnogenol® — studied in 40+ clinical trials.",             url:"/products/menorelief-by-kindra",                 badge:"Comprehensive Relief" },
-    multi:      { t:"Women's 40+ Multi by Bonafide", price:"$18", img:"https://hellobonafide.com/cdn/shop/files/Bonafide_MULTIVITAMIN-PARENT_Shopify_Thumb1Hero.png?v=1759868535&width=600", d:"15 vitamins and minerals formulated for women over 40. No iron, no fillers.",                              url:"/products/womens-40-multi-by-bonafide",          badge:"Daily Foundation" },
-    bundle:     { t:"Sleep + Hot Flash Bundle",  price:"$84.99",  img:"https://hellobonafide.com/cdn/shop/files/Bonafide_BNDLNOCRIS_Shopify_PLP.png?v=1766087043&width=600",                 d:"Noctera™ + Thermella® together — the two most-ordered Phase products at 15% off.",                        url:"/products/sleep-hot-flash-bundle-by-bonafide",   badge:"Bundle · Save 15%" }
+  var totalSteps = 5;
+
+  function updateProgress(step) {
+    var pct = Math.round(((step - 1) / totalSteps) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressLabel').textContent =
+      step <= totalSteps ? ('Question ' + step + ' of ' + totalSteps) : 'Protocol Ready';
+  }
+
+  window.phaseSelectOpt = function(el, key) {
+    var opts = el.closest('.phase-quiz-options').querySelectorAll('.phase-quiz-opt:not(.multi)');
+    opts.forEach(function(o) {
+      o.classList.remove('selected');
+      o.querySelector('.phase-quiz-opt-check').textContent = '';
+    });
+    el.classList.add('selected');
+    el.querySelector('.phase-quiz-opt-check').textContent = '✓';
+    var stepEl = el.closest('.phase-quiz-step');
+    if (stepEl) {
+      var stepNum = stepEl.id.replace('step', '');
+      var nextBtn = document.getElementById('next' + stepNum);
+      if (nextBtn) nextBtn.classList.add('enabled');
+    }
   };
 
-  var QS = [
-    { id:"q1", q:"How long have you been experiencing symptoms?", sub:"Helps us understand your phase.", type:"single", opts:[
-      {i:"🌱",l:"Just starting — a few months",v:"new"},
-      {i:"📅",l:"6 months to 2 years",v:"mid"},
-      {i:"🌊",l:"2–5 years",v:"established"},
-      {i:"🌸",l:"5+ years (postmenopause)",v:"post"}
-    ]},
-    { id:"q2", q:"Which symptoms bother you most?", sub:"Select all that apply — we'll match a product to each one.", type:"multi", opts:[
-      {i:"🔥",l:"Hot flashes or night sweats",v:"hf"},
-      {i:"😴",l:"Can't fall or stay asleep",v:"sl"},
-      {i:"😤",l:"Mood swings or irritability",v:"mo"},
-      {i:"🧠",l:"Brain fog or poor focus",v:"fo"},
-      {i:"💧",l:"Vaginal dryness or discomfort",v:"vd"},
-      {i:"❤️",l:"Low libido or reduced arousal",v:"li"},
-      {i:"💇",l:"Hair thinning or skin changes",v:"ha"},
-      {i:"🌡️",l:"Bloating or gut changes",v:"gu"}
-    ]},
-    { id:"q3", q:"How severely do your symptoms affect daily life?", sub:"Be honest — this shapes your protocol.", type:"single", opts:[
-      {i:"😌",l:"Mild — I notice them but cope fine",v:"mild"},
-      {i:"😐",l:"Moderate — they interrupt my day",v:"mod"},
-      {i:"😩",l:"Significant — I want them gone",v:"sev"},
-      {i:"🚨",l:"Severe — affecting work, sleep, relationships",v:"crit"}
-    ]},
-    { id:"q4", q:"Are you currently using hormone therapy (HRT)?", sub:"All Phase products are hormone-free and safe with HRT.", type:"single", opts:[
-      {i:"✅",l:"Yes — currently on HRT",v:"yes"},
-      {i:"🤔",l:"Considering it but not yet",v:"con"},
-      {i:"🌿",l:"No — prefer hormone-free options",v:"no"},
-      {i:"⚕️",l:"Can't use hormones (medical reason)",v:"cant"}
-    ]},
-    { id:"q5", q:"What matters most to you in a product?", sub:"We'll prioritize your top value.", type:"single", opts:[
-      {i:"🔬",l:"Clinical studies and proven results",v:"clin"},
-      {i:"🌿",l:"Natural, plant-based ingredients",v:"nat"},
-      {i:"💊",l:"Simple — one product that does it all",v:"simp"},
-      {i:"💰",l:"Best value for the money",v:"val"}
-    ]}
-  ];
+  window.phaseToggleOpt = function(el) {
+    el.classList.toggle('selected');
+    el.querySelector('.phase-quiz-opt-check').textContent = el.classList.contains('selected') ? '✓' : '';
+  };
 
-  var ANS = {}, STEP = 0;
+  window.phaseNextStep = function(from) {
+    var btn = document.getElementById('next' + from);
+    if (!btn || !btn.classList.contains('enabled')) return;
+    var current = document.getElementById('step' + from);
+    var next = document.getElementById('step' + (from + 1));
+    if (current) current.classList.remove('active');
+    if (next) {
+      next.classList.add('active');
+      updateProgress(from + 1);
+    }
+    var hero = document.getElementById('quizHero');
+    if (hero) window.scrollTo({ top: hero.offsetTop - 20, behavior: 'smooth' });
+  };
 
-  function recs() {
-    var s = ANS.q2||[], r=[];
-    if(s.indexOf("hf")>-1){r.push("thermella");r.push("relizen");}
-    if(s.indexOf("sl")>-1){r.push("noctera");r.push("hilma_sl");}
-    if(s.indexOf("mo")>-1) r.push("serenol");
-    if(s.indexOf("fo")>-1) r.push("tension");
-    if(s.indexOf("vd")>-1) r.push("revaree");
-    if(s.indexOf("li")>-1) r.push("ristela");
-    if(s.indexOf("ha")>-1) r.push("silvessa");
-    if(s.indexOf("gu")>-1) r.push("menorelief");
-    if(ANS.q5==="simp") r.unshift("menorelief");
-    if(ANS.q5==="val") r.push("multi");
-    if(s.indexOf("hf")>-1&&s.indexOf("sl")>-1) r.push("bundle");
-    if(r.length===0) r=["menorelief","noctera","thermella","multi"];
-    var seen={},out=[];
-    for(var i=0;i<r.length;i++){if(!seen[r[i]]){seen[r[i]]=true;out.push(r[i]);}}
-    if(out.length<3&&out.indexOf("multi")<0) out.push("multi");
-    return out.slice(0,4);
-  }
+  window.phasePrevStep = function(from) {
+    var current = document.getElementById('step' + from);
+    var prev = document.getElementById('step' + (from - 1));
+    if (current) current.classList.remove('active');
+    if (prev) {
+      prev.classList.add('active');
+      updateProgress(from - 1);
+    }
+    var hero = document.getElementById('quizHero');
+    if (hero) window.scrollTo({ top: hero.offsetTop - 20, behavior: 'smooth' });
+  };
 
-  function draw(){
-    var root=document.getElementById("phase-quiz-root");
-    if(!root) return;
-    if(STEP>=QS.length){results(root);return;}
-    var q=QS[STEP], isM=q.type==="multi";
-    var sel=ANS[q.id]||(isM?[]:null);
-    var ok=isM?sel.length>0:sel!==null;
-    var pct=(STEP/QS.length*100).toFixed(0);
+  window.phaseShowResults = function() {
+    var btn = document.getElementById('next5');
+    if (!btn || !btn.classList.contains('enabled')) return;
+    document.getElementById('step5').classList.remove('active');
+    document.getElementById('quizResults').classList.add('active');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressPct').textContent = '100%';
+    document.getElementById('progressLabel').textContent = 'Protocol Ready';
+    var hero = document.getElementById('quizHero');
+    if (hero) window.scrollTo({ top: hero.offsetTop - 20, behavior: 'smooth' });
+  };
 
-    root.innerHTML=
-      '<div class="pq-wrap">'+
-        '<div class="pq-header">'+
-          '<div class="pq-eyebrow">Your Personalized Protocol</div>'+
-          '<h1>Find your <em style="font-style:italic;color:var(--terracotta)">relief.</em></h1>'+
-          '<p>5 quick questions — personalized picks in under 60 seconds.</p>'+
-        '</div>'+
-        '<div class="pq-progress-bar"><div class="pq-progress-fill" style="width:'+pct+'%"></div></div>'+
-        '<div class="pq-step active">'+
-          '<div class="pq-question">'+q.q+'</div>'+
-          '<div class="pq-subtext">'+q.sub+'</div>'+
-          '<div class="pq-options'+(isM?' multi':'')+'">'+ q.opts.map(function(o){
-            var s=isM?sel.indexOf(o.v)>-1:sel===o.v;
-            return '<div class="pq-opt'+(s?' sel':'')+'" data-v="'+o.v+'">'+
-              '<span class="pq-opt-icon">'+o.i+'</span>'+
-              '<span class="pq-opt-label">'+o.l+'</span>'+
-              '<span class="pq-opt-check">'+(s?'&#10003;':'')+'</span>'+
-            '</div>';
-          }).join('')+'</div>'+
-          '<div class="pq-nav">'+
-            (STEP>0?'<button class="pq-back" id="pqb">← Back</button>':'')+
-            '<button class="pq-next" id="pqn"'+(ok?'':' disabled')+'>Continue →</button>'+
-            '<span class="pq-count">'+(STEP+1)+' / '+QS.length+'</span>'+
-          '</div>'+
-        '</div>'+
-      '</div>';
-
-    root.querySelectorAll(".pq-opt").forEach(function(el){
-      el.addEventListener("click",function(){
-        var v=this.getAttribute("data-v");
-        if(isM){var a=ANS[q.id]||[];var i=a.indexOf(v);if(i>-1)a.splice(i,1);else a.push(v);ANS[q.id]=a;}
-        else ANS[q.id]=v;
-        draw();
-      });
-    });
-    var n=root.querySelector("#pqn"); if(n) n.addEventListener("click",function(){if(!this.disabled){STEP++;draw();}});
-    var b=root.querySelector("#pqb"); if(b) b.addEventListener("click",function(){STEP--;draw();});
-  }
-
-  function results(root){
-    var r=recs();
-    root.innerHTML=
-      '<div class="pq-wrap">'+
-        '<div class="pq-results active">'+
-          '<div class="pq-results-hd">'+
-            '<div class="pq-eyebrow">Your Personalized Protocol</div>'+
-            '<h2>Your picks are ready.</h2>'+
-            '<p>Based on your symptoms and priorities — here is where to start.</p>'+
-          '</div>'+
-          '<div class="pq-rec-grid">'+r.map(function(k){
-            var p=P[k]; if(!p) return '';
-            return '<a href="'+p.url+'" class="pq-rec">'+
-              '<img class="pq-rec-img" src="'+p.img+'" alt="'+p.t+'" loading="lazy"/>'+
-              '<div class="pq-rec-body">'+
-                '<div class="pq-rec-badge">'+p.badge+'</div>'+
-                '<div class="pq-rec-title">'+p.t+'</div>'+
-                '<div class="pq-rec-desc">'+p.d+'</div>'+
-                '<div class="pq-rec-foot">'+
-                  '<span class="pq-rec-price">'+p.price+'</span>'+
-                  '<span class="pq-rec-cta">View product →</span>'+
-                '</div>'+
-              '</div>'+
-            '</a>';
-          }).join('')+'</div>'+
-          '<div class="pq-email-box">'+
-            '<h3>Get your protocol by email.</h3>'+
-            '<p>We\'ll send your picks + a 15% first-order code straight to your inbox.</p>'+
-            '<div class="pq-email-row">'+
-              '<input class="pq-email-in" type="email" placeholder="your@email.com"/>'+
-              '<button class="pq-email-btn" onclick="this.textContent=\'Sent ✓\'">Send my picks</button>'+
-            '</div>'+
-          '</div>'+
-          '<span class="pq-restart-link" onclick="location.reload()">← Retake the quiz</span>'+
-        '</div>'+
-      '</div>';
-  }
-
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",draw);
-  else draw();
+  updateProgress(1);
 })();
 </script>
 
