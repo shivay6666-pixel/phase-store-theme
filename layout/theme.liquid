@@ -175,6 +175,40 @@
     .skip-link { position: absolute; left: -9999px; }
     .skip-link:focus { left: 0; top: 0; z-index: 200; padding: 8px 16px; background: var(--terracotta); color: #fff; }
   </style>
+
+  <!-- Phase® Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '947471684581402');
+  fbq('track', 'PageView');
+  {% if template == 'product' %}
+    fbq('track', 'ViewContent', {
+      content_ids: ['{{ product.id }}'],
+      content_name: '{{ product.title | escape }}',
+      content_type: 'product',
+      value: {{ product.price | money_without_currency }},
+      currency: '{{ shop.currency }}'
+    });
+  {% endif %}
+  {% if template == 'cart' %}
+    fbq('track', 'InitiateCheckout', {
+      value: {{ cart.total_price | money_without_currency }},
+      currency: '{{ shop.currency }}',
+      num_items: {{ cart.item_count }}
+    });
+  {% endif %}
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=947471684581402&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel -->
 </head>
 
 <body class="template-{{ template | replace: '.', '-' | handleize }}">
@@ -212,9 +246,11 @@
         <a href="/" class="phase-logo">{{ shop.name }}<span>.</span></a>
         <nav class="phase-nav-links" aria-label="Main navigation">
           <a href="/collections/all">Shop All</a>
-          <a href="/collections/all">By Symptom</a>
+          <a href="/collections/hot-flashes">Hot Flashes</a>
+          <a href="/collections/sleep">Sleep</a>
+          <a href="/collections/hormone-support">Hormones</a>
+          <a href="/collections/focus">Brain Fog</a>
           <a href="/pages/about">Our Story</a>
-          <a href="/pages/find-your-protocol">Take the Quiz</a>
         </nav>
         <div class="phase-nav-actions">
           <a href="/search" class="phase-icon-btn" title="Search">⌕</a>
