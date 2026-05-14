@@ -12,14 +12,14 @@
     "hero": {
       "type": "phase-hero",
       "settings": {
-        "eyebrow": "For the women who weren't warned",
-        "headline_line1": "Symptoms have a season.",
-        "headline_line2": "So does relief.",
-        "subhead": "Doctor-formulated, plant-powered support for hot flashes, sleepless nights, and the moments you don't recognize yourself. Designed for the phase you're in.",
-        "cta_text": "Shop Relief",
+        "eyebrow": "Trusted by 15,000+ women",
+        "headline_line1": "Hot flashes. Night sweats.",
+        "headline_line2": "There's a Phase for that.",
+        "subhead": "Science-backed, plant-powered relief for every menopause symptom. Doctor-formulated. 60-day guarantee.",
+        "cta_text": "Shop Relief Now \u2192",
         "cta_link": "/collections/all",
-        "cta2_text": "Take the 60-second quiz",
-        "cta2_link": "/pages/find-your-protocol"
+        "cta2_text": "Find Your Protocol",
+        "cta2_link": "/collections/hormone-support"
       }
     },
     "trust": {
@@ -103,13 +103,13 @@
     "featured": {
       "type": "phase-featured-products",
       "settings": {
-        "eyebrow": "Bestsellers",
-        "heading": "Loved by 12,000+ women in the phase",
-        "subhead": "The essentials our customers reorder month after month.",
-        "collection": "all",
+        "eyebrow": "\ud83d\udd25 Best Sellers",
+        "heading": "What 15,000 women actually reach for",
+        "subhead": "The Phase products our customers reorder every single month.",
+        "collection": "frontpage",
         "product_limit": 8,
         "show_cta": true,
-        "cta_text": "View All Products",
+        "cta_text": "View All Products \u2192",
         "cta_link": "/collections/all"
       }
     },
@@ -119,9 +119,9 @@
         "heading": "I started Phase at 54, in the middle of my own.",
         "quote": "\"I was a mess for two years before I figured out what was happening to my body. I built Phase so no woman has to figure it out alone.\"",
         "body_1": "I'm Margaret. I spent 22 years as a clinical nutritionist before menopause hit me like a freight train at 51. My doctor offered HRT or \"lifestyle changes.\" Neither fixed the 3am wake-ups, the brain fog in client meetings, or the hot flashes that left me red-faced in the cereal aisle.",
-        "body_2": "I started formulating with two friends — a women's health pharmacist and a sleep researcher — to make the things I couldn't find. Now we make them for 12,000 other women. Every product is something I take, my mother takes, or my daughter is preparing to take.",
-        "sig_name": "— Margaret Chen",
-        "sig_title": "Founder · CN, Clinical Nutritionist"
+        "body_2": "I started formulating with two friends \u2014 a women's health pharmacist and a sleep researcher \u2014 to make the things I couldn't find. Now we make them for 12,000 other women. Every product is something I take, my mother takes, or my daughter is preparing to take.",
+        "sig_name": "\u2014 Margaret Chen",
+        "sig_title": "Founder \u00b7 CN, Clinical Nutritionist"
       }
     },
     "science": {
@@ -130,29 +130,29 @@
         "st1": {
           "type": "stat",
           "settings": {
-            "stat": "12k+",
-            "label": "Women supported across 23 countries"
+            "stat": "15k+",
+            "label": "Women supported in 30+ countries"
           }
         },
         "st2": {
           "type": "stat",
           "settings": {
             "stat": "94%",
-            "label": "Report symptom relief within 30 days"
+            "label": "Report relief within 30 days"
           }
         },
         "st3": {
           "type": "stat",
           "settings": {
-            "stat": "0",
-            "label": "Parabens, sulfates, or hormone disruptors"
+            "stat": "60-day",
+            "label": "Money-back guarantee \u2014 no questions"
           }
         },
         "st4": {
           "type": "stat",
           "settings": {
-            "stat": "60",
-            "label": "Day money-back relief guarantee"
+            "stat": "4.8\u2605",
+            "label": "Average rating across 6,000+ reviews"
           }
         }
       },
@@ -170,27 +170,27 @@
         "t1": {
           "type": "testimonial",
           "settings": {
-            "quote": "I'd accepted I'd never sleep through the night again. Three weeks in, I had to set an alarm because I was sleeping past 7am for the first time in years.",
+            "quote": "I've had 4 hot flashes in the last 2 weeks instead of 20. I actually cried when I realized I'd slept through the night for the first time in 3 years.",
             "name": "Sarah K.",
-            "meta": "51 · Subscriber 8 months",
+            "meta": "51 \u00b7 Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=100&q=80&auto=format&fit=crop"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
-            "quote": "The cooling neck wrap is in my bag at all times. I had a hot flash mid-presentation last week and my colleague didn't even notice. Game changer.",
+            "quote": "The Hormone Harmony Kit is the first thing that's actually worked for all my symptoms \u2014 not just one. I tell every woman I know about it.",
             "name": "Michelle R.",
-            "meta": "48 · Subscriber 4 months",
+            "meta": "48 \u00b7 Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1573164574396-ce99a23a0d7b?w=100&q=80&auto=format&fit=crop"
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
-            "quote": "Finally a brand that talks to me like an adult. The Daily Balance capsules are part of my morning ritual now and I can feel the difference on the days I forget.",
+            "quote": "I was skeptical of supplements but the 60-day guarantee made me try it. Now I'm on month 6. My doctor actually asked what I changed.",
             "name": "Jennifer L.",
-            "meta": "55 · Subscriber 1 year",
+            "meta": "55 \u00b7 Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&auto=format&fit=crop"
           }
         }
@@ -209,14 +209,14 @@
           "type": "faq",
           "settings": {
             "question": "When will I start to feel a difference?",
-            "answer": "Most customers report noticeable relief within 14–30 days of consistent use. Our 60-day guarantee gives you plenty of time."
+            "answer": "Most customers report noticeable relief within 14\u201330 days of consistent use. Our 60-day guarantee gives you plenty of time."
           }
         },
         "f2": {
           "type": "faq",
           "settings": {
             "question": "Are these products safe with HRT?",
-            "answer": "Most are designed to complement hormone therapy — but always check with your provider."
+            "answer": "Most are designed to complement hormone therapy \u2014 but always check with your provider."
           }
         },
         "f3": {
@@ -237,7 +237,7 @@
           "type": "faq",
           "settings": {
             "question": "What if a product doesn't work for me?",
-            "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you — no returns required, no fine print."
+            "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you \u2014 no returns required, no fine print."
           }
         }
       },
@@ -253,8 +253,8 @@
     "newsletter": {
       "type": "phase-newsletter",
       "settings": {
-        "heading": "Get the playbook we wish we'd had.",
-        "body": "Join 40,000+ women getting our weekly note on what's working — symptom science, doctor interviews, and reader stories. Plus 15% off your first order."
+        "heading": "Join 15,000+ women who found their phase.",
+        "body": "Weekly science-backed tips, symptom guides, and exclusive offers. Plus \u2014 15% off your first order when you subscribe."
       }
     }
   },
