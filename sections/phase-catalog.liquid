@@ -19,7 +19,7 @@
   .phase-cat-body{padding:20px;}
   .phase-cat-cat{font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
   .phase-cat-card h4{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;margin:0 0 6px;color:#2C2C2C;}
-  .phase-cat-price{font-size:16px;font-weight:600;color:#2C2C2C;}
+  .phase-cat-price{font-size:16px;font-weight:700;color:#C97B5C;display:flex;align-items:center;gap:8px;} .phase-cat-price .strike{color:#6B6B6B;text-decoration:line-through;font-weight:400;font-size:14px;}
   .phase-cat-cta{text-align:center;margin-top:50px;}
   .phase-btn{display:inline-block;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:2px;background:#C97B5C;color:#fff;text-decoration:none;}
   @media(max-width:1000px){.phase-cat-grid{grid-template-columns:repeat(3,1fr);}}
@@ -53,7 +53,12 @@
             <div class="phase-cat-body">
               {% if product.type != blank %}<div class="phase-cat-cat">{{ product.type }}</div>{% endif %}
               <h4>{{ product.title }}</h4>
-              <div class="phase-cat-price">{{ product.price | money }}</div>
+              <div class="phase-cat-price">
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="strike">{{ product.compare_at_price | money }}</span>
+                {%- endif -%}
+                {{ product.price | money }}
+              </div>
             </div>
           </a>
         {% endfor %}

@@ -50,8 +50,8 @@
     text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
   }
   .phase-product-price {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 16px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: 700; color: var(--terracotta);
   }
   .phase-product-price .strike {
     color: var(--muted); text-decoration: line-through;
@@ -102,10 +102,10 @@
             <div class="phase-product-cat">{{ product.type }}</div>
             <h4>{{ product.title }}</h4>
             <div class="phase-product-price">
-              {{ product.price | money }}
               {%- if product.compare_at_price > product.price -%}
                 <span class="strike">{{ product.compare_at_price | money }}</span>
               {%- endif -%}
+              {{ product.price | money }}
             </div>
             <div class="phase-product-stars">★★★★★</div>
           </div>
