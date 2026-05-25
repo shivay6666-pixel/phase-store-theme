@@ -36,7 +36,7 @@
             "description": "Cooling sprays, neck fans, and night-sweat-busting essentials.",
             "cta": "Shop cooling",
             "link": "/collections/hot-flashes",
-            "fallback_url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S9b176c74586d4a2498baaa685db7d511t.webp"
           }
         },
         "s2": {
@@ -46,7 +46,7 @@
             "description": "Magnesium blends, weighted eye masks, and cooling pillowcases.",
             "cta": "Shop sleep",
             "link": "/collections/sleep",
-            "fallback_url": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S01988566c947496594b41c060ee42433h.webp"
           }
         },
         "s3": {
@@ -56,7 +56,7 @@
             "description": "Adaptogens, breathwork tools, and calm-in-a-bottle essentials.",
             "cta": "Shop mood",
             "link": "/collections/mood",
-            "fallback_url": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S68d9a95befc34dec8bb41eeedc1448c28.webp"
           }
         },
         "s4": {
@@ -66,7 +66,7 @@
             "description": "Nootropic blends and focus support designed for hormonal shifts.",
             "cta": "Shop focus",
             "link": "/collections/focus",
-            "fallback_url": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S7ecadea944284e199924b168677cf5abV.webp"
           }
         },
         "s5": {
@@ -76,7 +76,7 @@
             "description": "Topical CBD, magnesium creams, and morning-mobility rituals.",
             "cta": "Shop body",
             "link": "/collections/body",
-            "fallback_url": "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/Sde2f1798a7bd40d1a270d2133d67f9d2b.webp"
           }
         },
         "s6": {
@@ -86,7 +86,7 @@
             "description": "pH-balanced moisturizers and comfort essentials, no shame attached.",
             "cta": "Shop intimate",
             "link": "/collections/intimate",
-            "fallback_url": "https://images.unsplash.com/photo-1583912267550-d44c9c98e9aa?w=600&q=80&auto=format&fit=crop"
+            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/Sf654d5724f1545279a15fef6c4163f52k.webp"
           }
         }
       },
