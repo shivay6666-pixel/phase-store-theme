@@ -1,38 +1,93 @@
 <style>
-  .phase-trust-bar {
+  .phase-press {
     background: var(--cream-dark);
-    padding: 40px 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+    padding: 36px 0;
   }
-  .phase-trust-inner {
+  .phase-press-inner {
     display: flex; align-items: center;
-    justify-content: space-between;
-    gap: 40px; flex-wrap: wrap;
+    gap: 0; flex-wrap: wrap;
+    justify-content: center;
   }
-  .phase-trust-label {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); white-space: nowrap;
+  .phase-press-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-right: 40px;
+    margin-right: 40px;
+    border-right: 1px solid var(--line);
+    flex-shrink: 0;
   }
-  .phase-trust-logos {
-    display: flex; gap: 48px; align-items: center; flex-wrap: wrap;
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px; color: var(--muted); opacity: .7;
+  .phase-press-logos {
+    display: flex; gap: 48px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
   }
-  .phase-trust-logos span { font-style: italic; }
+  .phase-press-logo {
+    opacity: 0.38;
+    transition: opacity 0.25s ease;
+    line-height: 1;
+  }
+  .phase-press-logo:hover { opacity: 0.65; }
+
+  /* Each styled to reflect actual brand identity */
+  .pub-vogue {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+  .pub-goop {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 21px; font-weight: 400;
+    letter-spacing: 4px; text-transform: lowercase;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+  .pub-wellgood {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: -0.3px;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+  .pub-cut {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 23px; font-weight: 700;
+    font-style: italic;
+    color: var(--charcoal);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .pub-mbg {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: lowercase;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+
+  @media (max-width: 700px) {
+    .phase-press-label { border-right: none; padding-right: 0; margin-right: 0; margin-bottom: 20px; width: 100%; text-align: center; }
+    .phase-press-logos { gap: 28px; }
+    .pub-vogue { font-size: 20px; }
+    .pub-goop { font-size: 16px; }
+    .pub-cut { font-size: 18px; }
+  }
 </style>
 
-<div class="phase-trust-bar">
+<div class="phase-press">
   <div class="container">
-    <div class="phase-trust-inner">
-      <div class="phase-trust-label">As seen in</div>
-      <div class="phase-trust-logos">
-        <span>Vogue</span>
-        <span>Goop</span>
-        <span>Well+Good</span>
-        <span>The Cut</span>
-        <span>mindbodygreen</span>
+    <div class="phase-press-inner">
+      <div class="phase-press-label">As seen in</div>
+      <div class="phase-press-logos">
+        <div class="phase-press-logo"><span class="pub-vogue">VOGUE</span></div>
+        <div class="phase-press-logo"><span class="pub-goop">goop</span></div>
+        <div class="phase-press-logo"><span class="pub-wellgood">Well+Good</span></div>
+        <div class="phase-press-logo"><span class="pub-cut">The Cut</span></div>
+        <div class="phase-press-logo"><span class="pub-mbg">mindbodygreen</span></div>
       </div>
     </div>
   </div>
@@ -40,8 +95,8 @@
 
 {% schema %}
 {
-  "name": "Phase Trust Bar",
+  "name": "Phase Press Bar",
   "settings": [],
-  "presets": [{ "name": "Phase Trust Bar" }]
+  "presets": [{ "name": "Phase Press Bar" }]
 }
 {% endschema %}
