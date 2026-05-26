@@ -16,7 +16,7 @@
         "headline_line1": "Hot flashes. Night sweats.",
         "headline_line2": "There's a Phase for that.",
         "subhead": "Science-backed, plant-powered relief for every menopause symptom. Doctor-formulated. 60-day guarantee.",
-        "cta_text": "Shop Relief Now \u2192",
+        "cta_text": "Shop Relief Now →",
         "cta_link": "/collections/all",
         "cta2_text": "Find Your Protocol",
         "cta2_link": "/collections/hormone-support"
@@ -36,7 +36,7 @@
             "description": "Cooling sprays, neck fans, and night-sweat-busting essentials.",
             "cta": "Shop cooling",
             "link": "/collections/hot-flashes",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S9b176c74586d4a2498baaa685db7d511t.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=85&auto=format&fit=crop&crop=center"
           }
         },
         "s2": {
@@ -46,7 +46,7 @@
             "description": "Magnesium blends, weighted eye masks, and cooling pillowcases.",
             "cta": "Shop sleep",
             "link": "/collections/sleep",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S01988566c947496594b41c060ee42433h.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1541199249251-f713e6145474?w=600&q=85&auto=format&fit=crop&crop=center"
           }
         },
         "s3": {
@@ -56,7 +56,7 @@
             "description": "Adaptogens, breathwork tools, and calm-in-a-bottle essentials.",
             "cta": "Shop mood",
             "link": "/collections/mood",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S68d9a95befc34dec8bb41eeedc1448c28.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=85&auto=format&fit=crop&crop=top"
           }
         },
         "s4": {
@@ -66,7 +66,7 @@
             "description": "Nootropic blends and focus support designed for hormonal shifts.",
             "cta": "Shop focus",
             "link": "/collections/focus",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/S7ecadea944284e199924b168677cf5abV.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=600&q=85&auto=format&fit=crop&crop=center"
           }
         },
         "s5": {
@@ -76,7 +76,7 @@
             "description": "Topical CBD, magnesium creams, and morning-mobility rituals.",
             "cta": "Shop body",
             "link": "/collections/body",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/Sde2f1798a7bd40d1a270d2133d67f9d2b.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1552693673-1bf958298935?w=600&q=85&auto=format&fit=crop&crop=center"
           }
         },
         "s6": {
@@ -86,7 +86,7 @@
             "description": "pH-balanced moisturizers and comfort essentials, no shame attached.",
             "cta": "Shop intimate",
             "link": "/collections/intimate",
-            "fallback_url": "https://cdn.shopify.com/s/files/1/0748/4119/4687/files/Sf654d5724f1545279a15fef6c4163f52k.webp"
+            "fallback_url": "https://images.unsplash.com/photo-1543269865-0a64d9f61f77?w=600&q=85&auto=format&fit=crop&crop=top"
           }
         }
       },
@@ -103,13 +103,13 @@
     "featured": {
       "type": "phase-featured-products",
       "settings": {
-        "eyebrow": "\ud83d\udd25 Best Sellers",
+        "eyebrow": "🔥 Best Sellers",
         "heading": "What 15,000 women actually reach for",
         "subhead": "The Phase products our customers reorder every single month.",
         "collection": "frontpage",
         "product_limit": 8,
         "show_cta": true,
-        "cta_text": "View All Products \u2192",
+        "cta_text": "View All Products →",
         "cta_link": "/collections/all"
       }
     },
@@ -119,9 +119,9 @@
         "heading": "I started Phase at 54, in the middle of my own.",
         "quote": "\"I was a mess for two years before I figured out what was happening to my body. I built Phase so no woman has to figure it out alone.\"",
         "body_1": "I'm Margaret. I spent 22 years as a clinical nutritionist before menopause hit me like a freight train at 51. My doctor offered HRT or \"lifestyle changes.\" Neither fixed the 3am wake-ups, the brain fog in client meetings, or the hot flashes that left me red-faced in the cereal aisle.",
-        "body_2": "I started formulating with two friends \u2014 a women's health pharmacist and a sleep researcher \u2014 to make the things I couldn't find. Now we make them for 12,000 other women. Every product is something I take, my mother takes, or my daughter is preparing to take.",
-        "sig_name": "\u2014 Margaret Chen",
-        "sig_title": "Founder \u00b7 CN, Clinical Nutritionist"
+        "body_2": "I started formulating with two friends — a women's health pharmacist and a sleep researcher — to make the things I couldn't find. Now we make them for 12,000 other women. Every product is something I take, my mother takes, or my daughter is preparing to take.",
+        "sig_name": "— Margaret Chen",
+        "sig_title": "Founder · CN, Clinical Nutritionist"
       }
     },
     "science": {
@@ -145,13 +145,13 @@
           "type": "stat",
           "settings": {
             "stat": "60-day",
-            "label": "Money-back guarantee \u2014 no questions"
+            "label": "Money-back guarantee — no questions"
           }
         },
         "st4": {
           "type": "stat",
           "settings": {
-            "stat": "4.8\u2605",
+            "stat": "4.8★",
             "label": "Average rating across 6,000+ reviews"
           }
         }
@@ -172,16 +172,16 @@
           "settings": {
             "quote": "I've had 4 hot flashes in the last 2 weeks instead of 20. I actually cried when I realized I'd slept through the night for the first time in 3 years.",
             "name": "Sarah K.",
-            "meta": "51 \u00b7 Verified buyer",
+            "meta": "51 · Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80&auto=format&fit=crop&crop=face"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
-            "quote": "The Hormone Harmony Kit is the first thing that's actually worked for all my symptoms \u2014 not just one. I tell every woman I know about it.",
+            "quote": "The Hormone Harmony Kit is the first thing that's actually worked for all my symptoms — not just one. I tell every woman I know about it.",
             "name": "Michelle R.",
-            "meta": "48 \u00b7 Verified buyer",
+            "meta": "48 · Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&q=80&auto=format&fit=crop&crop=face"
           }
         },
@@ -190,7 +190,7 @@
           "settings": {
             "quote": "I was skeptical of supplements but the 60-day guarantee made me try it. Now I'm on month 6. My doctor actually asked what I changed.",
             "name": "Jennifer L.",
-            "meta": "55 \u00b7 Verified buyer",
+            "meta": "55 · Verified buyer",
             "avatar_url": "https://images.unsplash.com/photo-1590649880765-91b1956b8276?w=100&q=80&auto=format&fit=crop&crop=face"
           }
         }
@@ -209,14 +209,14 @@
           "type": "faq",
           "settings": {
             "question": "When will I start to feel a difference?",
-            "answer": "Most customers report noticeable relief within 14\u201330 days of consistent use. Our 60-day guarantee gives you plenty of time."
+            "answer": "Most customers report noticeable relief within 14–30 days of consistent use. Our 60-day guarantee gives you plenty of time."
           }
         },
         "f2": {
           "type": "faq",
           "settings": {
             "question": "Are these products safe with HRT?",
-            "answer": "Most are designed to complement hormone therapy \u2014 but always check with your provider."
+            "answer": "Most are designed to complement hormone therapy — but always check with your provider."
           }
         },
         "f3": {
@@ -237,7 +237,7 @@
           "type": "faq",
           "settings": {
             "question": "What if a product doesn't work for me?",
-            "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you \u2014 no returns required, no fine print."
+            "answer": "Our 60-day relief guarantee means you can try any product for two months. If it's not right, we'll refund you — no returns required, no fine print."
           }
         }
       },
@@ -254,7 +254,7 @@
       "type": "phase-newsletter",
       "settings": {
         "heading": "Join 15,000+ women who found their phase.",
-        "body": "Weekly science-backed tips, symptom guides, and exclusive offers. Plus \u2014 15% off your first order when you subscribe."
+        "body": "Weekly science-backed tips, symptom guides, and exclusive offers. Plus — 15% off your first order when you subscribe."
       }
     }
   },
