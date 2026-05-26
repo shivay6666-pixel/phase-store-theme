@@ -176,6 +176,7 @@
     .skip-link:focus { left: 0; top: 0; z-index: 200; padding: 8px 16px; background: var(--terracotta); color: #fff; }
   </style>
 
+  {%- if settings.meta_pixel_id != blank -%}
   <!-- Phase® Meta Pixel -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -186,9 +187,9 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '947471684581402');
+  fbq('init', '{{ settings.meta_pixel_id }}');
   fbq('track', 'PageView');
-  {% if template == 'product' %}
+  {%- if template == 'product' -%}
     fbq('track', 'ViewContent', {
       content_ids: ['{{ product.id }}'],
       content_name: '{{ product.title | escape }}',
@@ -196,19 +197,20 @@
       value: {{ product.price | money_without_currency }},
       currency: '{{ shop.currency }}'
     });
-  {% endif %}
-  {% if template == 'cart' %}
+  {%- endif -%}
+  {%- if template == 'cart' -%}
     fbq('track', 'InitiateCheckout', {
       value: {{ cart.total_price | money_without_currency }},
       currency: '{{ shop.currency }}',
       num_items: {{ cart.item_count }}
     });
-  {% endif %}
+  {%- endif -%}
   </script>
   <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=947471684581402&ev=PageView&noscript=1"
+  src="https://www.facebook.com/tr?id={{ settings.meta_pixel_id }}&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel -->
+  {%- endif -%}
 </head>
 
 <body class="template-{{ template | replace: '.', '-' | handleize }}">
