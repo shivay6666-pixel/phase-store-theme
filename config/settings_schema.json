@@ -51,5 +51,21 @@
         "default": "#D4A574"
       }
     ]
+  },
+  {
+    "name": "Tracking & Analytics",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Meta (Facebook) Pixel"
+      },
+      {
+        "type": "text",
+        "id": "meta_pixel_id",
+        "label": "Meta Pixel ID",
+        "info": "Go to facebook.com/events_manager2 \u2192 Data Sources to find or create your pixel. Paste the 15-16 digit ID here.",
+        "placeholder": "e.g. 1234567890123456"
+      }
+    ]
   }
 ]
