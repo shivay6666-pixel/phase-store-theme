@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TAKO 5K Dog Walk Fundraiser – June 21 | Westford, MA</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange:    #e8612a;
+      --orange-lt: #f4945a;
+      --cream:     #fdf7f0;
+      --tan:       #f3e9d8;
+      --brown:     #5c3a1e;
+      --brown-lt:  #8b5e3c;
+      --green:     #4a7c59;
+      --green-lt:  #6dab82;
+      --white:     #ffffff;
+      --text:      #2d1f0f;
+      --muted:     #7a6050;
+      --border:    #e2cdb5;
+      --shadow:    0 4px 24px rgba(92,58,30,.12);
+      --radius:    14px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── Paw-print SVG helper ─────────────────────────────────── */
+    .paw { display: inline-block; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--orange) 0%, #c0441a 55%, var(--brown) 100%);
+      color: var(--white);
+      padding: 70px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.08) 0, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(255,255,255,.06) 0, transparent 40%);
+    }
+    .hero-paws {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-paws span {
+      position: absolute;
+      font-size: 2rem;
+      opacity: .12;
+      animation: floatPaw 10s ease-in-out infinite;
+    }
+    .hero-paws span:nth-child(1)  { top: 10%; left:  8%; animation-delay: 0s; }
+    .hero-paws span:nth-child(2)  { top: 70%; left: 90%; animation-delay: 1.5s; }
+    .hero-paws span:nth-child(3)  { top: 40%; left:  3%; animation-delay: 3s; }
+    .hero-paws span:nth-child(4)  { top: 20%; left: 75%; animation-delay: 4.5s; }
+    .hero-paws span:nth-child(5)  { top: 80%; left: 30%; animation-delay: 6s; }
+    .hero-paws span:nth-child(6)  { top: 55%; left: 60%; animation-delay: 7.5s; }
+    @keyframes floatPaw {
+      0%, 100% { transform: translateY(0) rotate(-10deg); }
+      50%       { transform: translateY(-18px) rotate(10deg); }
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-shadow: 0 2px 12px rgba(0,0,0,.25);
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: #ffe0c4; }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      opacity: .92;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-details {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .hero-chip {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.30);
+      border-radius: 50px;
+      padding: 9px 22px;
+      font-size: .95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-chip svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .btn-hero {
+      display: inline-block;
+      background: var(--white);
+      color: var(--orange);
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 16px 44px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(0,0,0,.25);
+      transition: transform .2s, box-shadow .2s;
+      letter-spacing: .01em;
+    }
+    .btn-hero:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,.3); }
+
+    /* ── Wave divider ─────────────────────────────────────────── */
+    .wave { display: block; width: 100%; line-height: 0; }
+    .wave-top { margin-top: -2px; }
+    .wave-bottom { margin-bottom: -2px; }
+
+    /* ── Sections shared ──────────────────────────────────────── */
+    section { padding: 72px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      background: var(--tan);
+      color: var(--orange);
+      border-radius: 50px;
+      padding: 4px 16px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    h2 .accent { color: var(--orange); }
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 48px;
+    }
+
+    /* ── Stats bar ────────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--brown);
+      color: var(--white);
+      padding: 28px 24px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stat-item { padding: 12px 20px; border-right: 1px solid rgba(255,255,255,.15); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      display: block;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffb38a;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .82rem;
+      opacity: .75;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── About TAKO ───────────────────────────────────────────── */
+    .about-section { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } }
+    .about-visual {
+      background: linear-gradient(135deg, var(--tan) 0%, #ffe5cc 100%);
+      border-radius: 24px;
+      padding: 50px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual::after {
+      content: '🐾';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      font-size: 7rem;
+      opacity: .08;
+    }
+    .tako-icon {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.15));
+    }
+    .about-visual h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--brown);
+      margin-bottom: 6px;
+    }
+    .about-visual p { font-size: .95rem; color: var(--muted); }
+    .about-visual .logo-full {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: .12em;
+      padding: 8px 22px;
+      border-radius: 50px;
+      margin-bottom: 22px;
+    }
+    .pill-list { list-style: none; margin-top: 28px; }
+    .pill-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .97rem;
+      color: var(--text);
+    }
+    .pill-list li:last-child { border-bottom: none; }
+    .pill-list .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--tan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Event Schedule ───────────────────────────────────────── */
+    .schedule-section { background: var(--tan); }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .sched-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--orange);
+      transition: transform .2s;
+    }
+    .sched-card:hover { transform: translateY(-4px); }
+    .sched-time {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sched-title { font-size: 1.05rem; font-weight: 800; color: var(--brown); margin-bottom: 6px; }
+    .sched-desc { font-size: .88rem; color: var(--muted); }
+    .sched-emoji { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+
+    /* ── What's included ──────────────────────────────────────── */
+    .included-section { background: var(--white); }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .incl-card {
+      text-align: center;
+      padding: 32px 20px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .incl-card:hover { border-color: var(--orange); box-shadow: var(--shadow); }
+    .incl-icon { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+    .incl-card h4 { font-weight: 800; color: var(--brown); margin-bottom: 6px; }
+    .incl-card p { font-size: .88rem; color: var(--muted); }
+
+    /* ── Registration Form ────────────────────────────────────── */
+    .form-section {
+      background: linear-gradient(135deg, var(--brown) 0%, #3a2010 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-section::before {
+      content: '🐾';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      font-size: 18rem;
+      opacity: .04;
+      pointer-events: none;
+    }
+    .form-wrap {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 52px 48px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--text);
+    }
+    @media (max-width: 600px) { .form-wrap { padding: 32px 22px; } }
+    .form-header { text-align: center; margin-bottom: 36px; }
+    .form-header .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--orange), #c0441a);
+      color: white;
+      border-radius: 50px;
+      padding: 10px 28px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 16px rgba(232,97,42,.4);
+    }
+    .form-header h2 { color: var(--brown); font-size: 1.9rem; margin-bottom: 8px; }
+    .form-header p { color: var(--muted); font-size: .95rem; }
+    .form-section-label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin: 28px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--tan);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--brown-lt);
+      margin-bottom: 7px;
+    }
+    .field label .req { color: var(--orange); margin-left: 2px; }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232,97,42,.15);
+      background: var(--white);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b5e3c' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* ── Dog entry ────────────────────────────────────────────── */
+    .dog-entry {
+      background: var(--tan);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .dog-entry-header {
+      font-weight: 800;
+      color: var(--brown);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Payment box ──────────────────────────────────────────── */
+    .payment-box {
+      background: var(--tan);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 8px;
+    }
+    .payment-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-top: 2px solid var(--border);
+      margin-top: 16px;
+    }
+    .payment-total .label { font-weight: 700; color: var(--brown); font-size: 1rem; }
+    .payment-total .amount { font-size: 1.6rem; font-weight: 900; color: var(--orange); }
+    .card-fields { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .card-row { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+    @media (max-width: 460px) { .card-row { grid-template-columns: 1fr; } }
+    .card-icons { display: flex; gap: 8px; margin-bottom: 14px; }
+    .card-icon {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    /* ── Waiver ───────────────────────────────────────────────── */
+    .waiver-box {
+      background: #fff8f4;
+      border: 1px solid #f4c6a8;
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 8px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+    .checkbox-field {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      accent-color: var(--orange);
+      margin-top: 1px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .checkbox-field label { font-size: .9rem; color: var(--text); cursor: pointer; }
+
+    /* ── Submit ───────────────────────────────────────────────── */
+    .btn-submit {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--orange), #c0441a);
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 900;
+      padding: 18px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(232,97,42,.45);
+      transition: transform .2s, box-shadow .2s;
+      margin-top: 28px;
+      letter-spacing: .02em;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,97,42,.55); }
+    .submit-note { text-align: center; margin-top: 12px; font-size: .82rem; color: var(--muted); }
+    .submit-note a { color: var(--orange); text-decoration: none; }
+
+    /* ── Map / location section ───────────────────────────────── */
+    .location-section { background: var(--tan); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 720px) { .location-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .map-placeholder {
+      background: linear-gradient(135deg, #d4e9da, #b8d9c2);
+      border-radius: var(--radius);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--green);
+      font-size: 1rem;
+      font-weight: 700;
+      border: 2px solid var(--green-lt);
+    }
+    .map-placeholder .map-icon { font-size: 3rem; }
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list .icon-circle {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .info-list .text strong { display: block; font-weight: 800; color: var(--brown); margin-bottom: 2px; }
+    .info-list .text span { font-size: .9rem; color: var(--muted); }
+
+    /* ── FAQ ──────────────────────────────────────────────────── */
+    .faq-section { background: var(--white); }
+    .faq-list { max-width: 700px; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--brown);
+      user-select: none;
+      gap: 12px;
+    }
+    .faq-q:hover { background: var(--cream); }
+    .faq-toggle {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--tan); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; color: var(--orange); font-weight: 900;
+      transition: transform .2s;
+    }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+      padding: 0 22px;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      padding: 48px 24px;
+    }
+    footer .logo { font-size: 1.3rem; font-weight: 900; color: var(--white); margin-bottom: 8px; }
+    footer .logo span { color: #ffb38a; }
+    footer p { font-size: .88rem; margin-bottom: 6px; }
+    footer a { color: #ffb38a; text-decoration: none; }
+    footer .footer-links { margin: 16px 0; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    footer .footer-links a { color: rgba(255,255,255,.7); font-size: .9rem; }
+    footer .footer-links a:hover { color: var(--white); }
+    footer .copyright { font-size: .78rem; opacity: .5; margin-top: 20px; }
+
+    /* ── Sticky nav ───────────────────────────────────────────── */
+    nav.sticky {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(92,58,30,.97);
+      backdrop-filter: blur(10px);
+      padding: 0 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.2);
+    }
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo { color: var(--white); font-weight: 900; font-size: 1rem; text-decoration: none; letter-spacing: .06em; }
+    .nav-logo span { color: #ffb38a; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .88rem; font-weight: 600; transition: color .2s; }
+    .nav-links a:hover { color: #ffb38a; }
+    .nav-cta {
+      background: var(--orange);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 700 !important;
+    }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ── Success message (hidden by default) ──────────────────── */
+    #success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    #success-msg .check { font-size: 4rem; margin-bottom: 16px; }
+    #success-msg h3 { font-size: 1.8rem; color: var(--green); font-weight: 900; margin-bottom: 10px; }
+    #success-msg p { color: var(--muted); font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<!-- ── Sticky Navigation ──────────────────────────────────────── -->
+<nav class="sticky">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">🐾 <span>TAKO</span> Foundation</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#register" class="nav-cta">Register — $20</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-paws" aria-hidden="true">
+    <span>🐾</span><span>🐾</span><span>🐾</span>
+    <span>🐾</span><span>🐾</span><span>🐾</span>
+  </div>
+  <div class="container" style="position:relative;">
+    <div class="hero-badge">🐕 Annual Fundraiser Event</div>
+    <h1>Walk for the <span>Paws</span><br>5K Dog Walk</h1>
+    <p class="hero-sub">
+      Join us for a morning of tail wags, community spirit, and real change
+      for animals in need — benefiting the TAKO Foundation.
+    </p>
+    <div class="hero-details">
+      <div class="hero-chip">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+        Saturday, June 21, 2026
+      </div>
+      <div class="hero-chip">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Westford 4H Fairgrounds, MA
+      </div>
+      <div class="hero-chip">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm.5 14.5h-1v-6h1v6zm0-8h-1V7h1v1.5z"/></svg>
+        Registration Opens 8:00 AM · Walk Starts 9:00 AM
+      </div>
+    </div>
+    <a href="#register" class="btn-hero">🐾 Register Now — Only $20</a>
+  </div>
+</section>
+
+<!-- ── Stats bar ──────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-num">$20</span>
+      <div class="stat-label">Registration Fee</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">5K</span>
+      <div class="stat-label">Walk Distance</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <div class="stat-label">Funds to Animal Rescue</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Jun 21</span>
+      <div class="stat-label">Event Date</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">All</span>
+      <div class="stat-label">Dog Breeds Welcome</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── About TAKO ─────────────────────────────────────────────── -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <span class="tako-logo" style="display:inline-block;background:var(--orange);color:white;font-weight:900;font-size:.95rem;letter-spacing:.12em;padding:8px 22px;border-radius:50px;margin-bottom:22px;">TAKO FOUNDATION</span>
+        <span class="tako-icon">🐕</span>
+        <h3>Trusted Animal Kare Organization</h3>
+        <p>Rescue · Medical Care · Adoption · Education</p>
+        <p style="margin-top:14px;font-size:.88rem;">22 Baldwin Road, Westford, MA 01886</p>
+        <p style="font-size:.88rem;"><a href="mailto:info@takofoundation.org" style="color:var(--orange);">info@takofoundation.org</a></p>
+      </div>
+      <div>
+        <div class="section-tag">Our Story</div>
+        <h2>Born from <span class="accent">Love</span> &amp; Loss</h2>
+        <p class="lead">
+          TAKO was co-founded by Shivay, then just 14 years old, and his father Anirban after a heartbreaking experience — Shivay's pet parrot passed away while the family was away because a shelter failed to provide proper care.
+        </p>
+        <p style="color:var(--muted);font-size:.97rem;margin-bottom:24px;">
+          Determined to make sure no family had to go through that pain again, they built TAKO — the <strong>Trusted Animal Kare Organization</strong> — right here in Westford, MA. Today TAKO works with local NGOs, veterinarians, and activists to rescue pets from hunger, abuse, and helplessness.
+        </p>
+        <ul class="pill-list">
+          <li>
+            <div class="icon">🏥</div>
+            <div><strong>Animal Medical Care</strong> — Connecting rescued animals with veterinary treatment and rehabilitation.</div>
+          </li>
+          <li>
+            <div class="icon">🏠</div>
+            <div><strong>Pet Rescue &amp; Adoption</strong> — Placing injured and homeless animals into loving forever homes.</div>
+          </li>
+          <li>
+            <div class="icon">🤝</div>
+            <div><strong>Community Partnerships</strong> — Working with local NGOs and activists across the region.</div>
+          </li>
+          <li>
+            <div class="icon">📚</div>
+            <div><strong>Education &amp; Outreach</strong> — Teaching responsible pet ownership and animal welfare in schools.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Event Schedule ─────────────────────────────────────────── -->
+<section class="schedule-section" id="schedule">
+  <div class="container">
+    <div class="section-tag">Event Day</div>
+    <h2>Day-of <span class="accent">Schedule</span></h2>
+    <p class="lead">Saturday, June 21, 2026 at Westford 4H Fairgrounds</p>
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <span class="sched-emoji">☀️</span>
+        <div class="sched-time">7:30 AM</div>
+        <div class="sched-title">Volunteer Setup</div>
+        <div class="sched-desc">Volunteers arrive to set up water stations, tents, and the registration booth.</div>
+      </div>
+      <div class="sched-card">
+        <span class="sched-emoji">📋</span>
+        <div class="sched-time">8:00 AM</div>
+        <div class="sched-title">Registration &amp; Check-In</div>
+        <div class="sched-desc">Pick up your bib, swag bag, and let your pup sniff around! Day-of registrations welcome.</div>
+      </div>
+      <div class="sched-card">
+        <span class="sched-emoji">🎉</span>
+        <div class="sched-time">8:45 AM</div>
+        <div class="sched-title">Opening Ceremony</div>
+        <div class="sched-desc">Welcome remarks from TAKO founders Shivay &amp; Anirban, plus a special dog parade!</div>
+      </div>
+      <div class="sched-card">
+        <span class="sched-emoji">🐕</span>
+        <div class="sched-time">9:00 AM</div>
+        <div class="sched-title">5K Walk Begins</div>
+        <div class="sched-desc">Hit the trail! Leashed dogs welcome. Water stations every mile along the route.</div>
+      </div>
+      <div class="sched-card">
+        <span class="sched-emoji">🎊</span>
+        <div class="sched-time">10:30 AM</div>
+        <div class="sched-title">Finish Festival</div>
+        <div class="sched-desc">Food trucks, dog treats, live music, raffles, and a costume contest for your pup!</div>
+      </div>
+      <div class="sched-card">
+        <span class="sched-emoji">🏆</span>
+        <div class="sched-time">11:30 AM</div>
+        <div class="sched-title">Awards &amp; Raffle</div>
+        <div class="sched-desc">Best costume, top fundraiser, and raffle prize winners announced. Group photo!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What's Included ────────────────────────────────────────── -->
+<section class="included-section">
+  <div class="container">
+    <div class="section-tag">Registration Perks</div>
+    <h2>What's <span class="accent">Included</span> with Your $20</h2>
+    <p class="lead">Every registration dollar goes directly toward TAKO's rescue and medical care programs.</p>
+    <div class="included-grid">
+      <div class="incl-card">
+        <span class="incl-icon">👕</span>
+        <h4>Event T-Shirt</h4>
+        <p>Custom TAKO Walk for the Paws t-shirt (while supplies last).</p>
+      </div>
+      <div class="incl-card">
+        <span class="incl-icon">🎒</span>
+        <h4>Swag Bag</h4>
+        <p>Filled with dog treats, coupons from local sponsors, and TAKO stickers.</p>
+      </div>
+      <div class="incl-card">
+        <span class="incl-icon">💧</span>
+        <h4>Hydration Stations</h4>
+        <p>Water and snacks for you and your pup throughout the entire route.</p>
+      </div>
+      <div class="incl-card">
+        <span class="incl-icon">🎟️</span>
+        <h4>Raffle Entry</h4>
+        <p>One raffle ticket included — win pet supply baskets and local gift cards.</p>
+      </div>
+      <div class="incl-card">
+        <span class="incl-icon">📸</span>
+        <h4>Photo Booth</h4>
+        <p>Doggie photo booth with props at the finish festival. Free prints!</p>
+      </div>
+      <div class="incl-card">
+        <span class="incl-icon">❤️</span>
+        <h4>Impact</h4>
+        <p>100% of proceeds fund animal rescue, medical care, and adoption services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Registration Form ──────────────────────────────────────── -->
+<section class="form-section" id="register">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-tag" style="background:rgba(255,255,255,.15);color:#ffcfab;">Sign Up</div>
+      <h2 style="color:white;margin-bottom:0;">Reserve Your <span style="color:#ffb38a;">Spot Today</span></h2>
+    </div>
+
+    <div class="form-wrap">
+      <div id="form-inner">
+        <div class="form-header">
+          <div class="price-badge">🐾 Registration Fee — $20 per Person</div>
+          <h2>Walk for the Paws 5K</h2>
+          <p>June 21, 2026 · Westford 4H Fairgrounds, Westford, MA</p>
+        </div>
+
+        <form id="registrationForm" novalidate>
+
+          <!-- Participant Info -->
+          <div class="form-section-label">👤 Participant Information</div>
+          <div class="form-row">
+            <div class="field">
+              <label for="firstName">First Name <span class="req">*</span></label>
+              <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name <span class="req">*</span></label>
+              <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="(978) 555-0100" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="address">Street Address</label>
+              <input type="text" id="address" name="address" placeholder="123 Maple Street" />
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="Westford" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="tshirt">T-Shirt Size <span class="req">*</span></label>
+              <select id="tshirt" name="tshirt" required>
+                <option value="" disabled selected>Select size…</option>
+                <option>XS (Extra Small)</option>
+                <option>S (Small)</option>
+                <option>M (Medium)</option>
+                <option>L (Large)</option>
+                <option>XL (Extra Large)</option>
+                <option>2XL (Double Extra Large)</option>
+                <option>No shirt, thanks</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="heardFrom">How did you hear about us?</label>
+              <select id="heardFrom" name="heardFrom">
+                <option value="" disabled selected>Select one…</option>
+                <option>TAKO Website</option>
+                <option>Social Media (Instagram/TikTok)</option>
+                <option>Friend / Family</option>
+                <option>Flyer / Poster</option>
+                <option>Local News</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Emergency Contact -->
+          <div class="form-section-label">🚨 Emergency Contact</div>
+          <div class="form-row">
+            <div class="field">
+              <label for="ecName">Contact Name <span class="req">*</span></label>
+              <input type="text" id="ecName" name="ecName" placeholder="John Smith" required />
+            </div>
+            <div class="field">
+              <label for="ecPhone">Contact Phone <span class="req">*</span></label>
+              <input type="tel" id="ecPhone" name="ecPhone" placeholder="(978) 555-0199" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="ecRelation">Relationship</label>
+            <select id="ecRelation" name="ecRelation">
+              <option value="" disabled selected>Select…</option>
+              <option>Spouse / Partner</option>
+              <option>Parent</option>
+              <option>Sibling</option>
+              <option>Friend</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- Dog Info -->
+          <div class="form-section-label">🐕 Your Dog(s)</div>
+          <div class="dog-entry">
+            <div class="dog-entry-header">🐾 Dog #1</div>
+            <div class="form-row">
+              <div class="field">
+                <label for="dogName1">Dog's Name <span class="req">*</span></label>
+                <input type="text" id="dogName1" name="dogName1" placeholder="Buddy" required />
+              </div>
+              <div class="field">
+                <label for="dogBreed1">Breed</label>
+                <input type="text" id="dogBreed1" name="dogBreed1" placeholder="Golden Retriever" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="dogAge1">Age</label>
+                <input type="text" id="dogAge1" name="dogAge1" placeholder="3 years" />
+              </div>
+              <div class="field">
+                <label for="dogVax1">Vaccinations Up to Date?</label>
+                <select id="dogVax1" name="dogVax1">
+                  <option value="" disabled selected>Select…</option>
+                  <option value="yes">Yes ✓</option>
+                  <option value="no">No</option>
+                  <option value="unsure">Unsure</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label for="addDogNotes">Additional dogs or special notes</label>
+            <textarea id="addDogNotes" name="addDogNotes" placeholder="e.g. bringing a second dog: Bella, 2yr old Beagle. Allergies: none."></textarea>
+          </div>
+
+          <!-- Fundraising -->
+          <div class="form-section-label">💛 Fundraising Goal (Optional)</div>
+          <div class="field">
+            <label for="fundraiseGoal">Personal Fundraising Goal</label>
+            <select id="fundraiseGoal" name="fundraiseGoal">
+              <option value="" disabled selected>Set a goal…</option>
+              <option>$20 (just the registration)</option>
+              <option>$50</option>
+              <option>$100</option>
+              <option>$250</option>
+              <option>$500</option>
+              <option>$1,000+</option>
+              <option>I'll fundraise on my own</option>
+            </select>
+          </div>
+
+          <!-- Payment -->
+          <div class="form-section-label">💳 Payment</div>
+          <div class="payment-box">
+            <div class="card-icons">
+              <span class="card-icon">VISA</span>
+              <span class="card-icon">MC</span>
+              <span class="card-icon">AMEX</span>
+              <span class="card-icon">DISC</span>
+            </div>
+            <div class="card-fields">
+              <div class="field" style="margin-bottom:0;">
+                <label for="cardName">Name on Card <span class="req">*</span></label>
+                <input type="text" id="cardName" name="cardName" placeholder="Jane Smith" required />
+              </div>
+              <div class="field" style="margin-bottom:0;">
+                <label for="cardNumber">Card Number <span class="req">*</span></label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="•••• •••• •••• ••••" maxlength="19" required />
+              </div>
+              <div class="card-row">
+                <div class="field" style="margin-bottom:0;">
+                  <label for="cardExpiry">Expiry Date <span class="req">*</span></label>
+                  <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM / YY" maxlength="7" required />
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                  <label for="cardCVC">CVC <span class="req">*</span></label>
+                  <input type="text" id="cardCVC" name="cardCVC" placeholder="•••" maxlength="4" required />
+                </div>
+              </div>
+            </div>
+            <div class="payment-total">
+              <div class="label">Registration Total</div>
+              <div class="amount">$20.00</div>
+            </div>
+          </div>
+
+          <!-- Waiver -->
+          <div class="form-section-label">📄 Waiver &amp; Release</div>
+          <div class="waiver-box">
+            <strong>Participant Waiver &amp; Release of Liability</strong><br><br>
+            I, the undersigned, do hereby acknowledge that participation in the TAKO Foundation Walk for the Paws 5K Dog Walk ("Event") on June 21, 2026 in Westford, MA involves physical activity and the presence of animals, and I knowingly and freely assume all such risks, both known and unknown. I agree to hold harmless the TAKO Foundation, its founders, volunteers, staff, and affiliated organizations from any and all claims, damages, or liability arising from my participation or my dog's participation in this event. I confirm that my dog is current on all required vaccinations, is in good health, and is non-aggressive. I give permission for the TAKO Foundation to use any photographs or video taken at the event for promotional purposes. I understand that registration fees are non-refundable. By checking the box below, I confirm that I have read, understand, and agree to these terms.
+          </div>
+          <div class="checkbox-field">
+            <input type="checkbox" id="waiver" name="waiver" required />
+            <label for="waiver">I have read and agree to the Participant Waiver &amp; Release of Liability. I confirm my dog is vaccinated and in good health. <span class="req">*</span></label>
+          </div>
+          <div class="checkbox-field">
+            <input type="checkbox" id="newsletter" name="newsletter" />
+            <label for="newsletter">Keep me updated on TAKO Foundation news, events, and the animals we've rescued. 🐾</label>
+          </div>
+
+          <button type="submit" class="btn-submit">🐕 Complete Registration — $20</button>
+          <p class="submit-note">
+            Your payment is processed securely. Receipts will be emailed to you within minutes.<br>
+            Questions? <a href="mailto:info@takofoundation.org">info@takofoundation.org</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Success state -->
+      <div id="success-msg">
+        <div class="check">🎉</div>
+        <h3>You're Registered!</h3>
+        <p style="margin-bottom:12px;">Thank you for signing up for the TAKO Walk for the Paws 5K!</p>
+        <p>A confirmation email is on its way to you. We'll see you <strong>June 21 at 8 AM</strong> at the Westford 4H Fairgrounds!</p>
+        <p style="margin-top:20px;font-size:.9rem;color:#4a7c59;">🐾 Your $20 goes directly toward rescuing animals in need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Location ────────────────────────────────────────────────── -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-tag">Getting There</div>
+    <h2>Event <span class="accent">Location</span></h2>
+    <div class="location-grid">
+      <div class="map-placeholder">
+        <span class="map-icon">📍</span>
+        <strong>Westford 4H Fairgrounds</strong>
+        <span style="font-size:.9rem;font-weight:400;color:var(--green);">Westford, MA 01886</span>
+        <a href="https://maps.google.com/?q=Westford+4H+Fairgrounds+Westford+MA" target="_blank" rel="noopener"
+           style="margin-top:10px;background:var(--green);color:white;padding:9px 22px;border-radius:50px;text-decoration:none;font-size:.88rem;font-weight:700;">
+          Open in Google Maps ↗
+        </a>
+      </div>
+      <ul class="info-list">
+        <li>
+          <div class="icon-circle">📍</div>
+          <div class="text">
+            <strong>Address</strong>
+            <span>Westford 4H Fairgrounds, Westford, MA 01886</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-circle">🅿️</div>
+          <div class="text">
+            <strong>Parking</strong>
+            <span>Free parking on-site. Overflow parking available in adjacent field. Arrive early — spaces fill by 8:30 AM!</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-circle">🐕</div>
+          <div class="text">
+            <strong>Dog Policy</strong>
+            <span>All leashed, vaccinated dogs welcome. Retractable leashes discouraged on the trail. Waste bags provided.</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-circle">♿</div>
+          <div class="text">
+            <strong>Accessibility</strong>
+            <span>The 5K route is paved and stroller/wheelchair friendly. Accessible restrooms on site.</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-circle">🌧️</div>
+          <div class="text">
+            <strong>Rain Plan</strong>
+            <span>Event is rain or shine! Tents will be available. Extreme weather updates posted at takofoundation.org.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-tag">Questions</div>
+    <h2>Frequently Asked <span class="accent">Questions</span></h2>
+    <p class="lead">Still have questions? Email us at <a href="mailto:info@takofoundation.org" style="color:var(--orange);">info@takofoundation.org</a></p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Can I walk without a dog? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">Absolutely! You don't need a dog to participate. All animal lovers, families, and supporters are welcome. Many participants walk in honor of a pet they've lost or as a general show of support.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the $20 fee per person or per dog? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">The $20 registration fee is per human participant. Your dogs walk for free! If you're bringing multiple human participants (e.g., family members), each person needs their own registration.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I register on the day of the event? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">Yes! Day-of registration is welcome starting at 8:00 AM at the registration booth. However, t-shirts and swag bags are only guaranteed for those who register online before June 14. The registration fee is the same ($20).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What should I bring? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">Comfortable walking shoes, your dog's leash, a poop bag (extras provided on-site), water for you and your pup, sunscreen, and your good vibes! We'll have water stations along the route.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are there age restrictions? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">None at all — this is a family-friendly event! Children under 12 walk free when accompanied by a registered adult. Strollers and wheelchairs are welcome on the paved route.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where does the money go? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">100% of registration proceeds go directly to TAKO Foundation programs including animal rescue, veterinary medical care, and adoption services. TAKO is a volunteer-run organization — no administrative overhead from your registration fee.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I volunteer instead of (or in addition to) registering? <div class="faq-toggle">+</div></div>
+        <div class="faq-a">Yes! We'd love volunteer help. Email info@takofoundation.org with the subject "Volunteer — June 21" and we'll send you details. Volunteers are encouraged to register for the walk too!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="logo">🐾 <span>TAKO</span> Foundation</div>
+  <p style="font-size:.82rem;letter-spacing:.08em;opacity:.6;margin-bottom:12px;">TRUSTED ANIMAL KARE ORGANIZATION</p>
+  <p>22 Baldwin Road, Westford, MA 01886</p>
+  <p><a href="mailto:info@takofoundation.org">info@takofoundation.org</a></p>
+  <div class="footer-links">
+    <a href="https://takofoundation.org" target="_blank" rel="noopener">Website</a>
+    <a href="https://www.instagram.com/tako.foundation/" target="_blank" rel="noopener">Instagram</a>
+    <a href="#register">Register</a>
+    <a href="#faq">FAQ</a>
+    <a href="mailto:info@takofoundation.org">Contact</a>
+  </div>
+  <p class="copyright">© 2026 TAKO Foundation · Walk for the Paws 5K · All rights reserved.</p>
+</footer>
+
+<script>
+  // ── FAQ accordion ──────────────────────────────────────────────
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── Card number formatting ─────────────────────────────────────
+  document.getElementById('cardNumber').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+  });
+  document.getElementById('cardExpiry').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2);
+    e.target.value = v;
+  });
+  document.getElementById('cardCVC').addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  // ── Form submission (sample — no real payment) ─────────────────
+  document.getElementById('registrationForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+
+    // Basic HTML5 validation
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (!document.getElementById('waiver').checked) {
+      alert('Please read and agree to the participant waiver to complete registration.');
+      return;
+    }
+
+    // Simulate processing
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = '⏳ Processing…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('form-inner').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('register').offsetTop - 60, behavior: 'smooth' });
+    }, 1800);
+  });
+</script>
+</body>
+</html>
